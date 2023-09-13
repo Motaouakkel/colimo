@@ -167,7 +167,7 @@ include 'header.php';
                                                     "uniqueName": "CA",
                                                     "caption": "CA NET TTC",
                                                     "aggregation": "sum",
-                                                    //s"format": "3dhvwiax"
+                                                    "format": "precision",
                                                 }, {
                                                     "uniqueName": "total des factures",
                                                     "caption": "NOMBRE FACTURES",

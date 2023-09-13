@@ -126,6 +126,7 @@ include 'header.php';
                                                     "uniqueName": "total",
                                                     "caption": "Frequence moy",
                                                     "aggregation": "average",
+                                                    "format": "precision",
                                                 },
                                                 {
                                                     "uniqueName": "<20",
@@ -178,6 +179,11 @@ include 'header.php';
                                                 "nullValue": "",
                                                 "textAlign": "right",
                                                 "isPercent": false
+                                            },
+                                            {
+                                                "name": "precision",
+                                                "decimalPlaces": 2,
+
                                             },
                                             {
                                                 "name": "3dhvwiax",

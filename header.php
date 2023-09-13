@@ -19,16 +19,6 @@ $response = fetch_data('http://194.163.166.243:3020/ms/gpmenuweb', $data, 'test'
 $objet = json_decode($response, true);
 
 
-$acces = 10;
-foreach ($objet as $v1) {
-    if ($v1["logic_name"] == "sale.php") {
-        $acces = 1;
-    }
-}
-if ($acces == 10) {
-
-    echo "<script language='javascript'>window.location.href='home.php';</script>";
-}
 
 ?>
 
