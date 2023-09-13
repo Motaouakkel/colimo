@@ -33,7 +33,7 @@ return file_get_contents($url, false, $context);
 
 $obj = 'Nothing';
 
-$response = file_post_contents12('http://10.10.10.165:3020/md/log',$data,'test','miftah');
+$response = file_post_contents12('http://194.163.166.243:3020/md/log',$data,'test','miftah');
 			
 
 $obj = json_decode($response, true);

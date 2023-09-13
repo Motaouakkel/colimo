@@ -9,7 +9,7 @@ extract($_REQUEST);
 $type = "2";
 
 
-$url =  'http://10.10.10.165:3020/md/agencybypartner';
+$url =  'http://194.163.166.243:3020/md/agencybypartner';
 $params = array('partner_id' => $_SESSION['partner']);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');

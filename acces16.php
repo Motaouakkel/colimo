@@ -19,7 +19,7 @@ if ($part== "" ) {
 	$part  = 0;
 }
 
-$url =  'http://10.10.10.165:3020/op/salesgoal';
+$url =  'http://194.163.166.243:3020/op/salesgoal';
 
 
 $params = array('date1' => $d1, 'date2' => $d2,'user_id' => $part);

@@ -13,7 +13,7 @@ if (!isset($_SESSION['auth']) or $_SESSION['auth'] != 'yes' or empty($_SESSION['
 
 $data = array("partner_id" => $_SESSION["partner"]);
 
-$response = fetch_data('http://10.10.10.165:3020/ms/gpmenuweb', $data, 'test', 'miftah');
+$response = fetch_data('http://194.163.166.243:3020/ms/gpmenuweb', $data, 'test', 'miftah');
 
 
 $objet = json_decode($response, true);

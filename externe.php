@@ -28,7 +28,7 @@ function file_post_contents12($url, $data, $username = null, $password = null)
 
 
 
-$response = file_post_contents12('http://10.10.10.165:3020/ms/gpmenuweb', $data, 'test', 'miftah');
+$response = file_post_contents12('http://194.163.166.243:3020/ms/gpmenuweb', $data, 'test', 'miftah');
 
 $obj = json_decode($response, true);
 

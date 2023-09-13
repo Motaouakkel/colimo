@@ -31,7 +31,7 @@ return file_get_contents($url, false, $context);}
 
 $data = array("partner_id" => $_SESSION["partner"]);   
 
-$response = file_post_contents13('http://10.10.10.165:3020/ms/gpmenuweb',$data,'test','miftah');
+$response = file_post_contents13('http://194.163.166.243:3020/ms/gpmenuweb',$data,'test','miftah');
 			
 
 $objet = json_decode($response, true);
