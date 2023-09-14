@@ -52,33 +52,61 @@ include 'header.php';
                                     data = glob
 
                                     var struct = {
-                                        "agency": {
+                                        "CAB": {
                                             type: "string"
                                         },
-                                        "sector": {
+                                        "AGENCE": {
                                             type: "string"
                                         },
-                                        "tour": {
+                                        "SECTEUR": {
                                             type: "string"
                                         },
-                                        "ref": {
+                                        "TOURNEE": {
                                             type: "string"
                                         },
-                                        "client": {
+                                        "NOM CLIENT": {
                                             type: "string"
                                         },
-                                        "typologie": {
+                                        "TYPOLOGIE": {
                                             type: "string"
                                         },
-                                        "vitrine": {
+                                        "VITRINE": {
                                             type: "string"
                                         },
-                                        "invoice": {
+                                        "N°FACTURE": {
                                             type: "string"
                                         },
-                                        "partner_scan": {
+                                        "SCAN": {
                                             type: "string"
                                         },
+                                        "DEBUT VISITE": {
+                                            type: "string"
+                                        },
+                                        "FIN VISITE": {
+                                            type: "string"
+                                        },
+                                        "DUREE VISITE": {
+                                            type: "string"
+                                        },
+                                        "VENTE AVANT REMISE/PERTE": {
+                                            type: "number"
+                                        },
+                                        "PERTE COMM": {
+                                            type: "number"
+                                        },
+                                        "PROMO": {
+                                            type: "number"
+                                        },
+                                        "RSF": {
+                                            type: "number"
+                                        },
+                                        "RFM": {
+                                            type: "number"
+                                        },
+                                        "VENTE NETTE": {
+                                            type: "number"
+                                        },
+
 
 
 
@@ -100,43 +128,12 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [{
-                                                    "uniqueName": "agency",
-                                                    "caption": "Agence",
-                                                },
-                                                {
-                                                    "uniqueName": "tour",
-                                                    "caption": "Tournee",
-                                                },
-                                                {
-                                                    "uniqueName": "sector",
-                                                    "caption": "Secteur",
-                                                }
-                                            ],
-                                            "rows": [{
-                                                "uniqueName": "ref",
-                                            }],
+                                            "reportFilters": [],
+                                            "rows": [],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
-                                            "measures": [{
-                                                "uniqueName": "client",
-                                                "caption": "Nom client"
-                                            }, {
-                                                "uniqueName": "typologie",
-                                                "caption": "Typologie"
-                                            }, {
-                                                "uniqueName": "vitrine",
-                                                "caption": "Vitrine"
-                                                
-                                            }, {
-                                                "uniqueName": "invoice",
-                                                "caption": "N°facture"
-                                            }, {
-                                                "uniqueName": "partner_scan",
-                                                "caption": "Scan"
-                                            }],
-
+                                            "measures": [],
                                         },
                                         "options": {
                                             "grid": {
@@ -145,7 +142,7 @@ include 'header.php';
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": true,
                                                 "type": "flat",
-                                                "showFilter":true,
+                                                "showFilter": true,
                                                 "showReportFiltersArea": false
                                             },
                                             "showAggregationLabels": false
@@ -156,30 +153,24 @@ include 'header.php';
                                 });
 
                                 function customizeToolbar(toolbar) {
-                                    var tabs = toolbar.getTabs(); // get all tabs from the toolbar
+                                    var tabs = toolbar.getTabs();
                                     toolbar.getTabs = function() {
                                         delete tabs[1];
-                                        delete tabs[0]; // delete the first tab
+                                        delete tabs[0];
                                         return tabs;
                                     }
                                 }
 
                             }
 
-
-                            //WebDataRocks[ report ] = yourValue;
-
                             loaddate();
                         </script>
 
 
                     </div>
-                    <!-- end: .row -->
 
-                    <!-- partial width widgets -->
 
             </section>
-            <!-- End: Content -->
 
         </section>
         <!-- End: Content-Wrapper -->
