@@ -219,137 +219,134 @@ include 'header.php';
                                             }, ],
                                             "measures": [{
                                                     "uniqueName": "vendeur_identifier",
-                                                    "caption": "vendeur"
+                                                    "caption": "VENDUR"
                                                 }, {
                                                     "uniqueName": "aide_identifier",
-                                                    "caption": "aide vendeur"
+                                                    "caption": "AIDE VENDEUR"
                                                 }, {
                                                     "uniqueName": "time_assignement",
-                                                    "caption": "time_assignement",
-                                                    
-                                                },{
+                                                    "caption": "HEURE SORTIE",
+
+                                                }, {
                                                     "uniqueName": "time_unsold",
-                                                    "caption": "time_unsold",
+                                                    "caption": "HEURE RETOUR",
                                                 },
                                                 {
                                                     "uniqueName": "total_time",
-                                                    "caption": "duree tournee",
+                                                    "caption": "DUREE TOURNEE",
                                                 },
                                                 {
                                                     "uniqueName": "sales_amount",
-                                                    "caption": "sales_amount",
+                                                    "caption": "VENTE NETTE REALISEE",
                                                 },
                                                 {
                                                     "uniqueName": "invoices_count",
-                                                    "caption": "invoices_count",
+                                                    "caption": "NBRE FACTURES",
                                                 },
                                                 {
                                                     "uniqueName": "qs LAIT FRAIS",
-                                                    "caption": "qs LAIT FRAIS",
+                                                    "caption": "QS LAIT FRAIS",
                                                 },
                                                 {
                                                     "uniqueName": "ca LAIT FRAIS",
-                                                    "caption": "ca LAIT FRAIS",
+                                                    "caption": "CA LAIT FRAIS",
                                                 },
                                                 {
                                                     "uniqueName": "qs LAIT UHT",
-                                                    "caption": "qs LAIT UHT",
+                                                    "caption": "QS LAIT UHT",
                                                 },
                                                 {
                                                     "uniqueName": "ca LAIT UHT",
-                                                    "caption": "ca LAIT UHT",
+                                                    "caption": "CA LAIT UHT",
                                                 },
                                                 {
                                                     "uniqueName": "qs BEURRE",
-                                                    "caption": "qs BEURRE",
+                                                    "caption": "SQ BEURRE",
                                                 },
                                                 {
                                                     "uniqueName": "ca BEURRE",
-                                                    "caption": "ca BEURRE",
+                                                    "caption": "CA BEURRE",
                                                 },
                                                 {
                                                     "uniqueName": "qs YAOURT FERME & BRASSÉ",
-                                                    "caption": "qs YAOURT FERME & BRASSÉ",
+                                                    "caption": "QS YAOURT FERME & BRASSÉ",
                                                 },
                                                 {
                                                     "uniqueName": "ca YAOURT FERME & BRASSÉ",
-                                                    "caption": "ca YAOURT FERME & BRASSÉ",
+                                                    "caption": "CA YAOURT FERME & BRASSÉ",
                                                 },
                                                 {
                                                     "uniqueName": "qs YAOURT À BOIRE",
-                                                    "caption": "qs YAOURT À BOIRE",
+                                                    "caption": "QS YAOURT À BOIRE",
                                                 },
                                                 {
                                                     "uniqueName": "ca YAOURT À BOIRE",
-                                                    "caption": "ca YAOURT À BOIRE",
+                                                    "caption": "CA YAOURT À BOIRE",
                                                 },
                                                 {
                                                     "uniqueName": "qs DESSERT",
-                                                    "caption": "qs DESSERT",
+                                                    "caption": "QS DESSERT",
                                                 },
                                                 {
                                                     "uniqueName": "ca DESSERT",
-                                                    "caption": "ca DESSERT",
+                                                    "caption": "CA DESSERT",
                                                 },
                                                 {
                                                     "uniqueName": "qs LBEN & RAIB",
-                                                    "caption": "qs LBEN & RAIB",
+                                                    "caption": "QS LBEN & RAIB",
                                                 },
                                                 {
                                                     "uniqueName": "ca LBEN & RAIB",
-                                                    "caption": "ca LBEN & RAIB",
+                                                    "caption": "CA LBEN & RAIB",
                                                 },
                                                 {
                                                     "uniqueName": "qs FROMAGE FRAIS",
-                                                    "caption": "qs FROMAGE FRAIS",
+                                                    "caption": "QS FROMAGE FRAIS",
                                                 },
                                                 {
                                                     "uniqueName": "ca FROMAGE FRAIS",
-                                                    "caption": "ca FROMAGE FRAIS",
+                                                    "caption": "CA FROMAGE FRAIS",
                                                 },
                                                 {
                                                     "uniqueName": "qs JUS",
-                                                    "caption": "qs JUS",
+                                                    "caption": "QS JUS",
                                                 },
                                                 {
                                                     "uniqueName": "ca JUS",
-                                                    "caption": "ca JUS",
+                                                    "caption": "CA JUS",
                                                 },
                                                 {
                                                     "uniqueName": "clients",
-                                                    "caption": "Nbre visites programmees",
+                                                    "caption": "NBRE VISITES PROGRAMMEES",
                                                 },
                                                 {
                                                     "uniqueName": "nbr_visits",
-                                                    "caption": "Nbre visite realisees",
+                                                    "caption": "NBRE VISITE REALISEES",
                                                 },
                                                 {
                                                     "uniqueName": "visite_ration",
-                                                    "caption": "Taux realisation visites programmees",
+                                                    "caption": "TAUX REALISATION VISITES PROGRAMMEES",
                                                 },
                                                 {
                                                     "uniqueName": "success_visits",
-                                                    "caption": "Nombre visites avec succes",
+                                                    "caption": "NOMBRE VISITES AVEC SUCCES",
                                                 },
                                                 {
                                                     "uniqueName": "success_visite_ration",
-                                                    "caption": "Taux de succes",
+                                                    "caption": "TAUX DE SUCCES",
                                                 },
                                                 {
                                                     "uniqueName": "Perte Commercial",
-                                                    "caption": "Perte Commercial",
-                                                },{
+                                                    "caption": "PERTE COMMERCIALE",
+                                                }, {
                                                     "uniqueName": "Perte Camion",
-                                                    "caption": "Perte Camion",
-                                                },{
-                                                    "uniqueName": "Perte Usine",
-                                                    "caption": "Perte Usine",
-                                                },{
+                                                    "caption": "PERTE CAMION",
+                                                }, {
                                                     "uniqueName": "perte globale",
-                                                    "caption": "perte globale",
-                                                },{
+                                                    "caption": "PERTE GLOBALE",
+                                                }, {
                                                     "uniqueName": "taux perte globale",
-                                                    "caption": "taux perte globale",
+                                                    "caption": "TAUX PERTE GLOBALE",
                                                 },
 
 
@@ -370,7 +367,7 @@ include 'header.php';
                                 });
 
                                 pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                   
+
                                     if (data.measure &&
                                         data.type != "header") {
                                         if (data.measure.uniqueName == "vendeur_identifier") {
@@ -378,7 +375,7 @@ include 'header.php';
                                         } else if (data.measure.uniqueName == "aide_identifier") {
                                             cell.text = "" + test[data.value]["aide_vendeur"];
                                         }
-                                        
+
                                     }
 
                                 });
