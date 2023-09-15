@@ -1,5 +1,5 @@
 <?php
-$json_string = 'http://194.163.166.243:3020/op/report1';
+$json_string = 'http://10.10.10.165:3020/op/report1';
 
 $jsondata = file_get_contents($json_string);
 

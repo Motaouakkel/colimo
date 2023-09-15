@@ -6,12 +6,9 @@
                 <a href="#.html">REPORT</a>
             </li>
             <li class="crumb-icon">
-                <a href="#.html">
+                <a href="/home.php">
                     <span class="glyphicon glyphicon-home"></span>
                 </a>
-            </li>
-            <li class="crumb-link">
-                <a href="#">Accueil</a>
             </li>
             <li class="crumb-trail"><?php echo $page_title; ?></li>
         </ol>

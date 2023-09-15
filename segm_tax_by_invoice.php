@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -195,7 +195,7 @@ include 'header.php';
                                                     "aggregation": "sum",
                                                 },
                                                 {
-                                                    "uniqueName": "60-70",
+                                                    "uniqueName": "200-250",
                                                     "caption": "200-250",
                                                     "aggregation": "sum",
                                                 },
@@ -214,7 +214,7 @@ include 'header.php';
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "SEGM DH TTC PAR FACTURE",
+                                                "title": "<?php echo $page_title ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false

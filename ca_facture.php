@@ -100,7 +100,7 @@ if (!isset($_SESSION['auth']) or $_SESSION['auth'] != 'yes' or empty($_SESSION['
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 

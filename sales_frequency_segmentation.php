@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -46,17 +46,6 @@ include 'header.php';
                         </div>
                         <script>
                             function loadfile(f) {
-                                date2 = document.getElementById('date2').value;
-                                date1 = document.getElementById('date1').value;
-                                splitd1 = date1.split('/')
-                                splitd2 = date2.split('/')
-                                Date1 = new Date("" + splitd1[2] + "-" + splitd1[1] + "-" + splitd1[0])
-                                Date2 = new Date("" + splitd2[2] + "-" + splitd2[1] + "-" + splitd2[0])
-
-                                const timeDifference = Date2.getTime() - Date1.getTime();
-                                const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
-                                formula = "count(\"tour\")/ " + daysDifference
-
                                 function getJSONData() {
 
                                     data = $.parseJSON(f);
@@ -110,7 +99,6 @@ include 'header.php';
                                         "slice": {
                                             "reportFilters": [{
                                                 "uniqueName": "date",
-                                                //"uniqueName": "name",
                                             }],
                                             "rows": [{
                                                 "uniqueName": "name"
@@ -130,39 +118,39 @@ include 'header.php';
                                                 },
                                                 {
                                                     "uniqueName": "<20",
-                                                    "caption": "<20",
+                                                    "caption": "<20%",
                                                     "aggregation": "average",
                                                 },
                                                 {
                                                     "uniqueName": "20-35",
-                                                    "caption": "20-35",
+                                                    "caption": "20-35%",
                                                     "aggregation": "average",
                                                 },
                                                 {
                                                     "uniqueName": "35-50",
-                                                    "caption": "35-50",
+                                                    "caption": "35-50%",
                                                     "aggregation": "average",
                                                 },
                                                 {
                                                     "uniqueName": "50-65",
-                                                    "caption": "50-65",
+                                                    "caption": "50-65%",
                                                     "aggregation": "average",
                                                 },
                                                 {
                                                     "uniqueName": "65-80",
-                                                    "caption": "65-80",
+                                                    "caption": "65-80%",
                                                     "aggregation": "average",
                                                 },
                                                 {
                                                     "uniqueName": ">80",
-                                                    "caption": ">80",
+                                                    "caption": ">80%",
                                                     "aggregation": "average",
                                                 },
                                             ]
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "SEGM NBRE FACTURES",
+                                                "title": "<?php echo $page_title ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false

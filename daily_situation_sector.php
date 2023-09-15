@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -354,7 +354,7 @@ include 'header.php';
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "Situation journaliere secteur",
+                                                "title": "<?php echo $page_title ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false

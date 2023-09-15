@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -137,15 +137,18 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "ca1",
                                                     "caption": "Ca 1",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "ca2",
                                                     "caption": "Ca 2",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "Evol_ca",
                                                     "caption": "Evol",
-                                                    "formula": "\"ca2\" - \"ca1\""
+                                                    "formula": "\"ca2\" - \"ca1\"",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "Evol_ca%",
@@ -211,6 +214,10 @@ include 'header.php';
                                             "decimalPlaces": 2,
                                             "currencySymbol": "%",
                                             "currencySymbolAlign": "right"
+                                        },{
+                                            "name": "precision",
+                                            "decimalPlaces": 2,
+                                            
                                         }]
                                     },
 

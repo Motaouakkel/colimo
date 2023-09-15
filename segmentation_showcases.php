@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -115,6 +115,7 @@ include 'header.php';
                                                 }, {
                                                     "uniqueName": "ca_vitrines",
                                                     "caption": "Ca vitrines",
+                                                    "formula": "\"ca/jour\" * \"vitrines\""
                                                 },
                                                 {
                                                     "uniqueName": "ca/jour",
@@ -149,7 +150,7 @@ include 'header.php';
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "SEGM DH TTC PAR FACTURE",
+                                                "title": "<?php echo $page_title ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false

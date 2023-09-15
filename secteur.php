@@ -8,7 +8,7 @@ extract($_REQUEST);
 
 $partner = $sup_id;
 
-$url =  'http://194.163.166.243:3020/md/locationbypartner';
+$url =  'http://10.10.10.165:3020/md/locationbypartner';
 $params = array('location_type_id' => 5,'partner_id'=> $partner,'active'=> 1);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');

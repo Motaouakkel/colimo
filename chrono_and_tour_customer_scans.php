@@ -2,31 +2,16 @@
 $page_title = "Chrono et scans clients tournee";
 $api_action = "chronoAndTourCustomerScans";
 include 'header.php';
-
 ?>
 
 <body class="dashboard-page sb-l-o sb-r-c">
-
-    <!-- Start: Main -->
     <div id="main">
-
-        <!-- Start: Header -->
-        <!-- End: Header -->
-        <?php include 'externe.php'; ?>
-        <!-- Start: Content-Wrapper -->
+        <?php include 'sidebar_left.php'; ?>
         <section id="content_wrapper">
-
             <?php include 'bread_crumbs.php'; ?>
-
-            <!-- Begin: Content -->
             <section id="content" class="animated fadeIn">
-
-                <!-- Admin-panels -->
                 <div class="admin-panels fade-onload sb-l-o-full">
-
-                    <!-- full width widgets -->
                     <div class="row">
-
                         <div class="panel">
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
@@ -34,7 +19,6 @@ include 'header.php';
                                 </div>
                             </div>
                             <div class="panel-body pn">
-
                                 <div class="ml15 ib va-m" id="toggle_sidemenu_r">
                                     <a href="#" id="aCliquer">
                                     </a>
@@ -107,9 +91,6 @@ include 'header.php';
                                             type: "number"
                                         },
 
-
-
-
                                     }
                                     maper = data;
                                     data.unshift(struct);
@@ -173,18 +154,14 @@ include 'header.php';
             </section>
 
         </section>
-        <!-- End: Content-Wrapper -->
 
         <?php include 'sidebar_right.php'; ?>
     </div>
-    <!-- End: Main -->
 
 
 
 
 </body>
-<!-- Start: header -->
 <?php include 'footer.php'; ?>
-<!-- Start: header -->
 
 </html>

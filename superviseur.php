@@ -10,7 +10,7 @@ $part = $_SESSION['partner'];
 $type = $location_id;
 $job = 21;
 
-$url =  'http://194.163.166.243:3020/md/getuser';
+$url =  'http://10.10.10.165:3020/md/getuser';
 $params = array('location_id' => $type,'job_id' => $job);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');

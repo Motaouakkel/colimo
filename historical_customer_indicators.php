@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -76,7 +76,7 @@ include 'header.php';
                                         },
 
                                     }
-                                    maper = data;
+
                                     data.unshift(struct);
 
                                     return data;
@@ -94,12 +94,15 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                    "uniqueName": "customer_name",
-                                                    "caption": "Nom client",
+                                                    "uniqueName": "sector",
+                                                    "caption": "secteur",
                                                 },
                                                 {
                                                     "uniqueName": "tour",
                                                     "caption": "Tournee",
+                                                }, {
+                                                    "uniqueName": "agency",
+                                                    "caption": "agence",
                                                 }
                                             ],
                                             "rows": [{
@@ -112,7 +115,8 @@ include 'header.php';
 
                                             "measures": [{
                                                 "uniqueName": "amount",
-                                            } ],
+                                                "caption": "total"
+                                            }, ],
 
                                         },
                                         "options": {
@@ -134,49 +138,61 @@ include 'header.php';
 
                                 });
 
-                               function  pivotcallback(pivot1){
-                                pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                    var i = 0
-                                    var l = 0
-                                    if (data.columnIndex == 1 && data.label == "-1" && i == 0) {
-                                        cell.text = "Agence"
-                                        i++
-                                    } else if (data.columnIndex == 2 && data.label == "0" && l == 0) {
-                                        cell.text = "type"
-                                        l++
-                                    }
-                                    if (data.columnIndex == 1 && data.label == "-1" && i == 0) {
-                                        cell.text = "Agence"
-                                        i++
-                                    }  
-                                    if (data.columnIndex == 2 &&  data.rowIndex != 0 )  {
-                                        cell2 = pivot1.getCell(data.rowIndex,0)
-                                        //cell.label.split("/")[1]
-                                        var a = cell2.label
-                                        var b = a.split("/")[2]
-                                       
-                                        cell.text = b
-                                        
-                                    }else if (data.columnIndex == 1 &&  data.rowIndex != 0 && !data.isGrandTotalRow )  {
-                                        cell2 = pivot1.getCell(data.rowIndex,0)
-                                        
-                                        //cell.label.split("/")[1]
-                                        
-                                        var a = cell2.label
-                                        var b = a.split("/")[0]
-                                        
-                                        cell.text = b
-                                        
-                                    }else if (data.columnIndex == 0 && data.rowIndex != 0 && !data.isGrandTotalRow){
-                                        
-                                        var a = data.label
-                                        cell.text = a.split("/")[1]
-                                        
-                                    }
-                                
-                                });                                
-                            }
-                            pivotcallback(pivot1)
+                                function pivotcallback(pivot1) {
+                                    pivot1.customizeCell(function customizeCellFunction(cell, data) {
+                                        var i = 0
+                                        var l = 0
+                                        var x = 0
+                                        cell3 = pivot1.getCell(data.rowIndex, data.columnIndex + 1)
+                                        if (cell3.isGrandTotalColumn) {
+                                            cell2 = pivot1.getCell(data.rowIndex, 0)
+
+                                            //cell.label.split("/")[1]
+
+                                            var a = cell2.label
+                                            var b = a.split("/")[3]
+                                            cell.text = b
+                                            //cell2 = pivot1.getCell(data.rowIndex, 0)
+                                            //x++
+                                        }
+                                        if (data.columnIndex == 1 && data.label == "-1" && i == 0) {
+                                            cell.text = "Secteur"
+                                            i++
+                                        } else if (data.columnIndex == 2 && data.label == "0" && l == 0) {
+                                            cell.text = "type"
+                                            l++
+                                        } else if (data.label == "32" && x == 0) {
+                                            cell.text = "NBRE JOURS VENTE"
+                                            x++
+                                        }
+                                        if (data.columnIndex == 2 && data.rowIndex != 0) {
+                                            cell2 = pivot1.getCell(data.rowIndex, 0)
+                                            //cell.label.split("/")[1]
+                                            var a = cell2.label
+                                            var b = a.split("/")[2]
+
+                                            cell.text = b
+
+                                        } else if (data.columnIndex == 1 && data.rowIndex != 0 && !data.isGrandTotalRow) {
+                                            cell2 = pivot1.getCell(data.rowIndex, 0)
+
+                                            //cell.label.split("/")[1]
+
+                                            var a = cell2.label
+                                            var b = a.split("/")[0]
+
+                                            cell.text = b
+
+                                        } else if (data.columnIndex == 0 && data.rowIndex != 0 && !data.isGrandTotalRow) {
+
+                                            var a = data.label
+                                            cell.text = a.split("/")[1]
+
+                                        }
+
+                                    });
+                                }
+                                pivotcallback(pivot1)
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
@@ -188,7 +204,7 @@ include 'header.php';
                                 }
 
                             }
-                           
+
 
                             //WebDataRocks[ report ] = yourValue;
 

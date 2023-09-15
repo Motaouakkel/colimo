@@ -23,10 +23,13 @@ function get_data($endpint)
         $part  = 0;
     }
 
-    $url =  'http://194.163.166.243:3020/op/' . $endpint;
+    $url =  'http://10.10.10.165:3020/op/' . $endpint;
 
 
-    $params = array('date1' => $date1, 'user_id' => $part);
+    $params = array('user_id' => $part);
+    if (isset($date1)) {
+        $params['date1'] = $date1;
+    }
     if (isset($date2)) {
         $params['date2'] = $date2;
     }

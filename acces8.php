@@ -13,7 +13,7 @@ $ag_id = $agency_id;
 $sup_id = $user_id;
 $part = $_SESSION['partner'];
 
-$url =  'http://194.163.166.243:3020/op/reportdiscount';
+$url =  'http://10.10.10.165:3020/op/reportdiscount';
 
 
 if ($_SESSION['job_id'] == 21) {

@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -47,25 +47,23 @@ include 'header.php';
                         <script>
                             function loadfile(f) {
                                 var tournee_pivot = [];
+
                                 function getJSONData() {
 
                                     data = $.parseJSON(f);
                                     var tournee = {};
-                                   
+
                                     try {
                                         if (data[0].tournee != undefined) {
                                             data[0].tournee.forEach(tr => {
-                                                tournee_pivot.push(
-                                                    {
+                                                tournee_pivot.push({
                                                     "uniqueName": tr,
                                                     "caption": tr,
+                                                })
+                                                tournee[tr] = {
+                                                    type: "number"
                                                 }
-                                                )
-                                                tournee[tr] = 
-                                                     {
-                                                        type : "number"
-                                                    }
-                                                
+
                                             })
                                         }
                                     } catch (e) {
@@ -86,21 +84,22 @@ include 'header.php';
                                         },
                                         "tournee affectation": {
                                             type: "number"
-                                        },...tournee
-                                    }                                    
+                                        },
+                                        ...tournee
+                                    }
                                     data.unshift(struct);
 
                                     return data;
 
                                 };
-                           
-                                dataSource =  getJSONData()
-                               
+
+                                dataSource = getJSONData()
+
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
                                     beforetoolbarcreated: customizeToolbar,
                                     toolbar: true,
-                                    
+
                                     report: {
                                         dataSource: {
                                             "data": dataSource
@@ -108,16 +107,13 @@ include 'header.php';
                                         "slice": {
                                             "reportFilters": [{
                                                 "uniqueName": "agency",
+                                                "caption": "agence",
 
                                             }, {
                                                 "uniqueName": "vendeur"
                                             }],
                                             "rows": [{
                                                 "uniqueName": "vendeur",
-                                            },{
-                                                "uniqueName": "totall",
-                                                "caption": "total test",
-                                                    "formula" : "1+1"
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
@@ -125,6 +121,7 @@ include 'header.php';
                                             "measures": [{
                                                     "uniqueName": "nombre de jours",
                                                     "caption": "Total jours periode",
+                                                    "format": "3dhvwiax",
                                                 }, {
                                                     "uniqueName": "journee affectation",
                                                     "caption": "Total jours affectation",
@@ -132,21 +129,44 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "tournee affectation",
                                                     "caption": "Nbre tournees affectation",
-                                                },...tournee_pivot,
-                                                
+                                                }, ...tournee_pivot,
+
                                             ]
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "SEGM DH TTC PAR FACTURE",
+                                                "title": "<?php echo $page_title ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "off",
                                                 "showHierarchyCaptions": false
                                             },
                                             "showAggregationLabels": false,
-                                            
+
                                         },
-                                        
+                                        "formats": [{
+                                                "name": "3dhvqfuq",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 2,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            },
+                                            {
+                                                "name": "3dhvwiax",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 2,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            }
+                                        ]
+
                                     },
 
                                 });

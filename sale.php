@@ -33,7 +33,7 @@ function file_post_contents13($url, $data, $username = null, $password = null)
 
 $data = array("partner_id" => $_SESSION["partner"]);
 
-$response = file_post_contents13('http://194.163.166.243:3020/ms/gpmenuweb', $data, 'test', 'miftah');
+$response = file_post_contents13('http://10.10.10.165:3020/ms/gpmenuweb', $data, 'test', 'miftah');
 
 
 $objet = json_decode($response, true);
@@ -141,7 +141,7 @@ if ($acces == 10) {
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 

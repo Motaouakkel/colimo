@@ -20699,7 +20699,7 @@ body.tray-rescale .tray .affix-pane.affix {
 /* Sidebar Left Container */
 #sidebar_left {
   color: #fff;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 230px;
@@ -21506,6 +21506,7 @@ body.sb-l-m #sidebar_left.sidebar-light .sidebar-menu > li > a > .sidebar-title 
 }
 .sb-r-c #content_wrapper {
   margin-right: 0;
+  margin-top: 80px;
 }
 /*====================================================
   C. Left Sidebar Minified Helper

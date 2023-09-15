@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -67,13 +67,11 @@ include 'header.php';
                                     })
 
                                     ret = []
-                                    //<40	40-50	50-60	60-70	>70
-
                                     var struct = {
                                         "tournee": {
                                             type: "string"
                                         },
-                                        
+
                                         "gamme_seq": {
                                             type: "number"
                                         },
@@ -126,7 +124,7 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                // "uniqueName": "Date"
+                                                "uniqueName": "tournee"
                                             }],
                                             "rows": [{
                                                     "uniqueName": "product_name"
@@ -138,28 +136,30 @@ include 'header.php';
                                             }],
 
                                             "measures": [{
-                                                    "uniqueName": "gamme_seq",
-                                                    "caption": "gamme",
+                                                    "uniqueName": "famille_seq",
+                                                    "caption": "FAMILLE",
                                                 },
                                                 {
-                                                    "uniqueName": "famille_seq",
-                                                    "caption": "famille",
+                                                    "uniqueName": "gamme_seq",
+                                                    "caption": "GAMME",
                                                 },
-                                                
                                                 {
                                                     "uniqueName": "sold_qtt1",
-                                                    "caption": "CA P1",
+                                                    "caption": "QTTE P1",
+                                                    "format": "precision"
 
                                                 },
                                                 {
                                                     "uniqueName": "sold_qtt2",
-                                                    "caption": "CA P2",
+                                                    "caption": "QTTE P2",
+                                                    "format": "precision"
 
                                                 },
                                                 {
                                                     "uniqueName": "Evol_sold_qtt",
-                                                    "caption": "Evol",
-                                                    "formula": "\"sold_qtt2\" - \"sold_qtt1\""
+                                                    "caption": "EVOL",
+                                                    "formula": "\"sold_qtt2\" - \"sold_qtt1\"",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "Evol_sold_qtt%",
@@ -170,19 +170,22 @@ include 'header.php';
                                                 },
                                                 {
                                                     "uniqueName": "ca1",
-                                                    "caption": "ca1",
+                                                    "caption": "CA P1",
+                                                    "format": "precision"
 
                                                 },
 
                                                 {
                                                     "uniqueName": "ca2",
-                                                    "caption": "ca2",
+                                                    "caption": "CA P2",
+                                                    "format": "precision"
 
                                                 },
                                                 {
                                                     "uniqueName": "Evol",
-                                                    "caption": "Evol",
-                                                    "formula": "\"ca2\" - \"ca1\""
+                                                    "caption": "EVOL",
+                                                    "formula": "\"ca2\" - \"ca1\"",
+                                                    "format": "precision"
 
                                                 },
                                                 {
@@ -195,17 +198,22 @@ include 'header.php';
                                                 },
                                                 {
                                                     "uniqueName": "lost1",
-                                                    "caption": "Perte globale p1",
+                                                    "caption": "PERTE GLOBALE P1",
+                                                    "format": "precision"
 
                                                 },
                                                 {
                                                     "uniqueName": "lost2",
-                                                    "caption": "Perte globale p2",
+                                                    "caption": "PERTE GLOBALE P2",
+                                                    "format": "precision"
+                                                    
                                                 },
                                                 {
                                                     "uniqueName": "EvolLost",
-                                                    "caption": "Evol",
-                                                    "formula": "\"lost2\" - \"lost1\""
+                                                    "caption": "EVOL",
+                                                    "formula": "\"lost2\" - \"lost1\"",
+                                                    "format": "precision"
+                                                    
                                                 },
                                                 {
                                                     "uniqueName": "EvolLost%",
@@ -231,6 +239,12 @@ include 'header.php';
                                             "decimalPlaces": 2,
                                             "currencySymbol": "%",
                                             "currencySymbolAlign": "right"
+                                        },
+                                        {
+                                            "name": "precision",
+                                            "decimalPlaces": 2,
+                                            
+                                            
                                         }]
                                     },
 

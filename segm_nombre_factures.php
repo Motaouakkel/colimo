@@ -1,6 +1,6 @@
 <?php
 $page_title = "Segmentation nombre de factures";
-$api_action = "segfact";
+$api_action = "segmNombreFactures";
 include 'header.php';
 
 ?>
@@ -12,7 +12,7 @@ include 'header.php';
 
         <!-- Start: Header -->
         <!-- End: Header -->
-        <?php include 'externe.php'; ?>
+        <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -53,7 +53,6 @@ include 'header.php';
                                     console.log("-------------------");
                                     console.log(data);
                                     ret = []
-                                    //<40	40-50	50-60	60-70	>70
                                     data.forEach(item => {
                                         var a = {
                                             "<40": 0,
@@ -62,13 +61,13 @@ include 'header.php';
                                             "60-70": 0,
                                             ">70": 0,
                                         }
-                                        if (item.CA < 40) {
+                                        if (item.nbr_inv < 40) {
                                             a["<40"]++;
-                                        } else if (item.CA >= 40 && item.CA < 50) {
+                                        } else if (item.nbr_inv >= 40 && item.nbr_inv < 50) {
                                             a["40-50"]++;
-                                        } else if (item.CA >= 50 && item.CA < 60) {
+                                        } else if (item.nbr_inv>= 50 && item.nbr_inv < 60) {
                                             a["50-60"]++;
-                                        } else if (item.CA >= 60 && item.CA < 70) {
+                                        } else if (item.nbr_inv >= 60 && item.nbr_inv < 70) {
                                             a["60-70"]++;
                                         } else {
                                             a[">70"]++;
@@ -80,41 +79,14 @@ include 'header.php';
                                         ret.push(item)
                                     })
                                     var struct = {
-                                        "Agence": {
+                                        "agency": {
                                             type: "string"
                                         },
-                                        "Secteur": {
-                                            type: "string"
-                                        },
-                                        "Date": {
-                                            type: "string"
-                                        },
-                                        "CA": {
-                                            type: "number"
-                                        },
-                                        "Client": {
-                                            type: "string"
-                                        },
-                                        "tournee_id": {
+                                        "nbr_inv": {
                                             type: "number"
                                         },
                                         "tournee_name": {
                                             type: "string"
-                                        },
-                                        "secteur_id": {
-                                            type: "number"
-                                        },
-                                        "agency_id": {
-                                            type: "number"
-                                        },
-                                        "Remise": {
-                                            type: "number"
-                                        },
-                                        "Sec_Scan": {
-                                            type: "number"
-                                        },
-                                        "Duree": {
-                                            type: "number"
                                         },
                                         "<40": {
                                             type: "number"
@@ -149,30 +121,29 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [{
-                                                "uniqueName": "Date"
-                                            }],
+                                            "reportFilters": [],
                                             "rows": [{
-                                                "uniqueName": "Agence"
+                                                "uniqueName": "agency"
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
-                                                    "uniqueName": "CA",
+                                                    "uniqueName": "nbr_inv",
                                                     "caption": "Nombre factures",
-                                                    "aggregation": "count",
+                                                    "aggregation": "sum",
                                                     "format": "3dhvwiax"
                                                 },
                                                 {
-                                                    "uniqueName": "tournee_id",
-                                                    "caption": "Number of Tournees",
-                                                    "aggregation": "distinctcount",
+                                                    "uniqueName": "tournee_name",
+                                                    "caption": 	"Nombre de tournees",
+                                                    "aggregation": "count",
                                                 },
                                                 {
                                                     "uniqueName": "TourneeRatio",
-                                                    "caption": "Tournee Ratio",
-                                                    "formula": " count(\"CA\") / distinctcount(\"tournee_id\")",
+                                                    "caption": "Nbr facture/tournee",
+                                                    "formula": " sum(\"nbr_inv\") / count(\"tournee_name\")",
+                                                    "format": "3dhvwiax"
                                                 },
                                                 {
                                                     "uniqueName": "<40",
@@ -204,7 +175,7 @@ include 'header.php';
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "SEGM NBRE FACTURES",
+                                                "title": "<?php echo $page_title ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false
@@ -226,7 +197,7 @@ include 'header.php';
                                                 "name": "3dhvwiax",
                                                 "thousandsSeparator": " ",
                                                 "decimalSeparator": ".",
-                                                "decimalPlaces": 0,
+                                                "decimalPlaces": 2,
                                                 "currencySymbol": "",
                                                 "currencySymbolAlign": "left",
                                                 "nullValue": "",
