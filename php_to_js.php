@@ -23,7 +23,7 @@ function get_data($endpint)
         $part  = 0;
     }
 
-    $url =  'http://10.10.10.165:3020/op/' . $endpint;
+    $url =  'http://194.163.166.243:3020/op/' . $endpint;
 
 
     $params = array('user_id' => $part);
