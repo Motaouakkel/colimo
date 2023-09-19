@@ -1,5 +1,7 @@
 <?php
-$json_string = 'http://194.163.166.243:3020/op/report1';
+include 'consts.php';
+
+$json_string = BASE_URL . ':'.PORT.'/op/report1';
 
 $jsondata = file_get_contents($json_string);
 

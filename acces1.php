@@ -1,4 +1,5 @@
 <?php
+include 'consts.php';
 session_start();
 
 extract($_REQUEST);
@@ -18,7 +19,7 @@ if ($part == "") {
     $part  = 0;
 }
 
-$url =  'http://194.163.166.243:3020/op/reportsl';
+$url =  BASE_URL . ':'.PORT.'/op/reportsl';
 
 
 $params = array('date1' => $d1, 'date2' => $d2, 'user_id' => $part);

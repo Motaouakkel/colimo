@@ -1,37 +1,23 @@
 <?php
-
+include 'consts.php';
 session_start();
-$data = array("partner_id" => $_SESSION["partner"]);
+$groupedArray = [];
+try {
+    $data = array("partner_id" => $_SESSION["partner"]);
+    $response = fetch_data(BASE_URL . ':' . PORT . '/ms/gpmenuweb', $data, 'test', 'miftah');
+    $obj = json_decode($response, true);
+    $groupedArray = array_reduce($obj, function ($carry, $item) {
+        $key = $item['mname'];
 
+        if (!isset($carry[$key])) {
+            $carry[$key] = [];
+        }
+        $carry[$key][] = $item;
 
-function file_post_contents12($url, $data, $username = null, $password = null)
-{
-
-    $postdata = http_build_query($data, '', '&');
-
-    $opts = array(
-        'http' =>
-        array(
-            'method'  => 'POST',
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'content' => $postdata
-        )
-    );
-
-    if ($username && $password) {
-        $opts['http']['header'] .= ("Authorization: Basic " . base64_encode("$username:$password")); // .= to append to the header array element
-    }
-
-    $context = stream_context_create($opts);
-    return file_get_contents($url, false, $context);
+        return $carry;
+    }, []);
+} catch (Exception  $e) {
 }
-
-
-
-$response = file_post_contents12('http://194.163.166.243:3020/ms/gpmenuweb', $data, 'test', 'miftah');
-
-$obj = json_decode($response, true);
-
 ?>
 
 
@@ -47,26 +33,29 @@ $obj = json_decode($response, true);
                 </a>
             </li>
             <li class="sidebar-label pt15">Menu</li>
-            <li>
-                <a class="accordion-toggle menu-open" href="#">
-                    <span class="glyphicons glyphicons-fire"></span>
-                    <span class="sidebar-title">PDA</span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="nav sub-nav">
-                    <?php
-                    $currentUrl = $_SERVER['REQUEST_URI'];
-                    $pageRoute = parse_url($currentUrl, PHP_URL_PATH);
-                    $class  = "";
-                    foreach ($obj as $v1) {
-                        $class = strpos($pageRoute, $v1["logic_name"]) !== false ? "active" : "";
-                        echo "<li class=\"" . $class . "\">";
-                        echo "<a href=" . $v1["logic_name"] . "><span class='glyphicons glyphicons-book'></span> " . $v1["iname"] . " </a> </li>";
-                    }
-
-                    ?>
-                </ul>
-            </li>
+            <?php
+            $output = "";
+            $currentUrl = $_SERVER['REQUEST_URI'];
+            $pageRoute = parse_url($currentUrl, PHP_URL_PATH);
+            $menu_item_class  = "";
+            $menu_class  = "";
+            $index = 0;
+            foreach ($groupedArray as $key => $menu) {
+                $menu_class = $index == 0 ? "menu-open" : "";
+                $output .= '<li><a class="accordion-toggle ' . $menu_class . '" href="#">';
+                $output .= '<span class="glyphicons glyphicons-fire"></span>';
+                $output .= '<span class="sidebar-title">' . $key . '</span>';
+                $output .= '<span class="caret"></span></a><ul class="nav sub-nav">';
+                foreach ($menu as $key => $menu_item) {
+                    $menu_item_class = strpos($pageRoute, $menu_item["logic_name"]) !== false ? "active" : "";
+                    $output .= '<li class=\"' . $menu_item_class . '">';
+                    $output .= '<a href="' . $menu_item["logic_name"] . '"><span class="glyphicons glyphicons-book"></span> ' . $menu_item["iname"] . ' </a> </li>';
+                }
+                $output .= '</ul></li>';
+                $index++;
+            }
+            echo $output;
+            ?>
         </ul>
         <div class="sidebar-toggle-mini">
             <a href="#">

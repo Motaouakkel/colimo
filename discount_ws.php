@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -10,7 +11,7 @@ $d1 = $date1;
 $d2 = $date2;
 
 
-$url =  'http://194.163.166.243:3020/pros/prospectdiscountbydate';
+$url =  BASE_URL . ':'.PORT.'/pros/prospectdiscountbydate';
 $params = array('from_date' => $d1,'to_date' => $d2);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');

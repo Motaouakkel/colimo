@@ -1,5 +1,6 @@
 
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -9,7 +10,7 @@ extract($_REQUEST);
 
 $sec_id = $sector;
 $dte = $date1;
-$url =  'http://194.163.166.243:3020/sl/gpsinvoice';
+$url =  BASE_URL . ':'.PORT.'/sl/gpsinvoice';
 
 
 $params = array('sector_id' => $sec_id , 'dte' => $dte);

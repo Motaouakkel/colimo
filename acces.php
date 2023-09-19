@@ -1,5 +1,5 @@
 <?php
-
+require_once 'function.php';
 session_start();
 
 extract($_REQUEST);
@@ -31,9 +31,7 @@ function file_post_contents12($url, $data, $username = null, $password = null)
     return file_get_contents($url, false, $context);
 }
 
-
-
-$response = file_post_contents12('http://194.163.166.243:3020/md/login', $data, 'test', 'miftah');
+$response = file_post_contents12(BASE_URL . ':' . PORT . '/md/login', $data, 'test', 'miftah');
 
 
 $obj = json_decode($response, true);

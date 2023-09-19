@@ -1,4 +1,5 @@
 <?php
+include 'consts.php';
     session_start();
 	if(!isset($_SESSION['auth']) or $_SESSION['auth']!='yes' or empty($_SESSION['auth'])) {
 	  echo "<script language='javascript'>window.location.href='login.php';</script>";
@@ -31,7 +32,7 @@ return file_get_contents($url, false, $context);}
 
 $data = array("partner_id" => $_SESSION["partner"]);   
 
-$response = file_post_contents13('http://194.163.166.243:3020/ms/gpmenuweb',$data,'test','miftah');
+$response = file_post_contents13(BASE_URL . ':'.PORT.'/ms/gpmenuweb',$data,'test','miftah');
 			
 
 $objet = json_decode($response, true);

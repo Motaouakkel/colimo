@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -13,7 +14,7 @@ $d1 = $date1;
 $d2 = $date2;
 
 
-$url =  'http://194.163.166.243:3020/md/log';
+$url =  BASE_URL . ':'.PORT.'/md/log';
 
 
 $params = array('date1' => "'" + $d1 + "'", 'date2' => "'" +  $d2 + "'");

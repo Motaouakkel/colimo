@@ -1,4 +1,5 @@
 <?php
+include 'consts.php';
 
 ///////////////////////////////////////////////////////////
 ////////////////////      Function     ///////////////////
@@ -23,7 +24,7 @@ function get_data($endpint)
         $part  = 0;
     }
 
-    $url =  'http://194.163.166.243:3020/op/' . $endpint;
+    $url =  BASE_URL . ':' . PORT . '/op/' . $endpint;
 
 
     $params = array('user_id' => $part);

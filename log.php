@@ -1,5 +1,5 @@
 <?php	
-
+include 'consts.php';
 session_start();    
 
 extract($_REQUEST);
@@ -33,7 +33,7 @@ return file_get_contents($url, false, $context);
 
 $obj = 'Nothing';
 
-$response = file_post_contents12('http://194.163.166.243:3020/md/log',$data,'test','miftah');
+$response = file_post_contents12(BASE_URL . ':'.PORT.'/md/log',$data,'test','miftah');
 			
 
 $obj = json_decode($response, true);

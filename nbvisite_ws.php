@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -12,7 +13,7 @@ $ag_id = $agency_id;
 $sup_id = $user_id;
 $part = $_SESSION['partner'];
 
-$url =  'http://194.163.166.243:3020/op/reportvisitesnbr';
+$url =  BASE_URL . ':'.PORT.'/op/reportvisitesnbr';
 
 if ($_SESSION['job_id'] == 21) {
 

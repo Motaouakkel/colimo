@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -9,7 +10,7 @@ extract($_REQUEST);
 $partner = $sup_id;
 $location_id = $sup_id;
 
-$url =  'http://194.163.166.243:3020/sl/tour';
+$url =  BASE_URL . ':'.PORT.'/sl/tour';
 //$params = array('location_type_id' => 5,'partner_id'=> $partner,'active'=> );
 
 $header = array('Content-Type' => 'application/json');

@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -9,7 +10,7 @@ extract($_REQUEST);
 $type = "2";
 
 
-$url =  'http://194.163.166.243:3020/md/agencybypartner';
+$url =  BASE_URL . ':'.PORT.'/md/agencybypartner';
 $params = array('partner_id' => $_SESSION['partner']);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');

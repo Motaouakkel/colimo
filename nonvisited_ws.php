@@ -1,4 +1,5 @@
-<?php	
+<?php
+include 'consts.php';	
 session_start();    
 
 
@@ -11,7 +12,7 @@ $d2 = $date2;
 $partner = $partner_id;
 
 
-$url =  'http://194.163.166.243:3020/sl/customerunvisited';
+$url =  BASE_URL . ':'.PORT.'/sl/customerunvisited';
 if ($_SESSION['job_id'] == 21) {
 $params = array('dtestart' => $d1,'dteend' => $d2,'partner' => $_SESSION['partner']);	
 } else {

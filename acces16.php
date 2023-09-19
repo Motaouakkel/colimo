@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -19,7 +20,7 @@ if ($part== "" ) {
 	$part  = 0;
 }
 
-$url =  'http://194.163.166.243:3020/op/salesgoal';
+$url =  BASE_URL . ':'.PORT.'/op/salesgoal';
 
 
 $params = array('date1' => $d1, 'date2' => $d2,'user_id' => $part);

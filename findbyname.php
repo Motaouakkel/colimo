@@ -1,5 +1,5 @@
 <?php	
-		
+include 'consts.php';	
 	
 function addBasicAuth($header, $username, $password) {
     $header['Authorization'] = 'Basic '.base64_encode("$username:$password");
@@ -45,7 +45,7 @@ $r=$ref;
 
 
 
-$url = 'http://194.163.166.243:3020/md/addresspartner';
+$url = BASE_URL . ':'.PORT.'/md/addresspartner';
 $params = array('ref' => $r);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');
@@ -64,7 +64,7 @@ foreach ($obj as $v1) {
   
 }
 
-$url = 'http://194.163.166.243:3020/md/listprospect';
+$url = BASE_URL . ':'.PORT.'/md/listprospect';
 $params = array('ref' => $r);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');
@@ -84,7 +84,7 @@ foreach ($obj_pros as $v1_pros) {
 
 
 
-$url = 'http://194.163.166.243:3020/md/prospectline';
+$url = BASE_URL . ':'.PORT.'/md/prospectline';
 $params = array('prospect_id' => $id_pros);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');

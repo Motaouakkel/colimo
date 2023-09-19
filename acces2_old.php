@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -10,7 +11,7 @@ $d1 = $date1;
 $d2 = $date2;
 $part = $_SESSION['partner'];
 
-$url =  'http://194.163.166.243:3020/op/reportinvoice';
+$url =  BASE_URL . ':'.PORT.'/op/reportinvoice';
 $params = array('date1' => $d1, 'date2' => $d2, 'user_id' => $part);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');

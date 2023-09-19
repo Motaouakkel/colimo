@@ -1,7 +1,8 @@
 <?php
 
+include 'consts.php';
 
-function fetch_data($url, $data, $username = null, $password = null)
+function fetch_data($url, $data, $username = null, $password = null )
 {
 
     $postdata = http_build_query($data, '', '&');

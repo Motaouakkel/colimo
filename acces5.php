@@ -1,4 +1,5 @@
 <?php	
+include 'consts.php';
 session_start();    
 
 
@@ -14,7 +15,7 @@ $sup_id = $user_id;
 $part = $_SESSION['partner'];
 
 
-$url =  'http://194.163.166.243:3020/op/reportinvoice';
+$url =  BASE_URL . ':'.PORT.'/op/reportinvoice';
 
 
 if ($_SESSION['job_id'] == 21) {
