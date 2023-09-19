@@ -864,10 +864,7 @@
 .admin-form .append-icon .field-icon {
   right: 0;
 }
-.admin-form .prepend-icon > input,
-.admin-form .prepend-icon > textarea {
-  padding-left: 36px;
-}
+
 .admin-form .append-icon > input,
 .admin-form .append-icon > textarea {
   padding-right: 36px;

@@ -47,7 +47,7 @@ try {
                 $output .= '<span class="caret"></span></a><ul class="nav sub-nav">';
                 foreach ($menu as $key => $menu_item) {
                     $menu_item_class = strpos($pageRoute, $menu_item["logic_name"]) !== false ? "active" : "";
-                    $output .= '<li class=\"' . $menu_item_class . '">';
+                    $output .= '<li class="' . $menu_item_class . '">';
                     $output .= '<a href="' . $menu_item["logic_name"] . '"><span class="glyphicons glyphicons-book"></span> ' . $menu_item["iname"] . ' </a> </li>';
                 }
                 $output .= '</ul></li>';
