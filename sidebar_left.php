@@ -1,6 +1,5 @@
 <?php
 include 'consts.php';
-session_start();
 $groupedArray = [];
 try {
     $data = array("partner_id" => $_SESSION["partner"]);
