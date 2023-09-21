@@ -117,7 +117,7 @@ include 'header.php';
                                         var x = 0
                                         
                                         if(data.label.split("}")[1] != null && data.rowIndex == 0){
-                                            cell.text = "hola"
+                                            cell.text = "RFM"
                                             data.hierarchy.filterEnabled = false
                                             console.log(data)
                                             console.log(cell)
