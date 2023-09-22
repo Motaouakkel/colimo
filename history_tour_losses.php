@@ -24,7 +24,7 @@ include 'header.php';
                         <div class="panel">
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
-                                    <?php include 'search_1_date.php' ?>
+                                    <?php include 'search_2_dates.php' ?>
                                 </div>
                             </div>
                             <div class="panel-body pn">
@@ -58,7 +58,7 @@ include 'header.php';
                                         "day": {
                                             type: "string"
                                         },
-                                        "tournee": {
+                                        "Bloc": {
                                             type: "string"
                                         },
                                         "type": {
@@ -72,6 +72,7 @@ include 'header.php';
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
+                                    customizeCell: customizeCellFunction,
                                     beforetoolbarcreated: customizeToolbar,
                                     toolbar: true,
                                     report: {
@@ -84,7 +85,7 @@ include 'header.php';
                                             }, {
                                                 "uniqueName": "Secteur"
                                             }, {
-                                                "uniqueName": "tournee"
+                                                "uniqueName": "Bloc"
                                             }, {
                                                 "uniqueName": "Gamme"
                                             }, {
@@ -96,11 +97,11 @@ include 'header.php';
                                                     "uniqueName": "Agence"
                                                 },
                                                 {
+                                                    "uniqueName": "Bloc"
+                                                }, {
                                                     "uniqueName": "Secteur"
                                                 },
-                                                {
-                                                    "uniqueName": "tournee"
-                                                }
+
                                             ],
                                             "columns": [{
                                                 "uniqueName": "day",
@@ -150,10 +151,17 @@ include 'header.php';
                                                 "textAlign": "right",
                                                 "isPercent": false
                                             }
-                                        ]
+                                        ],
                                     },
 
                                 });
+
+                                function customizeCellFunction(cell, data) {
+                                    let a = 1;
+                                    if (data.isGrandTotal && data.columnIndex == 0) {
+                                        cell.text = "TOTAL";
+                                    }
+                                }
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar

@@ -42,7 +42,7 @@ include 'header.php';
                                         "AGENCE": {
                                             type: 'string'
                                         },
-                                        "TOURNEE": {
+                                        "BLOC": {
                                             type: 'string'
                                         },
                                         "SECTEUR": {
