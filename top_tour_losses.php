@@ -136,6 +136,20 @@ include 'header.php';
                                         }]
                                     },
                                 });
+                                pivot1.on("reportcomplete", function() {
+                                    pivot1.on("reportchange", function() {
+                                        var filterValue = pivot1.getFilter("type");
+                                        var currentConfig = pivot1.getReport();
+                                        headerValue = "PERTE GLOBALE"
+                                        if (filterValue.length === 1) {
+                                            headerValue = filterValue[0].caption;
+                                        } else if (filterValue.length === 2) {
+                                            headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
+                                        }
+                                        currentConfig.slice.measures[0].caption = headerValue.toUpperCase();
+                                        pivot1.setReport(currentConfig);
+                                    });
+                                });
                             }
 
                             loaddate();
