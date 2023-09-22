@@ -58,6 +58,10 @@ include 'header.php';
                                         "CE NET": {
                                             type: "number"
                                         },
+                                        "QTT": {
+                                            type: "number"
+                                        },
+
                                     }
 
 
@@ -98,11 +102,18 @@ include 'header.php';
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
-                                                "uniqueName": "CE NET",
-                                                "caption": "VENTE NETTE DH TTC/J",
-                                                "aggregation": "sum",
-                                                "format": "precentForamt"
-                                            }],
+                                                    "uniqueName": "CE NET",
+                                                    "caption": "VENTE NETTE DH TTC/J",
+                                                    "aggregation": "sum",
+                                                    "format": "precentForamt"
+                                                },
+                                                {
+                                                    "uniqueName": "QTT",
+                                                    "caption": "VENTE NETTE DH UNITES/J",
+                                                    "aggregation": "sum",
+                                                    "format": "precentForamt"
+                                                }
+                                            ],
                                         },
                                         "sorting": "off",
                                         "options": {

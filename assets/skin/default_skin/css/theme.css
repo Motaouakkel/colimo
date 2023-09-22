@@ -25724,17 +25724,22 @@ body.tray-rescale .tray .affix-pane.affix {
   overflow-y: scroll;
   max-height: 60%;
 }
+
 .sidebar-menu li>a.menu-open+ul::-webkit-scrollbar {
-  width: 10px; /* Adjust as needed */
+  width: 10px;
+  /* Adjust as needed */
 }
 
 .sidebar-menu li>a.menu-open+ul::-webkit-scrollbar-thumb {
-  background-color: #333; /* Thumb color */
-  border-radius: 5px; /* Rounded corners */
+  background-color: #333;
+  /* Thumb color */
+  border-radius: 5px;
+  /* Rounded corners */
 }
 
 .sidebar-menu li>a.menu-open+ul::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Thumb color on hover */
+  background-color: #555;
+  /* Thumb color on hover */
 }
 
 
@@ -26673,6 +26678,7 @@ manipulation using an html class aswell */
   padding: 10px 21px;
   background: #fafafa;
   border-bottom: 1px solid #e0e0e0;
+  margin-top: 80px;
 }
 
 .topbar-right {
@@ -27423,6 +27429,11 @@ body.timeline-page #content {
 
 #timeline>.row>.right-column {
   margin-top: 80px;
+}
+
+#login1 input[type=text],
+#login1 input[type=password] {
+  padding-left: 40px;
 }
 
 @media (max-width: 770px) {

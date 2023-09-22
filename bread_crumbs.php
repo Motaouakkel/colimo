@@ -3,7 +3,7 @@
     <div class="topbar-left">
         <ol class="breadcrumb">
             <li class="crumb-active">
-                <a href="#.html">REPORT</a>
+                <a href="home.php">REPORT</a>
             </li>
             <li class="crumb-icon">
                 <a href="/home.php">
