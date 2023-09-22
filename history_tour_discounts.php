@@ -58,7 +58,7 @@ include 'header.php';
                                         "day": {
                                             type: "string"
                                         },
-                                        "tournee": {
+                                        "Bloc": {
                                             type: "string"
                                         },
                                         "type": {
@@ -73,6 +73,7 @@ include 'header.php';
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
                                     beforetoolbarcreated: customizeToolbar,
+                                    customizeCell: customizeCellFunction,
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -84,7 +85,7 @@ include 'header.php';
                                             }, {
                                                 "uniqueName": "Secteur"
                                             }, {
-                                                "uniqueName": "tournee"
+                                                "uniqueName": "Bloc"
                                             }, {
                                                 "uniqueName": "Gamme"
                                             }, {
@@ -96,11 +97,12 @@ include 'header.php';
                                                     "uniqueName": "Agence"
                                                 },
                                                 {
-                                                    "uniqueName": "Secteur"
+                                                    "uniqueName": "Bloc"
                                                 },
                                                 {
-                                                    "uniqueName": "tournee"
-                                                }
+                                                    "uniqueName": "Secteur"
+                                                },
+
                                             ],
                                             "columns": [{
                                                 "uniqueName": "day",
@@ -154,6 +156,13 @@ include 'header.php';
                                     },
 
                                 });
+
+                                function customizeCellFunction(cell, data) {
+                                    let a = 1;
+                                    if (data.isGrandTotal && data.columnIndex == 0) {
+                                        cell.text = "TOTAL";
+                                    }
+                                }
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar

@@ -46,7 +46,7 @@ include 'header.php';
                                         "secteur": {
                                             type: "string"
                                         },
-                                        "tournee": {
+                                        "Bloc": {
                                             type: "string"
                                         },
                                         "nbr_facture": {
@@ -81,7 +81,7 @@ include 'header.php';
                                                 }
                                             ],
                                             "rows": [{
-                                                "uniqueName": "tournee"
+                                                "uniqueName": "Bloc"
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
@@ -105,7 +105,7 @@ include 'header.php';
                                         },
                                         "formats": [{
                                             "name": "precentForamt",
-                                            "decimalPlaces": 2,
+                                            "decimalPlaces": 0,
                                         }]
                                     },
                                 });

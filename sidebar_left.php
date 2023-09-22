@@ -40,18 +40,23 @@ try {
             $menu_class  = "";
             $index = 0;
             foreach ($groupedArray as $key => $menu) {
-                $menu_class = $index == 0 ? "menu-open" : "";
-                $output .= '<li><a class="accordion-toggle ' . $menu_class . '" href="#">';
+                $menu_class = "";
+                $output .= '<li><a class="accordion-toggle @@menu@@" href="#">';
                 $output .= '<span class="glyphicons glyphicons-fire"></span>';
                 $output .= '<span class="sidebar-title">' . $key . '</span>';
                 $output .= '<span class="caret"></span></a><ul class="nav sub-nav">';
                 foreach ($menu as $key => $menu_item) {
-                    $menu_item_class = strpos($pageRoute, $menu_item["logic_name"]) !== false ? "active" : "";
+                    $menu_item_class = "";
+                    if (strpos($pageRoute, $menu_item["logic_name"]) !== false) {
+                        $menu_item_class = "active";
+                        $menu_class = "menu-open";
+                    }
                     $output .= '<li class="' . $menu_item_class . '">';
                     $output .= '<a href="' . $menu_item["logic_name"] . '"><span class="glyphicons glyphicons-book"></span> ' . $menu_item["iname"] . ' </a> </li>';
                 }
                 $output .= '</ul></li>';
                 $index++;
+                $output = str_replace('@@menu@@', $menu_class, $output);
             }
             echo $output;
             ?>
