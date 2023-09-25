@@ -8,4 +8,3 @@ if (!defined('BASE_URL')) {
 if (!defined('PORT')) {
     define('PORT', '3020');
 }
-

@@ -46,7 +46,7 @@ include 'header.php';
                                         "Secteur": {
                                             type: "string"
                                         },
-                                        "tournee": {
+                                        "Bloc": {
                                             type: "string"
                                         },
                                         "type": {
@@ -80,8 +80,8 @@ include 'header.php';
                                                     "caption": "Secteur",
                                                 },
                                                 {
-                                                    "uniqueName": "tournee",
-                                                    "caption": "tournee",
+                                                    "uniqueName": "Bloc",
+                                                    "caption": "Bloc",
                                                 },
                                                 {
                                                     "uniqueName": "type",
@@ -89,7 +89,7 @@ include 'header.php';
                                                 }
                                             ],
                                             "rows": [{
-                                                "uniqueName": "tournee"
+                                                "uniqueName": "Bloc"
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
@@ -116,6 +116,20 @@ include 'header.php';
                                             "decimalPlaces": 2,
                                         }]
                                     },
+                                });
+                                pivot1.on("reportcomplete", function() {
+                                    pivot1.on("reportchange", function() {
+                                        var filterValue = pivot1.getFilter("type");
+                                        var currentConfig = pivot1.getReport();
+                                        headerValue = "REMISE"
+                                        if (filterValue.length === 1) {
+                                            headerValue = filterValue[0].caption;
+                                        } else if (filterValue.length === 2) {
+                                            headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
+                                        }
+                                        currentConfig.slice.measures[0].caption = headerValue.toUpperCase();
+                                        pivot1.setReport(currentConfig);
+                                    });
                                 });
                             }
 

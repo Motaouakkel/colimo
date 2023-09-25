@@ -49,6 +49,9 @@ include 'header.php';
                                         "TOURNEE": {
                                             type: "string"
                                         },
+                                        "BLOC": {
+                                            type: "string"
+                                        },
                                         "Gamme": {
                                             type: "string"
                                         },
@@ -56,6 +59,9 @@ include 'header.php';
                                             type: "string"
                                         },
                                         "% INVENDU": {
+                                            type: "number"
+                                        },
+                                        "INVENDU": {
                                             type: "number"
                                         },
                                     }
@@ -83,8 +89,8 @@ include 'header.php';
                                                     "caption": "SECTEUR",
                                                 },
                                                 {
-                                                    "uniqueName": "TOURNEE",
-                                                    "caption": "TOURNEE",
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "BLOC",
                                                 },
                                                 {
                                                     "uniqueName": "Gamme",
@@ -92,12 +98,17 @@ include 'header.php';
                                                 }
                                             ],
                                             "rows": [{
-                                                "uniqueName": "TOURNEE"
+                                                "uniqueName": "BLOC"
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
+                                                "uniqueName": "INVENDU",
+                                                "caption": "INVENDU",
+                                                "aggregation": "sum",
+                                                "format": "precentForamt"
+                                            }, {
                                                 "uniqueName": "% INVENDU",
                                                 "caption": "% INVENDU",
                                                 "aggregation": "sum",
