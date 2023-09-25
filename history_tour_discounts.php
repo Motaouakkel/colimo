@@ -24,7 +24,7 @@ include 'header.php';
                         <div class="panel">
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
-                                    <?php include 'search_1_date.php' ?>
+                                    <?php include 'search_2_dates.php' ?>
                                 </div>
                             </div>
                             <div class="panel-body pn">
