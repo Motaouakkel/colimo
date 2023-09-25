@@ -15,7 +15,7 @@ include 'header.php';
                         <div class="panel">
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
-                                    <?php include 'search_1_date.php' ?>
+                                    <?php include 'search_2_dates.php' ?>
                                 </div>
                             </div>
                             <div class="panel-body pn">
@@ -36,7 +36,7 @@ include 'header.php';
                                     data = glob
 
                                     var struct = {
-                                        "selector": {
+                                        "BLOC": {
                                             type: "string"
                                         },
                                         "Agence": {
@@ -66,6 +66,7 @@ include 'header.php';
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
+                                    customizeCell: customizeCellFunction,
                                     // beforetoolbarcreated: customizeToolbar,
                                     toolbar: true,
                                     report: {
@@ -78,16 +79,28 @@ include 'header.php';
                                                     "caption": "Secteur",
                                                 },
                                                 {
-                                                    "uniqueName": "tournnee",
-                                                    "caption": "Tournee",
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
                                                 }, {
                                                     "uniqueName": "Agence",
                                                     "caption": "agence",
                                                 }
                                             ],
-                                            "rows": [{
-                                                "uniqueName": "selector"
-                                            }],
+                                            "rows": [
+                                                {
+                                                    "uniqueName": "Agence",
+                                                    "caption": "agence",
+                                                },
+                                                {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
+                                                },{
+                                                    "uniqueName": "Secteur",
+                                                    "caption": "Secteur",
+                                                },],
+                                                "expands": {
+                                                "expandAll": true,
+                                            },
                                             "columns": [{
                                                 "uniqueName": "day",
                                                 "formula": "sum(\"Mt facture\")"
@@ -99,9 +112,10 @@ include 'header.php';
                                         },
                                         "options": {
                                             "grid": {
+                                                "type": "classic",
                                                 "title": "<?php echo $page_title ?>",
                                                 "showHeaders": false,
-                                                "showGrandTotals": "rows",
+                                                "showGrandTotals": true,
                                                 "showHierarchyCaptions": false
                                             },
                                             "showAggregationLabels": false
@@ -115,40 +129,46 @@ include 'header.php';
                                     },
 
                                 });
-
-                                function pivotcallback(pivot1) {
-                                    pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                        var i = 0
-                                        cell2 = pivot1.getCell(data.rowIndex, 0)
-                                        if (data.type == "header" && i == 0) {
-                                            if (data.columnIndex == 1 && data.label == "-1") {
-                                                cell.text = "SECTEUR"
-                                            } else if (data.columnIndex == 2 && data.label == "0") {
-                                                cell.text = "TOURNEE"
-                                            }
-                                            i++
-                                        }
-
-                                        if (data.columnIndex == 1 && data.rowIndex != 0) {
-                                            var a = cell2.label
-                                            var b = a.split("/")[1]
-                                            cell.text = b
-                                        }
-
-                                        if (data.columnIndex == 2 && data.rowIndex != 0) {
-                                            var a = cell2.label
-                                            var b = a.split("/")[2]
-                                            cell.text = b
-                                        }
-
-                                        if (data.columnIndex == 0 && data.rowIndex != 0 && !data.isGrandTotalRow) {
-                                            var a = data.label
-                                            cell.text = a.split("/")[0]
-                                        }
-
-                                    });
+                                function customizeCellFunction(cell, data) {
+                                    let a = 1;
+                                    if (data.isGrandTotal && data.columnIndex == 0) {
+                                        cell.text = "TOTAL";
+                                    }
                                 }
-                                pivotcallback(pivot1)
+
+                                // function pivotcallback(pivot1) {
+                                //     pivot1.customizeCell(function customizeCellFunction(cell, data) {
+                                //         var i = 0
+                                //         cell2 = pivot1.getCell(data.rowIndex, 0)
+                                //         if (data.type == "header" && i == 0) {
+                                //             if (data.columnIndex == 1 && data.label == "-1") {
+                                //                 cell.text = "SECTEUR"
+                                //             } else if (data.columnIndex == 2 && data.label == "0") {
+                                //                 cell.text = "TOURNEE"
+                                //             }
+                                //             i++
+                                //         }
+
+                                //         if (data.columnIndex == 1 && data.rowIndex != 0) {
+                                //             var a = cell2.label
+                                //             var b = a.split("/")[1]
+                                //             cell.text = b
+                                //         }
+
+                                //         if (data.columnIndex == 2 && data.rowIndex != 0) {
+                                //             var a = cell2.label
+                                //             var b = a.split("/")[2]
+                                //             cell.text = b
+                                //         }
+
+                                //         if (data.columnIndex == 0 && data.rowIndex != 0 && !data.isGrandTotalRow) {
+                                //             var a = data.label
+                                //             cell.text = a.split("/")[0]
+                                //         }
+
+                                //     });
+                                // }
+                                // pivotcallback(pivot1)
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar

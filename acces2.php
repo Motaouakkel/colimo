@@ -1,10 +1,12 @@
 <?php
-include 'consts.php';	
+
+
+include 'consts.php';
+	
 session_start();    
 
 
 extract($_REQUEST);
-
 
 
 $d1 = $date1;
