@@ -303,11 +303,8 @@ function loadfile(f) {
 						},
 						{
 							"uniqueName": "Typologie"
-						},
-						{
-							"uniqueName": "Cat",
-							"caption": "Catégorie"
 						}
+						
 					],
 					"columns": [
 						{
@@ -327,8 +324,9 @@ function loadfile(f) {
 					"sorting": {
 						
 					},
+                   	
 					"expands": {
-						
+						"expandAll": true
 					},
 					"flatOrder": [
 						"Ref",
