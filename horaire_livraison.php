@@ -228,7 +228,7 @@ var ch =  1
                      
         }
       }      
-      xhttp.open("POST", "acces2.php", true);
+      xhttp.open("POST", "acces2horaire.php", true);
 	  
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("date1="+date_du+"&date2="+date_au+"&user_id="+sup_id+"&agency_id="+ag_id);
@@ -343,7 +343,27 @@ function loadfile(f) {
 				"showGrandTotals": "columns"
 			},
 			"showAggregationLabels": false
-		}
+		},
+		"conditions": [
+        {
+                "formula": "#value == '00:00:00'",
+                "measure": "Sec_Time",
+                "format": {
+                    "backgroundColor": "#E57373",
+                    "color": "#000000",
+                    "fontFamily": "Arial",
+                    "fontSize": "12px"
+                }
+        },
+		{
+            "formula": "#value == 00:00:00",
+            "measure": "Sec_Time",
+            "format": {
+                "backgroundColor": "#E57373",
+            }
+        }
+    ]
+				
 		},
 			
 		});
