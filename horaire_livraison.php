@@ -303,6 +303,9 @@ function loadfile(f) {
 						},
 						{
 							"uniqueName": "Typologie"
+						},
+						{
+							"uniqueName": "Secteur"
 						}
 						
 					],
