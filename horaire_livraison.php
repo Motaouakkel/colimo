@@ -340,7 +340,7 @@ function loadfile(f) {
 		"options": {
 			"grid": {
 				"type": "classic",
-				"title": "Historique horaire vente par client",
+				"title": "Historique horaire visite par client",
 				"showHeaders": false,
 				"showTotals": "columns",
 				"showGrandTotals": "columns"
