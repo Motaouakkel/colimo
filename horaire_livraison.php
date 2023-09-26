@@ -119,7 +119,7 @@ function includeHTML() {
                         <li class="crumb-link">
                             <a href="#">Accueil</a>
                         </li>
-                        <li class="crumb-trail">Historique horaire vente par client</li>
+                        <li class="crumb-trail">Historique horaire visite par client</li>
                     </ol>
                 </div>
              <div class="topbar-right">
@@ -352,7 +352,7 @@ function loadfile(f) {
                 "formula": "#value == '00:00:00'",
                 "measure": "Sec_Time",
                 "format": {
-                    "backgroundColor": "#E57373",
+                    "backgroundColor": "#ff6961",
                     "color": "#000000",
                     "fontFamily": "Arial",
                     "fontSize": "12px"
@@ -362,7 +362,7 @@ function loadfile(f) {
             "formula": "#value == 00:00:00",
             "measure": "Sec_Time",
             "format": {
-                "backgroundColor": "#E57373",
+                "backgroundColor": "#ff6961",
             }
         }
     ]
