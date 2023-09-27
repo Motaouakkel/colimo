@@ -86,10 +86,10 @@ include 'header.php';
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
                                                 },
-                                                {
-                                                    "uniqueName": "BLOC",
-                                                    "caption": "Bloc",
-                                                },
+                                                // {
+                                                //     "uniqueName": "BLOC",
+                                                //     "caption": "Bloc",
+                                                // },
                                                 {
                                                     "uniqueName": "Gamme",
                                                     "caption": "Gamme",

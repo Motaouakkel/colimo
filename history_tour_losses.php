@@ -1,5 +1,5 @@
 <?php
-$page_title = "Historique pertes secteur";
+$page_title = "Historique pertes par secteur";
 $api_action = "historyTourLosses";
 include 'header.php';
 
@@ -159,7 +159,7 @@ include 'header.php';
                                 function customizeCellFunction(cell, data) {
                                     let a = 1;
                                     if (data.isGrandTotal && data.columnIndex == 0) {
-                                        cell.text = "TOTAL";
+                                        cell.text = "GLOBAL";
                                     }
                                 }
 

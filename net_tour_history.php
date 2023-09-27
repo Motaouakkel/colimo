@@ -1,5 +1,5 @@
 <?php
-$page_title = "Historique ca net secteur";
+$page_title = "Historique ca net par secteur";
 $api_action = "netTourHistory";
 include 'header.php';
 ?>
@@ -79,12 +79,12 @@ include 'header.php';
                                                     "caption": "Secteur",
                                                 },
                                                 {
-                                                    "uniqueName": "BLOC",
-                                                    "caption": "Bloc",
-                                                }, {
                                                     "uniqueName": "Agence",
                                                     "caption": "agence",
-                                                }
+                                                }, {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
+                                                },
                                             ],
                                             "rows": [
                                                 {

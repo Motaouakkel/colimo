@@ -1,5 +1,5 @@
 <?php
-$page_title = "Top pertes secteur";
+$page_title = "Top pertes par secteur";
 $api_action = "topTourLosses";
 include 'header.php';
 ?>
@@ -83,6 +83,10 @@ include 'header.php';
                                                     "caption": "Agence",
                                                 },
                                                 {
+                                                    "uniqueName": "Secteur",
+                                                    "caption": "Secteur",
+                                                },
+                                                {
                                                     "uniqueName": "Gamme",
                                                     "caption": "Gamme",
                                                 },
@@ -90,14 +94,11 @@ include 'header.php';
                                                     "uniqueName": "Produit",
                                                     "caption": "Produit",
                                                 },
-                                                {
-                                                    "uniqueName": "Secteur",
-                                                    "caption": "Secteur",
-                                                },
-                                                {
-                                                    "uniqueName": "BLOC",
-                                                    "caption": "Bloc",
-                                                },
+                                               
+                                                // {
+                                                //     "uniqueName": "BLOC",
+                                                //     "caption": "Bloc",
+                                                // },
                                                 {
                                                     "uniqueName": "type",
                                                     "caption": "type",
@@ -112,12 +113,12 @@ include 'header.php';
                                             }],
                                             "measures": [{
                                                 "uniqueName": "Mt Perte",
-                                                "caption": "PERTE GLOBALE",
+                                                "caption": "PERTE GLOBALE DH TTC/J",
                                                 "aggregation": "sum",
                                                 "format": "precentForamt"
                                             }, {
                                                 "uniqueName": "QTT Perte",
-                                                "caption": "QTT GLOBALE",
+                                                "caption": "QTT GLOBALE UNITES/J",
                                                 "aggregation": "sum",
                                                 "format": "precentForamt"
                                             }],
@@ -172,8 +173,8 @@ include 'header.php';
                                         headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
                                          }
                                        
-                                        currentConfig.slice.measures[0].caption = headerValue;
-                                        
+                                        currentConfig.slice.measures[0].caption = headerValue + " DH TTC/J";
+                                        currentConfig.slice.measures[1].caption ="QTT " + headerValue + " UNITES/J";
                                         pivot1.setReport(currentConfig);
 
                                         

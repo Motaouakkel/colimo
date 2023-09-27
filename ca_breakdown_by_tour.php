@@ -1,5 +1,5 @@
 <?php
-$page_title = "Decomposition ca secteur";
+$page_title = "Decomposition ca par secteur";
 $api_action = "caBreakdownByTour";
 include 'header.php';
 ?>
@@ -139,13 +139,14 @@ include 'header.php';
                                                     "caption": "AGENCE",
                                                 },
                                                 {
-                                                    "uniqueName": "BLOC",
-                                                    "caption": "BLOC",
-                                                },
-                                                {
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
                                                 }
+                                                ,{
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "BLOC",
+                                                },
+                                                
                                             ],
                                             "rows": [
                                                 {

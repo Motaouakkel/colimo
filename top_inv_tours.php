@@ -1,5 +1,5 @@
 <?php
-$page_title = "Top inv Secteur";
+$page_title = "Top inv par Secteur";
 $api_action = "topInvTours";
 include 'header.php';
 ?>
@@ -88,13 +88,17 @@ include 'header.php';
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
                                                 },
-                                                {
-                                                    "uniqueName": "BLOC",
-                                                    "caption": "BLOC",
-                                                },
+                                                // {
+                                                //     "uniqueName": "BLOC",
+                                                //     "caption": "BLOC",
+                                                // },
                                                 {
                                                     "uniqueName": "Gamme",
                                                     "caption": "Gamme",
+                                                },
+                                                {
+                                                    "uniqueName": "Produit",
+                                                    "caption": "Produit",
                                                 }
                                             ],
                                             "rows": [{
@@ -103,12 +107,14 @@ include 'header.php';
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
-                                            "measures": [{
-                                                "uniqueName": "INVENDU",
-                                                "caption": "INVENDU",
-                                                "aggregation": "sum",
-                                                "format": "precentForamt"
-                                            }, {
+                                            "measures": [
+                                            // {
+                                            //     "uniqueName": "INVENDU",
+                                            //     "caption": "INVENDU",
+                                            //     "aggregation": "sum",
+                                            //     "format": "precentForamt"
+                                            // }, 
+                                            {
                                                 "uniqueName": "% INVENDU",
                                                 "caption": "% INVENDU",
                                                 "aggregation": "sum",

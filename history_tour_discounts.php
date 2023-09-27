@@ -1,5 +1,5 @@
 <?php
-$page_title = "Historique remises secteur";
+$page_title = "Historique remises par secteur";
 $api_action = "historyTourDiscounts";
 include 'header.php';
 
@@ -160,7 +160,7 @@ include 'header.php';
                                 function customizeCellFunction(cell, data) {
                                     let a = 1;
                                     if (data.isGrandTotal && data.columnIndex == 0) {
-                                        cell.text = "TOTAL";
+                                        cell.text = "GLOBAL";
                                     }
                                 }
 
