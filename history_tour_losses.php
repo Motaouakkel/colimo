@@ -1,5 +1,5 @@
 <?php
-$page_title = "Historique pertes tournees";
+$page_title = "Historique pertes secteur";
 $api_action = "historyTourLosses";
 include 'header.php';
 
@@ -118,7 +118,7 @@ include 'header.php';
                                         "options": {
                                             "grid": {
                                                 "type": "classic",
-                                                "title": "<?php echo $page_title ?>",
+                                                "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
                                                 "showHierarchyCaptions": false

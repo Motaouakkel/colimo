@@ -185,9 +185,7 @@ include 'header.php';
                                         "Perte Usine": {
                                             type: "number"
                                         },
-                                        "Perte Usine": {
-                                            type: "number"
-                                        },
+                                        
                                     }
 
                                     data.unshift(struct);
@@ -341,7 +339,12 @@ include 'header.php';
                                                 }, {
                                                     "uniqueName": "Perte Camion",
                                                     "caption": "PERTE CAMION",
-                                                }, {
+                                                },
+                                                {
+                                                    "uniqueName": "Perte Usine",
+                                                    "caption": "PERTE TECHNIQUE",
+                                                },
+                                                 {
                                                     "uniqueName": "perte globale",
                                                     "caption": "PERTE GLOBALE",
                                                 }, {

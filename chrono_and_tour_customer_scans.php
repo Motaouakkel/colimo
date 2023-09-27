@@ -118,7 +118,7 @@ include 'header.php';
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "<?php echo $page_title ?>",
+                                                "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": true,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": true,

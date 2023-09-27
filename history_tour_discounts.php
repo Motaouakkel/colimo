@@ -1,5 +1,5 @@
 <?php
-$page_title = "Historique remises tournees";
+$page_title = "Historique remises secteur";
 $api_action = "historyTourDiscounts";
 include 'header.php';
 
@@ -119,7 +119,7 @@ include 'header.php';
                                         "options": {
                                             "grid": {
                                                 "type": "classic",
-                                                "title": "<?php echo $page_title ?>",
+                                                "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
                                                 "showHierarchyCaptions": false
