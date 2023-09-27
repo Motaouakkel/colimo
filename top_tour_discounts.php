@@ -1,5 +1,5 @@
 <?php
-$page_title = "Top remises secteur";
+$page_title = "Top remises par secteur";
 $api_action = "topTourDiscounts";
 include 'header.php';
 ?>
@@ -79,10 +79,10 @@ include 'header.php';
                                                     "uniqueName": "Secteur",
                                                     "caption": "Secteur",
                                                 },
-                                                {
-                                                    "uniqueName": "Bloc",
-                                                    "caption": "Bloc",
-                                                },
+                                                // {
+                                                //     "uniqueName": "Bloc",
+                                                //     "caption": "Bloc",
+                                                // },
                                                 {
                                                     "uniqueName": "type",
                                                     "caption": "Type de remise",
