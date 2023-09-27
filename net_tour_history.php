@@ -1,5 +1,5 @@
 <?php
-$page_title = "Historique ca net tournees";
+$page_title = "Historique ca net secteur";
 $api_action = "netTourHistory";
 include 'header.php';
 ?>
@@ -113,7 +113,7 @@ include 'header.php';
                                         "options": {
                                             "grid": {
                                                 "type": "classic",
-                                                "title": "<?php echo $page_title ?>",
+                                                "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
                                                 "showHierarchyCaptions": false

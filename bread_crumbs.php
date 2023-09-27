@@ -10,7 +10,7 @@
                     <span class="glyphicon glyphicon-home"></span>
                 </a>
             </li>
-            <li class="crumb-trail"><?php echo $page_title; ?></li>
+            <li class="crumb-trail"><?php echo strtoupper($page_title); ?></li>
         </ol>
     </div>
     <div class="topbar-right">

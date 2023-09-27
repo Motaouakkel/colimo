@@ -1,5 +1,5 @@
 <?php
-$page_title = "Top pertes tournees";
+$page_title = "Top pertes secteur";
 $api_action = "topTourLosses";
 include 'header.php';
 ?>
@@ -30,6 +30,7 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
+                            var loaded = false;
                             function loadfile(f) {
                                 var maper = []
 
@@ -59,7 +60,7 @@ include 'header.php';
                                         "type": {
                                             type: "string"
                                         },
-                                        "tournee": {
+                                        "BLOC": {
                                             type: "string"
                                         },
 
@@ -94,8 +95,8 @@ include 'header.php';
                                                     "caption": "Secteur",
                                                 },
                                                 {
-                                                    "uniqueName": "tournee",
-                                                    "caption": "tournee",
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
                                                 },
                                                 {
                                                     "uniqueName": "type",
@@ -103,7 +104,8 @@ include 'header.php';
                                                 }
                                             ],
                                             "rows": [{
-                                                "uniqueName": "tournee"
+                                                "uniqueName": "BLOC",
+                                                "caption": "Bloc",
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
@@ -123,9 +125,10 @@ include 'header.php';
                                         "sorting": "off",
                                         "options": {
                                             "grid": {
-                                                "title": "<?php echo $page_title ?>",
+                                                "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
+                                                "sorting": "on",
                                                 "showHierarchyCaptions": false
                                             },
                                             "showAggregationLabels": false
@@ -136,22 +139,76 @@ include 'header.php';
                                         }]
                                     },
                                 });
+                                // console.log("*****************")
+                                // console.log("*****************")
+                                // console.log("*****************")
+                                // console.log(pivot1)
+                                // console.log("*****************")
+                                // console.log("*****************")
+                                // console.log("*****************")
+                                previosFilter = []
+                                
+                               
+                                    
                                 pivot1.on("reportcomplete", function() {
+                                    console.log("reportcomplete")
+                                    previosFilter = pivot1.getFilter("type");
+                                    if(!loaded){
+                                        console.log("loaded ",loaded)
+                                        loaded = true;
+                                    //var originalHeader = pivot1.getReport().slice.measures[0].caption;
                                     pivot1.on("reportchange", function() {
                                         var filterValue = pivot1.getFilter("type");
                                         var currentConfig = pivot1.getReport();
-                                        headerValue = "PERTE GLOBALE"
-                                        if (filterValue.length === 1) {
-                                            headerValue = filterValue[0].caption;
-                                        } else if (filterValue.length === 2) {
-                                            headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
+                                        if (compare_filters(previosFilter, filterValue)) {
+                                            console.log("filter not changed")
+                                            return;
                                         }
-                                        currentConfig.slice.measures[0].caption = headerValue.toUpperCase();
+                                        var headerValue = "PERTE GLOBALE"
+                                        
+                                        if (filterValue !=null && filterValue.length === 1) {
+                                            headerValue = filterValue[0].caption;
+                                        } else if (filterValue !=null && filterValue.length === 2) {
+                                        headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
+                                         }
+                                       
+                                        currentConfig.slice.measures[0].caption = headerValue;
+                                        
                                         pivot1.setReport(currentConfig);
-                                    });
-                                });
-                            }
 
+                                        
+                                    });}
+                                    });
+                                    }
+                                
+
+                                function compare_filters(f1,f2){
+                                    filter1 = {}
+                                    
+                                    if(f1 != null){
+                                        f1.forEach(e=>{
+                                            filter1[e.uniqueName] = 1
+                                        })
+                                    }
+                                    //check if element in f2 is in f1
+                                    if(f2 != null){
+                                        f2.forEach(e=>{
+                                            if(filter1[e.uniqueName] == 1){
+                                                filter1[e.uniqueName] = 2
+                                            }
+                                        })
+                                    }
+                                    if(f1 != null && f2 != null){
+                                        if (f1.length != f2.length)
+                                        return false
+                                    }
+                                    for (const [key, value] of Object.entries(filter1)) {
+                                        if(value == 1){
+                                            return false
+                                        }
+                                    }
+                                    return true
+                                }
                             loaddate();
                         </script>
 

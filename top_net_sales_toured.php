@@ -46,7 +46,7 @@ include 'header.php';
                                         "SECTEUR": {
                                             type: "string"
                                         },
-                                        "TOURNEE": {
+                                        "BLOC": {
                                             type: "string"
                                         },
                                         "Gamme": {
@@ -87,16 +87,20 @@ include 'header.php';
                                                     "caption": "SECTEUR",
                                                 },
                                                 {
-                                                    "uniqueName": "TOURNEE",
-                                                    "caption": "TOURNEE",
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
                                                 },
                                                 {
                                                     "uniqueName": "Gamme",
                                                     "caption": "Gamme",
-                                                }
+                                                },{
+                                                    "uniqueName": "Produit",
+                                                    "caption": "Produit",
+                                                },
                                             ],
                                             "rows": [{
-                                                "uniqueName": "TOURNEE"
+                                                "uniqueName": "BLOC",
+                                                "caption": "Bloc",
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
@@ -109,7 +113,7 @@ include 'header.php';
                                                 },
                                                 {
                                                     "uniqueName": "QTT",
-                                                    "caption": "VENTE NETTE DH UNITES/J",
+                                                    "caption": "VENTE NETTE UNITES/J",
                                                     "aggregation": "sum",
                                                     "format": "precentForamt"
                                                 }
@@ -118,7 +122,7 @@ include 'header.php';
                                         "sorting": "off",
                                         "options": {
                                             "grid": {
-                                                "title": "<?php echo $page_title ?>",
+                                                "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false

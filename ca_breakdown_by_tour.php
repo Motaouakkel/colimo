@@ -1,5 +1,5 @@
 <?php
-$page_title = "Decomposition ca tournees";
+$page_title = "Decomposition ca secteur";
 $api_action = "caBreakdownByTour";
 include 'header.php';
 ?>
@@ -66,7 +66,7 @@ include 'header.php';
                                         '% PC': {
                                             type: 'number'
                                         },
-                                        'PERTE USINE': {
+                                        'PERTE TECHNIQUE': {
                                             type: 'number'
                                         },
                                         '% PT': {
@@ -111,9 +111,10 @@ include 'header.php';
                                         '% REMISE GLOBALE': {
                                             type: 'number'
                                         },
-                                        'CE NET': {
+                                        'CA NET': {
                                             type: 'number'
-                                        }
+                                        },
+                                        
                                     }
                                     data.unshift(struct);
                                     console.log(data);
@@ -131,22 +132,163 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [],
-                                            "rows": [],
+                                            "reportFilters": [
+                                               
+                                                {
+                                                    "uniqueName": "AGENCE",
+                                                    "caption": "AGENCE",
+                                                },
+                                                {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "BLOC",
+                                                },
+                                                {
+                                                    "uniqueName": "SECTEUR",
+                                                    "caption": "SECTEUR",
+                                                }
+                                            ],
+                                            "rows": [
+                                                {
+                                                    "uniqueName": "AGENCE"
+                                                },
+                                                {
+                                                    "uniqueName": "BLOC"
+                                                },
+                                                {
+                                                    "uniqueName": "SECTEUR"
+                                                }
+                                            ],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
-                                            "measures": [],
+                                            "expands": {
+                                                "expandAll": true
+                                            },
+                                            "measures": [
+                                                {
+                                                    "uniqueName": "ENLEVEMENT BRUT",
+                                                    "aggregation": "sum",
+                                                    "caption": "ENLEVEMENT BRUT",
+                                                },
+                                                {
+                                                    "uniqueName": "INVENDU",
+                                                    "aggregation": "sum",
+                                                    "caption": "INVENDU",
+                                                },
+                                                {
+                                                    "uniqueName": "%INV",
+                                                    "caption": "%INV",
+                                                    "formula": "(sum('INVENDU')/sum('ENLEVEMENT BRUT'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "ENLEVEMENT NET",
+                                                    "aggregation": "sum",
+                                                    "caption": "ENLEVEMENT NET",
+                                                },
+                                                {
+                                                    "uniqueName": "PERTE COMMERCIAL",
+                                                    "aggregation": "sum",
+                                                    "caption": "PERTE COMMERCIAL",
+                                                },
+                                                {
+                                                    "uniqueName": "%PC",
+                                                    "caption": "%PC",
+                                                    "formula": "(sum('PERTE COMMERCIAL')/sum('ENLEVEMENT NET'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "PERTE TECHNIQUE",
+                                                    "caption": "PERTE TECHNIQUE",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "%PT",
+                                                    "caption": "%PT",
+                                                    "formula": "(sum('PERTE TECHNIQUE')/sum('ENLEVEMENT NET'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "PERTE CAMION",
+                                                    "caption": "PERTE CAMION",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "%PCAM",
+                                                    "caption": "%PCAM",
+                                                    "formula": "(sum('PERTE CAMION')/sum('ENLEVEMENT NET'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "PERTE GLOBALE",
+                                                    "caption": "PERTE GLOBALE",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "%PG",
+                                                    "caption": "%PG",
+                                                    "formula": "(sum('PERTE GLOBALE')/sum('ENLEVEMENT NET'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "CA NET avant remise",
+                                                    "caption": "CA NET avant remise",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "RFM",
+                                                    "caption": "RFM",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "%RFM",
+                                                    "caption": "%RFM",
+                                                    "formula": "(sum('RFM')/sum('CA NET avant remise'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "RSF",
+                                                    "caption": "RSF",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "%RSF",
+                                                    "caption": "%RSF",
+                                                    "formula": "(sum('RSF')/sum('CA NET avant remise'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "PROMOTION",
+                                                    "caption": "PROMOTION",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "%PROMO",
+                                                    "caption": "%PROMO",
+                                                    "formula": "(sum('PROMOTION')/sum('CA NET avant remise'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "REMISE GLOBALE",
+                                                    "caption": "REMISE GLOBALE",
+                                                    "aggregation": "sum",
+                                                },
+                                                {
+                                                    "uniqueName": "%REMISE GLOBALE",
+                                                    "caption": "%REMISE GLOBALE",
+                                                    "formula": "(sum('REMISE GLOBALE')/sum('CA NET avant remise'))*100",
+                                                },
+                                                {
+                                                    "uniqueName": "CA NET",
+                                                    "caption": "CA NET",
+                                                    "aggregation": "sum",
+                                                }
+                                                
+                                                
+                                            ],
                                         },
                                         "options": {
                                             "grid": {
-                                                "title": "<?php echo $page_title ?>",
+                                                "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": true,
-                                                "showGrandTotals": "rows",
+                                                "showGrandTotals": "off",
+                                                "showTotals": "off",
                                                 "showHierarchyCaptions": true,
-                                                "type": "flat",
-                                                "showFilter": true,
-                                                "showReportFiltersArea": false
+                                                "type": "classic",
+                                                
+                                               
                                             },
                                             "showAggregationLabels": false
                                         },

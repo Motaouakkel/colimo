@@ -86,6 +86,7 @@ $objet = json_decode($response, true);
     <link href="webdatarocks.min.css" rel="stylesheet" />
     <script src="webdatarocks.toolbar.min.js"></script>
     <script src="webdatarocks.js"></script>
+    <!-- <link href="https://cdn.webdatarocks.com/latest/webdatarocks.min.css" rel="stylesheet"/> -->
     <link href="theme/teal/webdatarocks.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
