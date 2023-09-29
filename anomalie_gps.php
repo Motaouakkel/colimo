@@ -259,15 +259,20 @@ function loadfile(f) {
 			
 			for (var i= 1; i < data.length; i++) {
 				
-					console.log(data[i].Scan);
+					
 					data[i].positionclient = (data[i].clt_lat +","+ data[i].clt_long);
-					if (data[i].Scan == false ){
-					data[i].scanclient = 0;
-					}
-					if (data[i].Scan == true){
-					data[i].scanclient = 1;
-					}
+					
 					//data[i].VNT = data[i].Vente;
+				if (data[i].distance < 10 && data[i].distance > 1  ){
+					data[i].scanclient = 0;
+					} 
+				if (data[i].distance > 10 ){
+					data[i].scanclient = 1;
+					} 
+				if (data[i].distance < 1 ){
+					data[i].scanclient = 2;
+					} 
+				
 					 
 			}
 			
@@ -353,21 +358,31 @@ function loadfile(f) {
 		},
 		"conditions": [
         {
-                "formula": "#value > 10",
-                "measure": "distance",
+                "formula": "#value == 0",
+                "measure": "scanclient",
                 "format": {
                     "backgroundColor": "#e9573f",
-                    "color": "#ffffff",
+                    "color": "#e9573f",
                     "fontFamily": "Arial",
                     "fontSize": "16px"
                 }
         },
 		{
-            "formula": "#value < 10",
-            "measure": "distance",
+            "formula": "#value == 1",
+            "measure": "scanclient",
             "format": {
-                "backgroundColor": "#70ca63",
-				"color": "#000000",
+                "backgroundColor": "#ffccff",
+				"color": "#ffccff",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            }
+        },
+			{
+            "formula": "#value == 2",
+            "measure": "scanclient",
+            "format": {
+                "backgroundColor": "#ffff00",
+				"color": "#ffff00",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
             }
