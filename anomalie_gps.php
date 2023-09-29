@@ -123,10 +123,10 @@ function includeHTML() {
                     </ol>
                 </div>
             <div class="topbar-right">
-                <span class="label label-rounded label-default" style="background-color:#99ff66 !important" >A</span><span style="background-color:#99ff66 !important" class="label label-default">GPS CONFORME</span>
-		<span class="label label-rounded label-primary" style="background-color:#ffccff !important">B</span><span style="background-color:#ffccff !important" class="label label-primary">GPS NON CONFORME</span>
-		<span class="label label-rounded label-success" style="background-color:#4FC3F7 !important">C</span><span  style="background-color:#4FC3F7 !important" class="label label-success">CLIENT FERME</span>
-		<span class="label label-rounded label-danger" style="background-color:#ffff00 !important">D</span><span style="background-color:#ffff00 !important" class="label label-danger">CLIENT NON VISITE</span>
+                <span class="label label-rounded label-default" style="background-color:#99ff66 !important" ></span><span style="background-color:#99ff66 !important;color:#000 important" class="label label-default">GPS CONFORME</span>
+		<span class="label label-rounded label-primary" style="background-color:#ffccff !important"></span><span style="background-color:#ffccff !important;color:#000 important" class="label label-primary">GPS NON CONFORME</span>
+		<span class="label label-rounded label-success" style="background-color:#4FC3F7 !important"></span><span  style="background-color:#4FC3F7 !important;color:#000 important" class="label label-success">CLIENT FERME</span>
+		<span class="label label-rounded label-danger" style="background-color:#ffff00 !important"></span><span style="background-color:#ffff00 !important;color:#000 important" class="label label-danger">CLIENT NON VISITE</span>
 		</div>
             </header>
             <!-- End: Topbar -->
