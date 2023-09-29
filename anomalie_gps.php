@@ -325,10 +325,6 @@ function loadfile(f) {
 					],
 					"measures": [
 						{
-							"uniqueName": "distance",
-							"aggregation": "min",
-							"caption": "Distance"
-						},{
 							"uniqueName": "scanclient",
 							"aggregation": "min",
 							"caption": "Scan Client"
@@ -379,6 +375,15 @@ function loadfile(f) {
         },
 			{
             "formula": "#value == 2",
+            "measure": "scanclient",
+            "format": {
+                "backgroundColor": "#ffff00",
+				"color": "#ffff00",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            },
+			{
+            "formula": "isNaN(#value)",
             "measure": "scanclient",
             "format": {
                 "backgroundColor": "#ffff00",
