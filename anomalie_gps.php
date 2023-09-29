@@ -1,4 +1,5 @@
 <?php
+require_once 'function.php';
     session_start();
 	if(!isset($_SESSION['auth']) or $_SESSION['auth']!='yes' or empty($_SESSION['auth'])) {
 	  echo "<script language='javascript'>window.location.href='login.php';</script>";
@@ -98,7 +99,7 @@ function includeHTML() {
 
         <!-- Start: Header -->
         <!-- End: Header -->
-<?php include 'externe.php';?>
+<?php include 'sidebar_left.php';?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
 
@@ -503,7 +504,7 @@ function loadfile(f) {
 
     </div>
 	
-	<?php include 'sidebar_left.php';?>
+	<?php include 'aside.php';?>
 
     <!-- End: Main -->
 
