@@ -157,27 +157,7 @@ function includeHTML() {
                            <div class="row">
                                <?php include "search.php" ?>
                             </div>
-							<div class="row" style="margin-top:10px !important;">
-								<div class="col-md-6" >
-								
-												<SPAN class="radio-custom mb5" >
-                                                        <input type="radio" id="radioExample0" name="radioMeasure" value="0" checked="checked">
-                                                        <label for="radioExample0" style="margin-top:6px !important;margin-left:5px !important">Format heure</label>
-                                                </span>
-                                                
-												<span class="radio-custom radio-primary mb5" >
-                                                        <input type="radio" id="radioExample1" name="radioMeasure" value="1">
-                                                        <label for="radioExample1" style="margin-top:6px !important;margin-left:5px !important">Format Num</label>
-                                                </span>
-												
-												
-												
-                                      
-
-										  
-                                </div>   				               
-														 
-                                </div>
+							
                         </div>
                         <div class="panel-body pn">
                           	
