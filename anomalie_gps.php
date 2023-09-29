@@ -503,7 +503,7 @@ function loadfile(f) {
 
     </div>
 	
-	<?php include 'aside.php';?>
+	<?php include 'sidebar_left.php';?>
 
     <!-- End: Main -->
 
