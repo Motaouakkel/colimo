@@ -361,8 +361,8 @@ function loadfile(f) {
                 "formula": "#value == 0",
                 "measure": "scanclient",
                 "format": {
-                    "backgroundColor": "#e9573f",
-                    "color": "#e9573f",
+                    "backgroundColor": "#99ff66",
+                    "color": "#99ff66",
                     "fontFamily": "Arial",
                     "fontSize": "16px"
                 }
@@ -379,6 +379,15 @@ function loadfile(f) {
         },
 			{
             "formula": "#value == 2",
+            "measure": "scanclient",
+            "format": {
+                "backgroundColor": "#ffff00",
+				"color": "#ffff00",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            },
+			{
+            "formula": "#value == null",
             "measure": "scanclient",
             "format": {
                 "backgroundColor": "#ffff00",
