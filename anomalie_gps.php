@@ -396,7 +396,7 @@ function loadfile(f) {
 				"color": "#ffff00",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
-            }
+            }}
     ]
 		},
 			
