@@ -385,15 +385,6 @@ function loadfile(f) {
 				"color": "#ffff00",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
-            },
-			{
-            "formula": "#value == null",
-            "measure": "scanclient",
-            "format": {
-                "backgroundColor": "#ffff00",
-				"color": "#ffff00",
-                "fontFamily": "Arial",
-                "fontSize": "16px"
             }
         }
     ]
