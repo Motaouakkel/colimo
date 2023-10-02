@@ -81,7 +81,8 @@ include 'header.php';
                                             }],
                                             "measures": [{
                                                 "uniqueName": "Ecart_Pert",
-                                                "caption": "total"
+                                                "caption": "total",
+                                                "format": "precision"
                                             }, ],
                                             "expands": {
                                                 "expandAll": true,
