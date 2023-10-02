@@ -1,6 +1,6 @@
 <?php
-$page_title = "Historique Produit";
-$api_action = "historyTourLosses";
+$page_title = "Historique Enlevement Net par Canal";
+$api_action = "historyenlevcanal";
 include 'header.php';
 
 ?>
@@ -52,22 +52,22 @@ include 'header.php';
                                         "Secteur": {
                                             type: "string"
                                         },
-                                        "amout": {
+                                        "amount": {
                                             type: "number"
                                         },
                                         "day": {
                                             type: "string"
                                         },
-                                        "Bloc": {
-                                            type: "string"
-                                        },
                                         "type": {
                                             type: "number"
                                         },
+                                        "Canal": {
+                                            type: "string"
+                                        },  
                                     }
-                                    
                                     data.unshift(struct);
                                     return data;
+                                    
                                 };
 
 
@@ -84,23 +84,25 @@ include 'header.php';
                                             "reportFilters": [{
                                                 "uniqueName": "Agence"
                                             },{
+                                                "uniqueName": "Gamme"
+                                            },
+                                            ,{
                                                 "uniqueName": "type"
                                             }],
                                             "rows": [{
-                                                    "uniqueName": "Gamme"
+                                                    "uniqueName": "Canal"
                                                 },
-                                                {
-                                                    "uniqueName": "Produit"
-                                                }
+                                                
 
                                             ],
                                             "columns": [{
                                                 "uniqueName": "day",
-                                                "formula": "sum(\"amout\")"
+                                                "formula": "sum(\"amount\")"
                                             }],
                                             "measures": [{
-                                                "uniqueName": "amout",
-                                                "caption": "total"
+                                                "uniqueName": "amount",
+                                                "caption": "total",
+                                                "format": "precision"
                                             }, ],
                                             "expands": {
                                                 "expandAll": true,
