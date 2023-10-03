@@ -83,13 +83,17 @@ include 'header.php';
                                                     "caption": "AGENCE",
                                                 },
                                                 {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "BLOC",
+                                                },
+                                                {
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
                                                 },
-                                                // {
-                                                //     "uniqueName": "BLOC",
-                                                //     "caption": "Bloc",
-                                                // },
+                                                {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
+                                                },
                                                 {
                                                     "uniqueName": "Gamme",
                                                     "caption": "Gamme",
@@ -99,8 +103,8 @@ include 'header.php';
                                                 },
                                             ],
                                             "rows": [{
-                                                "uniqueName": "BLOC",
-                                                "caption": "Bloc",
+                                                "uniqueName": "SECTEUR",
+                                                "caption": "sect",
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"

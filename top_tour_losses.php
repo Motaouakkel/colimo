@@ -83,6 +83,10 @@ include 'header.php';
                                                     "caption": "Agence",
                                                 },
                                                 {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
+                                                },
+                                                {
                                                     "uniqueName": "Secteur",
                                                     "caption": "Secteur",
                                                 },
@@ -95,18 +99,15 @@ include 'header.php';
                                                     "caption": "Produit",
                                                 },
                                                
-                                                // {
-                                                //     "uniqueName": "BLOC",
-                                                //     "caption": "Bloc",
-                                                // },
+                                                
                                                 {
                                                     "uniqueName": "type",
                                                     "caption": "type",
                                                 }
                                             ],
                                             "rows": [{
-                                                "uniqueName": "BLOC",
-                                                "caption": "Bloc",
+                                                "uniqueName": "Secteur",
+                                                "caption": "Secteur",
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
