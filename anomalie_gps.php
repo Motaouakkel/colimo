@@ -269,7 +269,7 @@ function loadfile(f) {
 					data[i].positionclient = (data[i].part_lat +","+ data[i].part_long);
 					
 					//data[i].VNT = data[i].Vente;
-				if ((data[i].distance < 15 && data[i].distance > 1  ) && (data[i].status_viste == 'VENTE')) {
+				if ((data[i].distance < 15 ) && (data[i].status_viste == 'VENTE')) {
 					data[i].scanclient = 0;
 					} 
 				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE')) {
