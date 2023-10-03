@@ -1,6 +1,6 @@
 <?php
 $page_title = "Historique Enlevement Net par Canal";
-$api_action = "historyenlevcanal";
+$api_action = "historyenlevag";
 include 'header.php';
 
 ?>
@@ -36,7 +36,6 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
-                            var daysMapper = {}
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
@@ -56,9 +55,6 @@ include 'header.php';
                                         "amount": {
                                             type: "number"
                                         },
-                                        "day": {
-                                            type: "number"
-                                        },
                                         "type": {
                                             type: "number"
                                         },
@@ -66,9 +62,8 @@ include 'header.php';
                                             type: "string"
                                         },  
                                     }
-                                    daysMapper = data[1]
-                                    data[0].unshift(struct);
-                                    return data[0];
+                                    data.unshift(struct);
+                                    return data;
                                     
                                 };
 
@@ -87,13 +82,11 @@ include 'header.php';
                                                 "uniqueName": "Agence"
                                             },{
                                                 "uniqueName": "Gamme"
-                                            },
-                                            {
-                                                "uniqueName":"Produit"
+                                            },{
+                                                "uniqueName": "Produit"
                                             }
                                             ,{
                                                 "uniqueName": "type",
-                                                "caption": "Unité",
                                                 "filter": {
                                                         "members": [
                                                             "type.DH TTC"
@@ -101,13 +94,13 @@ include 'header.php';
                                                     }
                                             }],
                                             "rows": [{
-                                                    "uniqueName": "Canal"
+                                                    "uniqueName": "Agence"
                                                 },
                                                 
 
                                             ],
                                             "columns": [{
-                                                "uniqueName": "day",
+                                                "uniqueName": "Canal",
                                                 "formula": "sum(\"amount\")"
                                             }],
                                             "measures": [{
@@ -161,15 +154,7 @@ include 'header.php';
                                 });
 
                                 function customizeCellFunction(cell, data) {
-                                    
-                                    if(data.rowIndex == 0 && data.columnIndex != 0 && data.label != ''){
-                                        var str = daysMapper[parseInt(data.label)];
-                                        
-                                        if (str){
-                                        arr = str.split('/');
-                                        cell.text = arr[0] + '/' + arr[1] ;
-                                        }
-                                    }
+                                    let a = 1;
                                     if (data.isGrandTotal && data.columnIndex == 0) {
                                         cell.text = "Total";
                                     }
