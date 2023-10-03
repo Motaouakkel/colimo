@@ -275,13 +275,13 @@ function loadfile(f) {
 				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE')) {
 					data[i].scanclient = 1;
 					} 
-				if (data[i].status_viste == 'CLIENT FERME'){
+				if ((data[i].status_viste == 'CLIENT FERME') || ( data[i].status_viste == "REFUS D'ACHAT")  || ( data[i].status_viste == 'MANQUE DE LIQUIDITE')){
 					data[i].scanclient = 2;
 					} 
-				if (data[i].status_viste == 'null' ){
+				if (!data[i].status_viste){
 					data[i].scanclient = 3;
 					} 
-				if (data[i].status_viste == '' ){
+				if (data[i].status_viste == null ){
 					data[i].scanclient = 3;
 					} 
 				
@@ -390,7 +390,7 @@ function loadfile(f) {
             "measure": "scanclient",
             "format": {
                 "backgroundColor": "#4FC3F7",
-		"color": "#ffff00",
+		"color": "#4FC3F7",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
             }
