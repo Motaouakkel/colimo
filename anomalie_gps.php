@@ -278,7 +278,10 @@ function loadfile(f) {
 				if (data[i].status_viste < 'CLIENT FERME' ){
 					data[i].scanclient = 2;
 					} 
-				if (data[i].status_viste == null ){
+				if (data[i].status_viste == 'null' ){
+					data[i].scanclient = 3;
+					} 
+				if (data[i].status_viste == '' ){
 					data[i].scanclient = 3;
 					} 
 				
