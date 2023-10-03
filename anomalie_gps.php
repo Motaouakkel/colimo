@@ -269,10 +269,10 @@ function loadfile(f) {
 					data[i].positionclient = (data[i].part_lat +","+ data[i].part_long);
 					
 					//data[i].VNT = data[i].Vente;
-				if ((data[i].distance < 15 ) && (data[i].status_viste == 'VENTE')) {
+				if ((data[i].distance < 15 ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0)) {
 					data[i].scanclient = 0;
 					} 
-				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE')) {
+				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0 )) {
 					data[i].scanclient = 1;
 					} 
 				if ((data[i].status_viste == 'CLIENT FERME') || ( data[i].status_viste == "REFUS D'ACHAT")  || ( data[i].status_viste == 'MANQUE DE LIQUIDITE')){
