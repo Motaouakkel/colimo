@@ -76,20 +76,21 @@ include 'header.php';
                                                     "caption": "Agence",
                                                 },
                                                 {
+                                                    "uniqueName": "Bloc",
+                                                    "caption": "Bloc",
+                                                },
+                                                {
                                                     "uniqueName": "Secteur",
                                                     "caption": "Secteur",
                                                 },
-                                                // {
-                                                //     "uniqueName": "Bloc",
-                                                //     "caption": "Bloc",
-                                                // },
+                                                
                                                 {
                                                     "uniqueName": "type",
                                                     "caption": "Type de remise",
                                                 }
                                             ],
                                             "rows": [{
-                                                "uniqueName": "Bloc"
+                                                "uniqueName": "Secteur"
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"

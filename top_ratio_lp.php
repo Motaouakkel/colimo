@@ -49,55 +49,14 @@ include 'header.php';
                                         "Secteur": {
                                             type: "string"
                                         },
+                                        "Bloc": {
+                                            type: "string"
+                                        },
                                         
                                         
                                     }
                                     data.unshift(struct);
                                     return data;
-                                    /*
-                                    1,5-1,75%
-: 
-0
-1,25-1,50%
-: 
-1
-1,75-2%
-: 
-0
-75-100
-: 
-0
-100-125
-: 
-0
-125-150
-: 
-0
-<1,25%
-: 
-0
-<75
-: 
-1
->2%
-: 
-0
->150
-: 
-0
-Agence
-: 
-"OUJDA"
-CA
-: 
-3796.128333333333
-Pertes
-: 
-48.13500000000002
-Secteur
-: 
-"1235"
-                                    */ 
                                 };
 
 
@@ -111,7 +70,18 @@ Secteur
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [],
+                                            "reportFilters": [
+                                                {
+                                                    "uniqueName": "Agence"
+                                                },
+                                                {
+                                                    "uniqueName": "Bloc"
+                                                },
+                                                {
+                                                    "uniqueName": "Secteur"
+                                                },
+                                                
+                                            ],
                                             "rows": [{
                                                     "uniqueName": "Secteur"
                                                 }
