@@ -272,7 +272,7 @@ function loadfile(f) {
 				if ((data[i].distance < 15 && data[i].distance > 1  ) && (data[i].status_viste == 'VENTE')) {
 					data[i].scanclient = 0;
 					} 
-				if ((data[i].distance < 15 && data[i].distance > 1  ) && (data[i].status_viste == 'VENTE')) {
+				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE')) {
 					data[i].scanclient = 1;
 					} 
 				if (data[i].status_viste < 'CLIENT FERME' ){
