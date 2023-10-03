@@ -117,7 +117,7 @@ function includeHTML() {
                             </a>
                         </li>
                         <li class="crumb-link">
-                            <a href="#">Taux de pénétrataion C.A</a>
+                            <a href="#">HISTORIQUE VENTES NETTES CLIENTS</a>
                         </li>
                     </ol>
                 </div>
@@ -330,7 +330,7 @@ function getJSONData() {
     },
     "options": {
         "grid": {
-            "title": "Taux de pénétration CA",
+            "title": "HISTORIQUE VENTES NETTES CLIENTS",
             "showHeaders": false,
             "showGrandTotals": "on",
             "showHierarchyCaptions": true,
