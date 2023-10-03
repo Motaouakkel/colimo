@@ -5,7 +5,7 @@
 	  exit;
 	}
 	
-	
+	include 'header.php';
 	
 ?>
 
