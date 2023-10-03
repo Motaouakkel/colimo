@@ -443,10 +443,7 @@ function loadfile(f) {
       cellBuilder.text = "3";
     } 
 
-				 if (cellData.label = "") {
-      cellBuilder.text = "3";
-    } 
-				 if (cellData.label <0) {
+				 if (cellData.label == ' ') {
       cellBuilder.text = "3";
     } 
   }
