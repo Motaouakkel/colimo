@@ -272,23 +272,23 @@ function loadfile(f) {
 					//data[i].VNT = data[i].Vente;
 				if ((data[i].distance < 15 ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0)) {
 					data[i].scanclient = 0;
-					data[i].ca_visite = data[i].ca + "(A)";
+					data[i].ca_visite = data[i].ca  ;
 					} 
 				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0 )) {
 					data[i].scanclient = 1;
-					data[i].ca_visite = data[i].ca + "(B)";
+					data[i].ca_visite = data[i].ca ;
 					} 
 				if ((data[i].status_viste == 'CLIENT FERME') || ( data[i].status_viste == "REFUS D'ACHAT")  || ( data[i].status_viste == 'MANQUE DE LIQUIDITE')){
 					data[i].scanclient = 2;
-					data[i].ca_visite = 0 + "(C)";
+					data[i].ca_visite = 0 ";
 					} 
 				if (!data[i].status_viste){
 					data[i].scanclient = 3;
-					data[i].ca_visite = 0 + "(D)";
+					data[i].ca_visite = 0 ;
 					} 
 				if (data[i].status_viste == null ){
 					data[i].scanclient = 3;
-					data[i].ca_visite = 0 + "(D)";
+					data[i].ca_visite = 0 ;
 					} 
 			}
 			
@@ -434,6 +434,7 @@ function loadfile(f) {
 	
 		function customizeCellFunction(cellBuilder, cellData) {
 		 /* let a = 1;
+   		let b = 0; 
 		if (
      cellData.hierarchy &&
       cellData.hierarchy.uniqueName == "positionclient"
@@ -442,15 +443,19 @@ function loadfile(f) {
 		cellBuilder.text = '<a  href="https://www.google.com/maps/@'+cellData.label+'" target="_blank" class="pl5" value="Réf" style="color:#fff;text-decoration:underline"  id ="link">Réf</a>'.replace(/Réf/g, cellData.label);	
 	} 
 */
-			if (cellData.type == "value") {
-    if (isNaN(cellData.label)) {
-      cellBuilder.text = "3";
-    } 
+			if (
+     cellData.hierarchy &&
+      cellData.hierarchy.uniqueName == "CA"
+    )
+			{
 
-				 if (cellData.label == ' ') {
-      cellBuilder.text = "3";
-    } 
-  }
+				b= cellData.label;
+			}
+			
+			if (ccellData.hierarchy.uniqueName == "scanclient") {
+  
+	    cellBuilder.text = b;
+  
 	}
 	
 	
