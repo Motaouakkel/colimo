@@ -275,7 +275,7 @@ function loadfile(f) {
 				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE')) {
 					data[i].scanclient = 1;
 					} 
-				if (data[i].status_viste < 'CLIENT FERME' ){
+				if (data[i].status_viste == 'CLIENT FERME'){
 					data[i].scanclient = 2;
 					} 
 				if (data[i].status_viste == 'null' ){
