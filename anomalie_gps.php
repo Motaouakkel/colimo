@@ -434,7 +434,7 @@ function loadfile(f) {
 	
 		function customizeCellFunction(cellBuilder, cellData) {
 		 /* let a = 1;
-   		let b = 0; 
+   		
 		if (
      cellData.hierarchy &&
       cellData.hierarchy.uniqueName == "positionclient"
@@ -443,6 +443,7 @@ function loadfile(f) {
 		cellBuilder.text = '<a  href="https://www.google.com/maps/@'+cellData.label+'" target="_blank" class="pl5" value="Réf" style="color:#fff;text-decoration:underline"  id ="link">Réf</a>'.replace(/Réf/g, cellData.label);	
 	} 
 */
+			let b = 0; 
 			if (
      cellData.hierarchy &&
       cellData.hierarchy.uniqueName == "CA"
