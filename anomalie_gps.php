@@ -272,26 +272,24 @@ function loadfile(f) {
 					//data[i].VNT = data[i].Vente;
 				if ((data[i].distance < 15 ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0)) {
 					data[i].scanclient = 0;
-					data[i].ca_visite = data[i].ca + (A);
+					data[i].ca_visite = data[i].ca + "(A)";
 					} 
 				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0 )) {
 					data[i].scanclient = 1;
-					data[i].ca_visite = data[i].ca + (B);
+					data[i].ca_visite = data[i].ca + "(B)";
 					} 
 				if ((data[i].status_viste == 'CLIENT FERME') || ( data[i].status_viste == "REFUS D'ACHAT")  || ( data[i].status_viste == 'MANQUE DE LIQUIDITE')){
 					data[i].scanclient = 2;
-					data[i].ca_visite = 0 + (C);
+					data[i].ca_visite = 0 + "(C)";
 					} 
 				if (!data[i].status_viste){
 					data[i].scanclient = 3;
-					data[i].ca_visite = 0 + (D);
+					data[i].ca_visite = 0 + "(D)";
 					} 
 				if (data[i].status_viste == null ){
 					data[i].scanclient = 3;
-					data[i].ca_visite = 0 + (D);
+					data[i].ca_visite = 0 + "(D)";
 					} 
-				
-					 
 			}
 			
 			return data;
