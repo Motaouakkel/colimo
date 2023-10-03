@@ -443,25 +443,19 @@ function loadfile(f) {
 		cellBuilder.text = '<a  href="https://www.google.com/maps/@'+cellData.label+'" target="_blank" class="pl5" value="Réf" style="color:#fff;text-decoration:underline"  id ="link">Réf</a>'.replace(/Réf/g, cellData.label);	
 	} 
 */
-			let b = 0; 
-			if (
-     cellData.hierarchy &&
-      cellData.hierarchy.uniqueName == "CA"
-    )
-			{
-
-				b= cellData.label;
-			}
 			
-			if (ccellData.hierarchy.uniqueName == "scanclient") {
-  
-	    cellBuilder.text = b;
-  
-	}
+			if (cellData.type == "value") {
+    if (isNaN(cellData.label)) {
+      cellBuilder.text = "3";
+    } 
+
+				 if (cellData.label == ' ') {
+      cellBuilder.text = "3";
+    } 
 	
 	
 	}
-                
+		}
       
   
                 //WebDataRocks[ report ] = yourValue;
