@@ -442,6 +442,13 @@ function loadfile(f) {
     if (isNaN(cellData.label)) {
       cellBuilder.text = "3";
     } 
+
+				 if (cellData.label = "") {
+      cellBuilder.text = "3";
+    } 
+				 if (cellData.label <0) {
+      cellBuilder.text = "3";
+    } 
   }
 	}
 	
