@@ -240,8 +240,8 @@ function loadfile(f) {
 				"Date": {type : "string"},
 				"inv_Lat": {type : "string"},
 				"inv_Long": {type : "string"},
-				"clt_long": {type : "string"},
-				"clt_lat": {type : "string"},
+				"part_long": {type : "string"},
+				"part_lat": {type : "string"},
 				"Heure": {type : "numbers"},
 				"CA": {type : "number"},
 				"Scan": {type : "string"},
@@ -257,7 +257,8 @@ function loadfile(f) {
 				"Heure": {type : "time"},
 				"distance": {type : "number"},
 				"positionclient": {type : "string"},
-				"scanclient": {type : "number"}
+				"scanclient": {type : "number"},
+				"status_viste": {type : "number"}
 			}
 			data.unshift(struct);
 			
@@ -265,7 +266,7 @@ function loadfile(f) {
 			for (var i= 1; i < data.length; i++) {
 				
 					
-					data[i].positionclient = (data[i].clt_lat +","+ data[i].clt_long);
+					data[i].positionclient = (data[i].part_lat +","+ data[i].part_long);
 					
 					//data[i].VNT = data[i].Vente;
 				if (data[i].distance < 15 && data[i].distance > 1  ){
@@ -274,7 +275,7 @@ function loadfile(f) {
 				if (data[i].distance > 15 ){
 					data[i].scanclient = 1;
 					} 
-				if (data[i].distance < 1 ){
+				if (data[i].status_viste < 'null' ){
 					data[i].scanclient = 2;
 					} 
 				
@@ -350,7 +351,7 @@ function loadfile(f) {
 		"options": {
 			"grid": {
 				"type": "classic",
-				"title": "Anomalie GPS",
+				"title": "HISTORIQUE  GPS CLIENTS",
 				"showHeaders": false,
 				"showTotals": "columns",
 				"showGrandTotals": "columns"
