@@ -6,7 +6,7 @@
 	}
 	
 	
-	
+	include 'header.php';
 ?>
 
 
