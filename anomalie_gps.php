@@ -280,7 +280,7 @@ function loadfile(f) {
 					} 
 				if ((data[i].status_viste == 'CLIENT FERME') || ( data[i].status_viste == "REFUS D'ACHAT")  || ( data[i].status_viste == 'MANQUE DE LIQUIDITE')){
 					data[i].scanclient = 2;
-					data[i].ca_visite = 0 ";
+					data[i].ca_visite = 0 ;
 					} 
 				if (!data[i].status_viste){
 					data[i].scanclient = 3;
