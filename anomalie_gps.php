@@ -269,14 +269,17 @@ function loadfile(f) {
 					data[i].positionclient = (data[i].part_lat +","+ data[i].part_long);
 					
 					//data[i].VNT = data[i].Vente;
-				if (data[i].distance < 15 && data[i].distance > 1  ){
+				if ((data[i].distance < 15 && data[i].distance > 1  ) && (data[i].status_viste == 'VENTE')) {
 					data[i].scanclient = 0;
 					} 
-				if (data[i].distance > 15 ){
+				if ((data[i].distance < 15 && data[i].distance > 1  ) && (data[i].status_viste == 'VENTE')) {
 					data[i].scanclient = 1;
 					} 
-				if (data[i].status_viste < 'null' ){
+				if (data[i].status_viste < 'CLIENT FERME' ){
 					data[i].scanclient = 2;
+					} 
+				if (data[i].status_viste == null ){
+					data[i].scanclient = 3;
 					} 
 				
 					 
@@ -374,7 +377,7 @@ function loadfile(f) {
             "measure": "scanclient",
             "format": {
                 "backgroundColor": "#ffccff",
-				"color": "#ffccff",
+		"color": "#ffccff",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
             }
@@ -383,8 +386,18 @@ function loadfile(f) {
             "formula": "#value == 2",
             "measure": "scanclient",
             "format": {
+                "backgroundColor": "#4FC3F7",
+		"color": "#ffff00",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            }
+        },
+			{
+            "formula": "#value == 3",
+            "measure": "scanclient",
+            "format": {
                 "backgroundColor": "#ffff00",
-				"color": "#ffff00",
+		"color": "#ffff00",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
             }
@@ -394,7 +407,7 @@ function loadfile(f) {
             "measure": "scanclient",
             "format": {
                 "backgroundColor": "#ffff00",
-				"color": "#ffff00",
+		"color": "#ffff00",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
             }}
