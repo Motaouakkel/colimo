@@ -6,7 +6,7 @@ include 'consts.php';
 	  exit;
 	}
 	
-	
+	include 'header.php';
 
 function file_post_contents13($url, $data, $username = null, $password = null){
 
@@ -46,7 +46,6 @@ $objet = json_decode($response, true);
 	if ($acces == 10)
 	{
 		
-			  echo "<script language='javascript'>window.location.href='home.php';</script>";
 	}
 	
 ?>
