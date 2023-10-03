@@ -1,16 +1,25 @@
 <?php
-$page_title = "Historique ca net par secteur";
-$api_action = "netTourHistory";
+$page_title = "Historique Enlevement Net par Canal";
+$api_action = "historyenlevcanal";
 include 'header.php';
+
 ?>
 
 <body class="dashboard-page sb-l-o sb-r-c">
+
+    <!-- Start: Main -->
     <div id="main">
+        <!-- Start: Header -->
+        <!-- End: Header -->
         <?php include 'sidebar_left.php'; ?>
+        <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
             <?php include 'bread_crumbs.php'; ?>
+            <!-- Begin: Content -->
             <section id="content" class="animated fadeIn">
+                <!-- Admin-panels -->
                 <div class="admin-panels fade-onload sb-l-o-full">
+                    <!-- full width widgets -->
                     <div class="row">
                         <div class="panel">
                             <div class="panel-menu p12 admin-form theme-primary">
@@ -29,47 +38,45 @@ include 'header.php';
                         <script>
                             var daysMapper = {}
                             function loadfile(f) {
-                                var maper = []
-
                                 function getJSONData() {
-
-                                    glob = $.parseJSON(f);
-                                    data = glob
-
+                                    data = $.parseJSON(f);
                                     var struct = {
-                                        "BLOC": {
+                                        "Agence": {
                                             type: "string"
                                         },
-                                        "Agence": {
+                                        "Gamme": {
+                                            type: "string"
+                                        },
+                                        "Produit": {
                                             type: "string"
                                         },
                                         "Secteur": {
                                             type: "string"
                                         },
-                                        "tournnee": {
-                                            type: "string"
+                                        "amount": {
+                                            type: "number"
                                         },
                                         "day": {
                                             type: "number"
                                         },
-                                        "Mt facture": {
+                                        "type": {
                                             type: "number"
                                         },
-
+                                        "Canal": {
+                                            type: "string"
+                                        },  
                                     }
-                                    maper = data;
-                                    daysMapper = data[1];
+                                    daysMapper = data[1]
                                     data[0].unshift(struct);
-
                                     return data[0];
-
+                                    
                                 };
 
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
                                     customizeCell: customizeCellFunction,
-                                    // beforetoolbarcreated: customizeToolbar,
+                                    beforetoolbarcreated: customizeToolbar,
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -77,40 +84,40 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                    "uniqueName": "Secteur",
-                                                    "caption": "Secteur",
-                                                },
-                                                {
-                                                    "uniqueName": "Agence",
-                                                    "caption": "agence",
-                                                }, {
-                                                    "uniqueName": "BLOC",
-                                                    "caption": "Bloc",
-                                                },
-                                            ],
-                                            "rows": [
-                                                {
-                                                    "uniqueName": "Agence",
-                                                    "caption": "agence",
-                                                },
-                                                {
-                                                    "uniqueName": "BLOC",
-                                                    "caption": "Bloc",
-                                                },{
-                                                    "uniqueName": "Secteur",
-                                                    "caption": "Secteur",
-                                                },],
-                                                "expands": {
-                                                "expandAll": true,
+                                                "uniqueName": "Agence"
+                                            },{
+                                                "uniqueName": "Gamme"
                                             },
+                                            {
+                                                "uniqueName":"Produit"
+                                            }
+                                            ,{
+                                                "uniqueName": "type",
+                                                "caption": "Unité",
+                                                "filter": {
+                                                        "members": [
+                                                            "type.DH TTC"
+                                                        ]
+                                                    }
+                                            }],
+                                            "rows": [{
+                                                    "uniqueName": "Canal"
+                                                },
+                                                
+
+                                            ],
                                             "columns": [{
                                                 "uniqueName": "day",
-                                                "formula": "sum(\"Mt facture\")"
+                                                "formula": "sum(\"amount\")"
                                             }],
                                             "measures": [{
-                                                "uniqueName": "Mt facture",
-                                                "caption": "total"
+                                                "uniqueName": "amount",
+                                                "caption": "total",
+                                                "format": "precision"
                                             }, ],
+                                            "expands": {
+                                                "expandAll": true,
+                                            }
                                         },
                                         "options": {
                                             "grid": {
@@ -123,15 +130,38 @@ include 'header.php';
                                             "showAggregationLabels": false
                                         },
                                         "formats": [{
-                                            "name": "precentForamt",
-                                            "decimalPlaces": 2,
-                                            "currencySymbol": "%",
-                                            "currencySymbolAlign": "right"
-                                        }]
+                                                "name": "3dhvqfuq",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 2,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            },
+                                            {
+                                                "name": "precision",
+                                                "decimalPlaces": 2,
+
+                                            }, {
+                                                "name": "3dhvwiax",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 0,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            }
+                                        ],
                                     },
 
                                 });
+
                                 function customizeCellFunction(cell, data) {
+                                    
                                     if(data.rowIndex == 0 && data.columnIndex != 0 && data.label != ''){
                                         var str = daysMapper[parseInt(data.label)];
                                         
@@ -141,43 +171,9 @@ include 'header.php';
                                         }
                                     }
                                     if (data.isGrandTotal && data.columnIndex == 0) {
-                                        cell.text = "TOTAL";
+                                        cell.text = "Total";
                                     }
                                 }
-
-                                // function pivotcallback(pivot1) {
-                                //     pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                //         var i = 0
-                                //         cell2 = pivot1.getCell(data.rowIndex, 0)
-                                //         if (data.type == "header" && i == 0) {
-                                //             if (data.columnIndex == 1 && data.label == "-1") {
-                                //                 cell.text = "SECTEUR"
-                                //             } else if (data.columnIndex == 2 && data.label == "0") {
-                                //                 cell.text = "TOURNEE"
-                                //             }
-                                //             i++
-                                //         }
-
-                                //         if (data.columnIndex == 1 && data.rowIndex != 0) {
-                                //             var a = cell2.label
-                                //             var b = a.split("/")[1]
-                                //             cell.text = b
-                                //         }
-
-                                //         if (data.columnIndex == 2 && data.rowIndex != 0) {
-                                //             var a = cell2.label
-                                //             var b = a.split("/")[2]
-                                //             cell.text = b
-                                //         }
-
-                                //         if (data.columnIndex == 0 && data.rowIndex != 0 && !data.isGrandTotalRow) {
-                                //             var a = data.label
-                                //             cell.text = a.split("/")[0]
-                                //         }
-
-                                //     });
-                                // }
-                                // pivotcallback(pivot1)
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
@@ -190,24 +186,33 @@ include 'header.php';
 
                             }
 
+                            //WebDataRocks[ report ] = yourValue;
+
                             loaddate();
                         </script>
 
 
                     </div>
+                    <!-- end: .row -->
 
+                    <!-- partial width widgets -->
 
             </section>
+            <!-- End: Content -->
 
         </section>
+        <!-- End: Content-Wrapper -->
 
         <?php include 'sidebar_right.php'; ?>
     </div>
+    <!-- End: Main -->
 
 
 
 
 </body>
+<!-- Start: header -->
 <?php include 'footer.php'; ?>
+<!-- Start: header -->
 
 </html>

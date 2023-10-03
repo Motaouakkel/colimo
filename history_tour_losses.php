@@ -36,6 +36,7 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
+                             var daysMapper = {}
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
@@ -65,8 +66,9 @@ include 'header.php';
                                             type: "number"
                                         },
                                     }
-                                    data.unshift(struct);
-                                    return data;
+                                    daysMapper = data[1]
+                                    data[0].unshift(struct);
+                                    return data[0];
                                 };
 
 
@@ -157,7 +159,14 @@ include 'header.php';
                                 });
 
                                 function customizeCellFunction(cell, data) {
-                                    let a = 1;
+                                    if(data.rowIndex == 0 && data.columnIndex != 0 && data.label != ''){
+                                        var str = daysMapper[parseInt(data.label)];
+                                        
+                                        if (str){
+                                        arr = str.split('/');
+                                        cell.text = arr[0] + '/' + arr[1] ;
+                                        }
+                                    }
                                     if (data.isGrandTotal && data.columnIndex == 0) {
                                         cell.text = "GLOBAL";
                                     }

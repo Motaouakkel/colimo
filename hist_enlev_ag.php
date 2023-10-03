@@ -1,6 +1,6 @@
 <?php
-$page_title = "Historique Produit";
-$api_action = "historyTourLosses";
+$page_title = "Historique Enlevement Net par Canal";
+$api_action = "historyenlevag";
 include 'header.php';
 
 ?>
@@ -36,7 +36,6 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
-                            var daysMapper = {}
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
@@ -53,22 +52,19 @@ include 'header.php';
                                         "Secteur": {
                                             type: "string"
                                         },
-                                        "amout": {
+                                        "amount": {
                                             type: "number"
-                                        },
-                                        "day": {
-                                            type: "number"
-                                        },
-                                        "Bloc": {
-                                            type: "string"
                                         },
                                         "type": {
                                             type: "number"
                                         },
+                                        "Canal": {
+                                            type: "string"
+                                        },  
                                     }
-                                    daysMapper = data[1]
-                                    data[0].unshift(struct);
-                                    return data[0];
+                                    data.unshift(struct);
+                                    return data;
+                                    
                                 };
 
 
@@ -85,23 +81,32 @@ include 'header.php';
                                             "reportFilters": [{
                                                 "uniqueName": "Agence"
                                             },{
-                                                "uniqueName": "type"
+                                                "uniqueName": "Gamme"
+                                            },{
+                                                "uniqueName": "Produit"
+                                            }
+                                            ,{
+                                                "uniqueName": "type",
+                                                "filter": {
+                                                        "members": [
+                                                            "type.DH TTC"
+                                                        ]
+                                                    }
                                             }],
                                             "rows": [{
-                                                    "uniqueName": "Gamme"
+                                                    "uniqueName": "Agence"
                                                 },
-                                                {
-                                                    "uniqueName": "Produit"
-                                                }
+                                                
 
                                             ],
                                             "columns": [{
-                                                "uniqueName": "day",
-                                                "formula": "sum(\"amout\")"
+                                                "uniqueName": "Canal",
+                                                "formula": "sum(\"amount\")"
                                             }],
                                             "measures": [{
-                                                "uniqueName": "amout",
-                                                "caption": "total"
+                                                "uniqueName": "amount",
+                                                "caption": "total",
+                                                "format": "precision"
                                             }, ],
                                             "expands": {
                                                 "expandAll": true,
@@ -149,17 +154,9 @@ include 'header.php';
                                 });
 
                                 function customizeCellFunction(cell, data) {
-                                    
-                                    if(data.rowIndex == 0 && data.columnIndex != 0 && data.label != ''){
-                                        var str = daysMapper[parseInt(data.label)];
-                                        
-                                        if (str){
-                                        arr = str.split('/');
-                                        cell.text = arr[0] + '/' + arr[1] ;
-                                        }
-                                    }
+                                    let a = 1;
                                     if (data.isGrandTotal && data.columnIndex == 0) {
-                                        cell.text = "GLOBAL";
+                                        cell.text = "Total";
                                     }
                                 }
 
