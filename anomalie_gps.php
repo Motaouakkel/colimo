@@ -437,12 +437,12 @@ function loadfile(f) {
 	{
 		cellBuilder.text = '<a  href="https://www.google.com/maps/@'+cellData.label+'" target="_blank" class="pl5" value="Réf" style="color:#fff;text-decoration:underline"  id ="link">Réf</a>'.replace(/Réf/g, cellData.label);	
 	} 
-
+*/
 			if (cellData.type == "value") {
     if (isNaN(cellData.label)) {
       cellBuilder.text = "3";
     } 
-  }*/
+  }
 	}
 	
 	
