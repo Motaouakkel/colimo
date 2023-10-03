@@ -259,7 +259,7 @@ function loadfile(f) {
 				"positionclient": {type : "string"},
 				"scanclient": {type : "number"},
 				"status_viste": {type : "number"},
-				"ca_visite": {type : "string"}
+				"ca_visite": {type : "number"}
 			}
 			data.unshift(struct);
 			
