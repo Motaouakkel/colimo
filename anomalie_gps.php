@@ -335,6 +335,7 @@ function loadfile(f) {
 						{
 							"uniqueName": "Date"
 						},
+                       
 						{
 							"uniqueName": "Measures"
 						}
@@ -344,7 +345,10 @@ function loadfile(f) {
 							"uniqueName": "scanclient",
 							"aggregation": "min",
 							"caption": "Scan Client"
-						}
+						},
+                        {
+                            "uniqueName": "CA"
+                        },
 					],
 					"sorting": {
 						
@@ -433,17 +437,33 @@ function loadfile(f) {
     }
 	
 		function customizeCellFunction(cellBuilder, cellData) {
-		 /* let a = 1;
-   		
-		if (
-     cellData.hierarchy &&
-      cellData.hierarchy.uniqueName == "positionclient"
-    )
-	{
-		cellBuilder.text = '<a  href="https://www.google.com/maps/@'+cellData.label+'" target="_blank" class="pl5" value="Réf" style="color:#fff;text-decoration:underline"  id ="link">Réf</a>'.replace(/Réf/g, cellData.label);	
-	} 
-*/
-			
+		//console.log(cellBuilder,cellData)
+        if(cellData.measure){
+        if(cellData.rowIndex > 2 && cellData.columnIndex >4 && cellData.measure.uniqueName== "CA"){
+            
+           // console.log(cellData)
+            prevCell = pivot1.getCell(cellData.rowIndex,cellData.columnIndex - 1)
+            if(prevCell){
+                if(prevCell.label == "0"){
+                    console.log(cellBuilder.style)
+                    cellBuilder.style["background-color"] = "#99ff66";
+                }
+                else if(prevCell.label == "1"){
+                    console.log(cellBuilder.style)
+                    cellBuilder.style["background-color"] = "#ffccff";
+                }
+                else if(prevCell.label == "2"){
+                    console.log(cellBuilder.style)
+                    cellBuilder.style["background-color"] = "#4FC3F7";
+                }
+                else{
+                    console.log(cellBuilder.style)
+                    cellBuilder.style["background-color"] = "#ffff00";
+                }
+
+            }
+        }}
+        
 			if (cellData.type == "value") {
     if (isNaN(cellData.label)  && cellData.label.length < 2) {
       cellBuilder.text = "3";
