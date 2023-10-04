@@ -439,7 +439,7 @@ function loadfile(f) {
 		function customizeCellFunction(cellBuilder, cellData) {
 		//console.log(cellBuilder,cellData)
         if(cellData.measure){
-        if(cellData.rowIndex > 1 && cellData.columnIndex >4 && cellData.measure.uniqueName== "CA"){
+        if(cellData.rowIndex > 2 && cellData.columnIndex >4 && cellData.measure.uniqueName== "CA"){
             
            // console.log(cellData)
             prevCell = pivot1.getCell(cellData.rowIndex,cellData.columnIndex - 1)
