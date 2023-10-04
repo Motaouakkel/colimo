@@ -54,8 +54,8 @@ include 'header.php';
                                     var tournee = {};
 
                                     try {
-                                        if (data[0].tournee != undefined) {
-                                            data[0].tournee.forEach(tr => {
+                                        if (data[0].sector != undefined) {
+                                            data[0].sector.forEach(tr => {
                                                 tournee_pivot.push({
                                                     "uniqueName": tr,
                                                     "caption": tr,
@@ -82,7 +82,7 @@ include 'header.php';
                                         "journee affectation": {
                                             type: "number"
                                         },
-                                        "tournee affectation": {
+                                        "sector affectation": {
                                             type: "number"
                                         },
                                         ...tournee
@@ -121,13 +121,13 @@ include 'header.php';
                                             "measures": [{
                                                     "uniqueName": "nombre de jours",
                                                     "caption": "Total jours periode",
-                                                    "format": "3dhvwiax",
+                                                    
                                                 }, {
                                                     "uniqueName": "journee affectation",
                                                     "caption": "Total jours affectation",
                                                 },
                                                 {
-                                                    "uniqueName": "tournee affectation",
+                                                    "uniqueName": "sector affectation",
                                                     "caption": "Nbre tournees affectation",
                                                 }, ...tournee_pivot,
 

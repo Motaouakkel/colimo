@@ -97,27 +97,11 @@ include 'header.php';
                                         "Client": {
                                             type: "string"
                                         },
-                                        "tournee_id": {
+                                        "CA/DAYS":{
                                             type: "number"
+                                        
                                         },
-                                        "tournee_name": {
-                                            type: "string"
-                                        },
-                                        "secteur_id": {
-                                            type: "number"
-                                        },
-                                        "agency_id": {
-                                            type: "number"
-                                        },
-                                        "Remise": {
-                                            type: "number"
-                                        },
-                                        "Sec_Scan": {
-                                            type: "number"
-                                        },
-                                        "Duree": {
-                                            type: "number"
-                                        },
+                                        
                                         "<100": {
                                             type: "number"
                                         },
@@ -154,9 +138,7 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [{
-                                                "uniqueName": "Date"
-                                            }],
+                                            "reportFilters": [],
                                             "rows": [{
                                                 "uniqueName": "Agence"
                                             }],
@@ -164,7 +146,7 @@ include 'header.php';
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
-                                                    "uniqueName": "CA",
+                                                    "uniqueName": "CA/DAYS",
                                                     "caption": "CA NET TTC",
                                                     "aggregation": "sum",
                                                     "format": "precision",
@@ -213,10 +195,12 @@ include 'header.php';
                                             ]
                                         },
                                         "options": {
+                                            grandTotalCaption: "Total",
                                             "grid": {
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "columns",
+                                                
                                                 "showHierarchyCaptions": false
                                             },
                                             "showAggregationLabels": false

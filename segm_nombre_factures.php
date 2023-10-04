@@ -50,7 +50,7 @@ include 'header.php';
                                 function getJSONData() {
 
                                     data = $.parseJSON(f);
-                                    console.log("-------------------");
+                                   
                                     console.log(data);
                                     ret = []
                                     data.forEach(item => {
@@ -85,7 +85,7 @@ include 'header.php';
                                         "nbr_inv": {
                                             type: "number"
                                         },
-                                        "tournee_name": {
+                                        "Secteur": {
                                             type: "string"
                                         },
                                         "<40": {
@@ -115,6 +115,7 @@ include 'header.php';
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
                                     beforetoolbarcreated: customizeToolbar,
+                                    customizeCell: customizeCellFunction,
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -132,17 +133,17 @@ include 'header.php';
                                                     "uniqueName": "nbr_inv",
                                                     "caption": "Nombre factures",
                                                     "aggregation": "sum",
-                                                    "format": "3dhvwiax"
+                                                    
                                                 },
                                                 {
-                                                    "uniqueName": "tournee_name",
-                                                    "caption": 	"Nombre de tournees",
+                                                    "uniqueName": "Secteur",
+                                                    "caption": 	"Nombre de secteurs",
                                                     "aggregation": "count",
                                                 },
                                                 {
                                                     "uniqueName": "TourneeRatio",
                                                     "caption": "Nbr facture/tournee",
-                                                    "formula": " sum(\"nbr_inv\") / count(\"tournee_name\")",
+                                                    "formula": " sum(\"nbr_inv\") / count(\"Secteur\")",
                                                     "format": "3dhvwiax"
                                                 },
                                                 {
@@ -208,7 +209,11 @@ include 'header.php';
                                     },
 
                                 });
-
+                                function customizeCellFunction(cell, data) {
+                                    if (data.isGrandTotal && data.columnIndex == 0) {
+                                        cell.text = "TOTAL";
+                                    }
+                                }
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
                                     toolbar.getTabs = function() {
