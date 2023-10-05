@@ -265,7 +265,9 @@ function loadfile(f) {
 			
 			
 			for (var i= 1; i < data.length; i++) {
-				
+				if (!data[i].CA) {
+                    data[i].CA = 0;
+                }
 					
 					data[i].positionclient = (data[i].part_lat +","+ data[i].part_long);
 					
@@ -273,22 +275,27 @@ function loadfile(f) {
 				if ((data[i].distance < 15 ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0)) {
 					data[i].scanclient = 0;
 					data[i].ca_visite = data[i].ca  ;
+                   
 					} 
 				if ((data[i].distance > 15  ) && (data[i].status_viste == 'VENTE' ||  data[i].CA > 0 )) {
 					data[i].scanclient = 1;
 					data[i].ca_visite = data[i].ca ;
+                   
 					} 
 				if ((data[i].status_viste == 'CLIENT FERME') || ( data[i].status_viste == "REFUS D'ACHAT")  || ( data[i].status_viste == 'MANQUE DE LIQUIDITE')){
 					data[i].scanclient = 2;
 					data[i].ca_visite = 0 ;
+                    
 					} 
-				if (!data[i].status_viste){
-					data[i].scanclient = 3;
-					data[i].ca_visite = 0 ;
-					} 
+				// if (!data[i].status_viste){
+				// 	data[i].scanclient = 3;
+				// 	data[i].ca_visite = 0 ;
+                   
+				// 	} 
 				if (data[i].status_viste == null ){
 					data[i].scanclient = 3;
 					data[i].ca_visite = 0 ;
+                   
 					} 
 			}
 			
@@ -336,16 +343,16 @@ function loadfile(f) {
 							"uniqueName": "Date"
 						},
                        
-						{
-							"uniqueName": "Measures"
-						}
+						// {
+						// 	"uniqueName": "Measures"
+						// }
 					],
 					"measures": [
-						{
-							"uniqueName": "scanclient",
-							"aggregation": "min",
-							"caption": "Scan Client"
-						},
+						// {
+						// 	"uniqueName": "scanclient",
+						// 	"aggregation": "min",
+						// 	"caption": "Scan Client"
+						// },
                         {
                             "uniqueName": "CA"
                         },
@@ -383,12 +390,33 @@ function loadfile(f) {
                     "fontSize": "16px"
                 }
         },
+        {
+            "formula": "min(\"scanclient\") == 0",
+            "measure": "CA",
+            "format":{
+                "backgroundColor": "#99ff66",
+                //"color": "#FFA500",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            }
+        },
+
 		{
             "formula": "#value == 1",
             "measure": "scanclient",
             "format": {
                 "backgroundColor": "#ffccff",
 		"color": "#ffccff",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            }
+        },
+        {
+            "formula": "min(\"scanclient\") == 1",
+            "measure": "CA",
+            "format":{
+                "backgroundColor": "#ffccff",
+               // "color": "#FFA500",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
             }
@@ -403,12 +431,31 @@ function loadfile(f) {
                 "fontSize": "16px"
             }
         },
+        {
+            "formula": "min(\"scanclient\") == 2",
+            "measure": "CA",
+            "format":{
+                "backgroundColor": "#4FC3F7",
+                //"color": "#FFA500",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            }
+        },
 			{
             "formula": "#value == 3",
             "measure": "scanclient",
             "format": {
                 "backgroundColor": "#ffff00",
 		"color": "#ffff00",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            }
+        },{
+            "formula": "min(\"scanclient\") == 3",
+            "measure": "CA",
+            "format":{
+                "backgroundColor": "#ffff00",
+                //"color": "#FFA500",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
             }
@@ -421,7 +468,16 @@ function loadfile(f) {
 		"color": "#ffff00",
                 "fontFamily": "Arial",
                 "fontSize": "16px"
-            }}
+            }},{
+            "formula": "isNaN(min(\"scanclient\"))",
+            "measure": "CA",
+            "format":{
+                "backgroundColor": "#ffff00",
+                //"color": "#FFA500",
+                "fontFamily": "Arial",
+                "fontSize": "16px"
+            }
+        }
     ]
 		},
 			
@@ -438,31 +494,42 @@ function loadfile(f) {
 	
 		function customizeCellFunction(cellBuilder, cellData) {
 		//console.log(cellBuilder,cellData)
-        if(cellData.measure){
-        if(cellData.rowIndex > 2 && cellData.columnIndex >4 && cellData.measure.uniqueName== "CA"){
+        report = pivot1.getOptions()
+        columnLimit = 4
+        rowLimit = 2
+        // if (report.grid.type== 'compact'){
+        //     columnLimit = 0
+        //     rowLimit = 4
+        // }
+        
+        // if(cellData.measure){
+        //     if(cellData.rowIndex >rowLimit&& cellData.columnIndex >columnLimit && cellData.measure.uniqueName== "scanclient"){
+        //         console.log(cellData,cellBuilder)
+        //     }
+        // if(cellData.rowIndex >rowLimit&& cellData.columnIndex >columnLimit && cellData.measure.uniqueName== "CA"){
             
-           // console.log(cellData)
-            prevCell = pivot1.getCell(cellData.rowIndex,cellData.columnIndex - 1)
-            if(prevCell){
-                if(prevCell.label == "0"){
-                    console.log(cellBuilder.style)
-                    cellBuilder.style["background-color"] = "#99ff66";
-                }
-                else if(prevCell.label == "1"){
-                    console.log(cellBuilder.style)
-                    cellBuilder.style["background-color"] = "#ffccff";
-                }
-                else if(prevCell.label == "2"){
-                    console.log(cellBuilder.style)
-                    cellBuilder.style["background-color"] = "#4FC3F7";
-                }
-                else{
-                    console.log(cellBuilder.style)
-                    cellBuilder.style["background-color"] = "#ffff00";
-                }
+        //    // console.log(cellData)
+        //     prevCell = pivot1.getCell(cellData.rowIndex,cellData.columnIndex - 1)
+        //     if(prevCell){
+        //         if(prevCell.label == "0"){
+                    
+        //             cellBuilder.style["background-color"] = "#99ff66";
+        //         }
+        //         else if(prevCell.label == "1"){
+                    
+        //             cellBuilder.style["background-color"] = "#ffccff";
+        //         }
+        //         else if(prevCell.label == "2"){
+                   
+        //             cellBuilder.style["background-color"] = "#4FC3F7";
+        //         }
+        //         else{
+                    
+        //             cellBuilder.style["background-color"] = "#ffff00";
+        //         }
 
-            }
-        }}
+        //     }
+        // }}
         
 			if (cellData.type == "value") {
     if (isNaN(cellData.label)  && cellData.label.length < 2) {
