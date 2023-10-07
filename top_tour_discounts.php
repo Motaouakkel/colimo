@@ -24,7 +24,13 @@ include 'header.php';
                                     </a>
                                 </div>
                                 <div class="row">
-                                    <div id="wdr-component1"></div>
+                                    <div class="table1 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component"></div>
+                                    </div>
+                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;"></div>
+                                    <div class="table2 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component2"></div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -64,7 +70,7 @@ include 'header.php';
                                 };
 
                                 var pivot1 = new WebDataRocks({
-                                    container: "#wdr-component1",
+                                    container: "#wdr-component",
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -83,7 +89,7 @@ include 'header.php';
                                                     "uniqueName": "Secteur",
                                                     "caption": "Secteur",
                                                 },
-                                                
+
                                                 {
                                                     "uniqueName": "type",
                                                     "caption": "Type de remise",
@@ -101,11 +107,18 @@ include 'header.php';
                                                 "aggregation": "sum",
                                                 "format": "precentForamt"
                                             }],
+                                            "sorting": {
+                                                "column": {
+                                                    "type": "desc",
+                                                    "tuple": [],
+                                                    "measure": "Mt Remise"
+                                                }
+                                            },
                                         },
                                         "sorting": "off",
                                         "options": {
                                             "grid": {
-                                                "title": "<?php echo strtoupper($page_title) ?>",
+                                                "title": "Top +",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false
@@ -118,19 +131,82 @@ include 'header.php';
                                         }]
                                     },
                                 });
+
+                                var pivot2 = new WebDataRocks({
+                                    container: "#wdr-component2",
+                                    toolbar: true,
+                                    report: {
+                                        dataSource: {
+                                            "data": getJSONData()
+                                        },
+                                        "slice": {
+                                            "reportFilters": [
+                                                {
+                                                    "uniqueName": "Agence",
+                                                    "caption": "Agence",
+                                                },
+                                                {
+                                                    "uniqueName": "Bloc",
+                                                    "caption": "Bloc",
+                                                },
+                                                {
+                                                    "uniqueName": "Secteur",
+                                                    "caption": "Secteur",
+                                                },
+
+                                                {
+                                                    "uniqueName": "type",
+                                                    "caption": "Type de remise",
+                                                }
+                                            ],
+                                            "rows": [{
+                                                "uniqueName": "Secteur"
+                                            }],
+                                            "columns": [{
+                                                "uniqueName": "Measures"
+                                            }],
+                                            "measures": [{
+                                                "uniqueName": "Mt Remise",
+                                                "caption": "REMISE",
+                                                "aggregation": "sum",
+                                                "format": "precentForamt"
+                                            }],
+                                            "sorting": {
+                                                "column": {
+                                                    "type": "asc",
+                                                    "tuple": [],
+                                                    "measure": "Mt Remise"
+                                                }
+                                            },
+                                        },
+                                        "sorting": "off",
+                                        "options": {
+                                            "grid": {
+                                                "title": "Top -",
+                                                "showHeaders": false,
+                                                "showFilter": false,
+                                                "showGrandTotals": "rows",
+                                                "showHierarchyCaptions": false
+                                            },
+                                            "showAggregationLabels": false
+                                        },
+                                        "formats": [{
+                                            "name": "precentForamt",
+                                            "decimalPlaces": 2,
+                                        }]
+                                    },
+                                });
+
                                 previosFilter = []
                                 pivot1.on("reportcomplete", function() {
                                     previosFilter = pivot1.getFilter("type");
-                                    
-                                    
+
+
                                     pivot1.on("reportchange", function() {
-                                        if (compare_filters(previosFilter, filterValue)) {
-                                            console.log("filter not changed")
-                                            return;
-                                        }
+                                        var currentConfig = pivot1.getReport();
+                                        var currentConfigP2 = pivot2.getReport();
+                                        currentConfigP2.slice.reportFilters = currentConfig.slice.reportFilters;
                                         var filterValue = pivot1.getFilter("type");
-                                       
-                                            var currentConfig = pivot1.getReport();
                                         headerValue = "REMISE"
                                         if (filterValue.length === 1) {
                                             headerValue = filterValue[0].caption;
@@ -138,37 +214,40 @@ include 'header.php';
                                             headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
                                         }
                                         currentConfig.slice.measures[0].caption = headerValue.toUpperCase();
-                                        pivot1.setReport(currentConfig);                  
+                                        currentConfigP2.slice.measures[0].caption = headerValue.toUpperCase();
+                                        pivot2.setReport(currentConfigP2);
+                                        pivot1.setReport(currentConfig);
                                     });
                                 });
                             }
-                            function compare_filters(f1,f2){
-                                    filter1 = {}
-                                    
-                                    if(f1 != null){
-                                        f1.forEach(e=>{
-                                            filter1[e.uniqueName] = 1
-                                        })
-                                    }
-                                    //check if element in f2 is in f1
-                                    if(f2 != null){
-                                        f2.forEach(e=>{
-                                            if(filter1[e.uniqueName] == 1){
-                                                filter1[e.uniqueName] = 2
-                                            }
-                                        })
-                                    }
-                                    if(f1 != null && f2 != null){
-                                        if (f1.length != f2.length)
+
+                            function compare_filters(f1, f2) {
+                                filter1 = {}
+
+                                if (f1 != null) {
+                                    f1.forEach(e => {
+                                        filter1[e.uniqueName] = 1
+                                    })
+                                }
+                                //check if element in f2 is in f1
+                                if (f2 != null) {
+                                    f2.forEach(e => {
+                                        if (filter1[e.uniqueName] == 1) {
+                                            filter1[e.uniqueName] = 2
+                                        }
+                                    })
+                                }
+                                if (f1 != null && f2 != null) {
+                                    if (f1.length != f2.length)
+                                        return false
+                                }
+                                for (const [key, value] of Object.entries(filter1)) {
+                                    if (value == 1) {
                                         return false
                                     }
-                                    for (const [key, value] of Object.entries(filter1)) {
-                                        if(value == 1){
-                                            return false
-                                        }
-                                    }
-                                    return true
                                 }
+                                return true
+                            }
                             loaddate();
                         </script>
 
