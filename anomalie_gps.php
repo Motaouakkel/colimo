@@ -287,12 +287,12 @@ function loadfile(f) {
 					data[i].ca_visite = 0 ;
                     
 					} 
-				// if (!data[i].status_viste){
+				// if (!data[i].status_viste && data[i].CA <= 0 ){
 				// 	data[i].scanclient = 3;
 				// 	data[i].ca_visite = 0 ;
                    
 				// 	} 
-				if (data[i].status_viste == null ){
+				if (data[i].status_viste == null  && data[i].CA <= 0){
 					data[i].scanclient = 3;
 					data[i].ca_visite = 0 ;
                    
