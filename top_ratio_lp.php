@@ -32,7 +32,16 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
-                                <div id="wdr-component"></div>
+                                <div class="row">
+                                    <div class="table1 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component"></div>
+                                    </div>
+                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;"></div>
+                                    <div class="table2 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component2"></div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <script>
@@ -52,8 +61,6 @@ include 'header.php';
                                         "Bloc": {
                                             type: "string"
                                         },
-                                        
-                                        
                                     }
                                     data.unshift(struct);
                                     return data;
@@ -65,13 +72,112 @@ include 'header.php';
                                     beforetoolbarcreated: customizeToolbar,
                                     customizeCell: customizeCellFunction,
                                     toolbar: true,
+                                    height: 1000,
                                     report: {
                                         dataSource: {
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [
+                                            "reportFilters": [{
+                                                    "uniqueName": "Agence"
+                                                },
                                                 {
+                                                    "uniqueName": "Bloc"
+                                                },
+                                                {
+                                                    "uniqueName": "Secteur",
+                                                    "filter": {
+                                                        "quantity": 10,
+                                                        "type": "top"
+                                                    }
+                                                },
+
+                                            ],
+                                            "rows": [{
+                                                    "uniqueName": "Secteur"
+                                                }
+
+
+                                            ],
+                                            "columns": [{
+                                                "uniqueName": "Measures"
+                                            }],
+                                            "measures": [{
+                                                "uniqueName": "ratio",
+                                                "caption": "RATIO LP %",
+                                                "format": "percent",
+                                            }, ],
+                                            "sorting":{
+                                                "column" : {
+                                                    "type": "desc",
+                                                    "tuple": [],
+                                                    "measure": "ratio"
+                                                }
+                                            },
+                                            "expands": {
+                                                "expandAll": true,
+                                            }
+                                        },
+                                        "options": {
+                                            "grid": {
+                                                "type": "classic",
+                                                "title": "TOP +",
+                                                "showHeaders": false,
+                                                "showGrandTotals": true,
+                                                "showHierarchyCaptions": false,
+
+                                            },
+                                            "showAggregationLabels": false
+                                        },
+                                        "formats": [{
+                                                "name": "3dhvqfuq",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 2,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            },
+                                            {
+                                                "name": "precision",
+                                                "decimalPlaces": 2,
+
+                                            }, {
+                                                "name": "percent",
+                                                "decimalPlaces": 2,
+                                                "currencySymbol": "%",
+
+
+                                            }, {
+                                                "name": "3dhvwiax",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 0,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            }
+                                        ]
+                                    },
+
+                                });
+
+                                var pivot2 = new WebDataRocks({
+                                    container: "#wdr-component2",
+                                    customizeCell: customizeCellFunction,
+                                    toolbar: true,
+
+                                    height: 1000,
+                                    report: {
+                                        dataSource: {
+                                            "data": getJSONData()
+                                        },
+                                        "slice": {
+                                            "reportFilters": [{
                                                     "uniqueName": "Agence"
                                                 },
                                                 {
@@ -80,27 +186,32 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "Secteur"
                                                 },
-                                                
+
                                             ],
                                             "rows": [{
                                                     "uniqueName": "Secteur"
                                                 }
-                                                
+
 
                                             ],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
-                                            "measures": [
-                                                {
-                                                "uniqueName": "ratio",
-                                                "caption": "RATIO LP %",
-                                                "format": "percent",
-                                                
+                                            "measures": [{
+                                                    "uniqueName": "ratio",
+                                                    "caption": "RATIO LP %",
+                                                    "format": "percent",
+                                                },
+
+
+                                            ],
+                                            "sorting":{
+                                                "column" : {
+                                                    "type": "asc",
+                                                    "tuple": [],
+                                                    "measure": "ratio"
+                                                }
                                             },
-                                           
-                                            
-                                         ],
                                             "expands": {
                                                 "expandAll": true,
                                             }
@@ -108,8 +219,9 @@ include 'header.php';
                                         "options": {
                                             "grid": {
                                                 "type": "classic",
-                                                "title": "<?php echo strtoupper($page_title) ?>",
+                                                "title": "TOP -",
                                                 "showHeaders": false,
+                                                "showFilter": false,
                                                 "showGrandTotals": true,
                                                 "showHierarchyCaptions": false
                                             },
@@ -130,11 +242,11 @@ include 'header.php';
                                                 "name": "precision",
                                                 "decimalPlaces": 2,
 
-                                            },{
+                                            }, {
                                                 "name": "percent",
                                                 "decimalPlaces": 2,
                                                 "currencySymbol": "%",
-                                                
+
 
                                             }, {
                                                 "name": "3dhvwiax",
@@ -168,7 +280,31 @@ include 'header.php';
                                     }
                                 }
 
+
+                                pivot1.customizeCell(function customizeCellFunction(cell, data) {
+                                    if (data.isGrandTotal && data.columnIndex == 0) {
+                                        cell.text = "Total";
+                                    }
+                                });
+
+
+                                pivot1.on("reportcomplete", function() {
+                                    previosFilter = pivot1.getFilter("canal");
+                                    pivot1.on("reportchange", function() {
+                                        var currentConfigP1 = pivot1.getReport();
+                                        var currentConfigP2 = pivot2.getReport();
+                                        currentConfigP2.slice.measures.forEach(m => {
+                                            if (m.uniqueName == 'ratio') {
+                                                m.caption = "RATIO LP %"
+                                            }
+                                        })
+                                        currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
+                                        pivot2.setReport(currentConfigP2);
+                                    });
+                                });
                             }
+
+
 
                             //WebDataRocks[ report ] = yourValue;
 

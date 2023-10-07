@@ -179,8 +179,7 @@
   border-collapse: collapse;
   border-spacing: 0;
 }
-#wdr-component {
-  
+#wdr-component ,#wdr-component2 {
   height:250% !important;
 }
 
