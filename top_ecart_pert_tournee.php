@@ -32,7 +32,15 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
-                                <div id="wdr-component"></div>
+                                <div class="row">
+                                    <div class="table1 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component"></div>
+                                    </div>
+                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;"></div>
+                                    <div class="table2 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component2"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <script>
@@ -54,11 +62,10 @@ include 'header.php';
                                     return data;
                                 };
 
-                                //{"Agence":"OUJDA","Secteur":"LES IRIS","agency_id":1144,"sector_id":1243,"Perte_Valider":59,"Perte_Annnance":59,"Ecart_Pert":0,"pertes":"Perte Commercial","Date":"2023-09-17"}
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
                                     beforetoolbarcreated: customizeToolbar,
-                                    
+
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -70,8 +77,7 @@ include 'header.php';
                                             }, {
                                                 "uniqueName": "Secteur"
                                             }],
-                                            "rows": [
-                                                {
+                                            "rows": [{
                                                     "uniqueName": "Secteur"
                                                 },
 
@@ -81,9 +87,16 @@ include 'header.php';
                                             }],
                                             "measures": [{
                                                 "uniqueName": "Ecart_Pert",
-                                                "caption": "total",
+                                                "caption": "ECART PERTE/J",
                                                 "format": "precision"
                                             }, ],
+                                            "sorting": {
+                                                "column": {
+                                                    "type": "desc",
+                                                    "tuple": [],
+                                                    "measure": "Ecart_Pert"
+                                                }
+                                            },
                                             "expands": {
                                                 "expandAll": true,
                                             }
@@ -91,11 +104,11 @@ include 'header.php';
                                         "options": {
                                             "grid": {
                                                 "type": "classic",
-                                                "title": "<?php echo strtoupper($page_title) ?>",
+                                                "title": "TOP +",
                                                 "showHeaders": false,
                                                 "showTotals": "off",
                                                 "showGrandTotals": "off",
-                                                
+
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -130,7 +143,88 @@ include 'header.php';
 
                                 });
 
-                                
+                                var pivot2 = new WebDataRocks({
+                                    container: "#wdr-component2",
+                                    beforetoolbarcreated: customizeToolbar,
+
+                                    toolbar: true,
+                                    report: {
+                                        dataSource: {
+                                            "data": getJSONData()
+                                        },
+                                        "slice": {
+                                            "reportFilters": [{
+                                                "uniqueName": "Agence"
+                                            }, {
+                                                "uniqueName": "Secteur"
+                                            }],
+                                            "rows": [{
+                                                    "uniqueName": "Secteur"
+                                                },
+
+                                            ],
+                                            "columns": [{
+                                                "uniqueName": "Measures"
+                                            }],
+                                            "measures": [{
+                                                "uniqueName": "Ecart_Pert",
+                                                "caption": "ECART PERTE/J",
+                                                "format": "precision"
+                                            }, ],
+                                            "sorting": {
+                                                "column": {
+                                                    "type": "asc",
+                                                    "tuple": [],
+                                                    "measure": "Ecart_Pert"
+                                                }
+                                            },
+                                            "expands": {
+                                                "expandAll": true,
+                                            }
+                                        },
+                                        "options": {
+                                            "grid": {
+                                                "type": "classic",
+                                                "title": "TOP -",
+                                                "showHeaders": false,
+                                                "showFilter": false,
+                                                "showTotals": "off",
+                                                "showGrandTotals": "off",
+
+                                            },
+                                            "showAggregationLabels": false
+                                        },
+                                        "formats": [{
+                                                "name": "3dhvqfuq",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 2,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            },
+                                            {
+                                                "name": "precision",
+                                                "decimalPlaces": 2,
+
+                                            }, {
+                                                "name": "3dhvwiax",
+                                                "thousandsSeparator": " ",
+                                                "decimalSeparator": ".",
+                                                "decimalPlaces": 0,
+                                                "currencySymbol": "",
+                                                "currencySymbolAlign": "left",
+                                                "nullValue": "",
+                                                "textAlign": "right",
+                                                "isPercent": false
+                                            }
+                                        ]
+                                    },
+
+                                });
+
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
@@ -140,6 +234,20 @@ include 'header.php';
                                         return tabs;
                                     }
                                 }
+
+                                pivot1.on("reportcomplete", function() {
+                                    pivot1.on("reportchange", function() {
+                                        var currentConfigP1 = pivot1.getReport();
+                                        var currentConfigP2 = pivot2.getReport();
+                                        currentConfigP2.slice.measures.forEach(m => {
+                                            if (m.uniqueName == 'Ecart_Pert') {
+                                                m.caption = "ECART PERTE/J"
+                                            }
+                                        })
+                                        currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
+                                        pivot2.setReport(currentConfigP2);
+                                    });
+                                });
 
                             }
 

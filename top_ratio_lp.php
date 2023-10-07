@@ -289,7 +289,6 @@ include 'header.php';
 
 
                                 pivot1.on("reportcomplete", function() {
-                                    previosFilter = pivot1.getFilter("canal");
                                     pivot1.on("reportchange", function() {
                                         var currentConfigP1 = pivot1.getReport();
                                         var currentConfigP2 = pivot2.getReport();
