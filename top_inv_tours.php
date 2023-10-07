@@ -24,9 +24,14 @@ include 'header.php';
                                     </a>
                                 </div>
                                 <div class="row">
-                                    <div id="wdr-component1"></div>
+                                    <div class="table1 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component"></div>
+                                    </div>
+                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;"></div>
+                                    <div class="table2 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component2"></div>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
                         <script>
@@ -73,7 +78,7 @@ include 'header.php';
                                 };
 
                                 var pivot1 = new WebDataRocks({
-                                    container: "#wdr-component1",
+                                    container: "#wdr-component",
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -92,7 +97,7 @@ include 'header.php';
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
                                                 },
-                                                
+
                                                 {
                                                     "uniqueName": "Gamme",
                                                     "caption": "Gamme",
@@ -108,25 +113,93 @@ include 'header.php';
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
-                                            "measures": [
-                                            // {
-                                            //     "uniqueName": "INVENDU",
-                                            //     "caption": "INVENDU",
-                                            //     "aggregation": "sum",
-                                            //     "format": "precentForamt"
-                                            // }, 
-                                            {
+                                            "measures": [{
                                                 "uniqueName": "% INVENDU",
                                                 "caption": "% INVENDU",
                                                 "aggregation": "sum",
                                                 "format": "precentForamt"
                                             }],
+                                            "sorting": {
+                                                "column": {
+                                                    "type": "desc",
+                                                    "tuple": [],
+                                                    "measure": "% INVENDU"
+                                                }
+                                            },
                                         },
-                                        "sorting": "off",
+
                                         "options": {
                                             "grid": {
-                                                "title": "<?php echo strtoupper($page_title) ?>",
+                                                "title": "TOP +",
                                                 "showHeaders": false,
+                                                "showGrandTotals": "rows",
+                                                "showHierarchyCaptions": false
+                                            },
+                                            "showAggregationLabels": false
+                                        },
+                                        "formats": [{
+                                            "name": "precentForamt",
+                                            "decimalPlaces": 2,
+                                        }]
+                                    },
+                                });
+
+                                var pivot2 = new WebDataRocks({
+                                    container: "#wdr-component2",
+                                    toolbar: true,
+                                    report: {
+                                        dataSource: {
+                                            "data": getJSONData()
+                                        },
+                                        "slice": {
+                                            "reportFilters": [{
+                                                    "uniqueName": "AGENCE",
+                                                    "caption": "AGENCE",
+                                                },
+                                                {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "BLOC",
+                                                },
+                                                {
+                                                    "uniqueName": "SECTEUR",
+                                                    "caption": "SECTEUR",
+                                                },
+
+                                                {
+                                                    "uniqueName": "Gamme",
+                                                    "caption": "Gamme",
+                                                },
+                                                {
+                                                    "uniqueName": "Produit",
+                                                    "caption": "Produit",
+                                                }
+                                            ],
+                                            "rows": [{
+                                                "uniqueName": "SECTEUR"
+                                            }],
+                                            "columns": [{
+                                                "uniqueName": "Measures"
+                                            }],
+                                            "measures": [{
+                                                "uniqueName": "% INVENDU",
+                                                "caption": "% INVENDU",
+                                                "aggregation": "sum",
+                                                "format": "precentForamt"
+                                            }],
+                                            "sorting": {
+                                                "column": {
+                                                    "type": "asc",
+                                                    "tuple": [],
+                                                    "measure": "% INVENDU"
+                                                }
+                                            },
+                                        },
+
+                                        "options": {
+                                            "grid": {
+                                                "title": "TOP -",
+                                                "showHeaders": false,
+                                                "showFilter": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false
                                             },
