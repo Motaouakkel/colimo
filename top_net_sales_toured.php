@@ -24,7 +24,13 @@ include 'header.php';
                                     </a>
                                 </div>
                                 <div class="row">
-                                    <div id="wdr-component1"></div>
+                                    <div class="table1 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component"></div>
+                                    </div>
+                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;"></div>
+                                    <div class="table2 col-xl-5 col-md-5 col-sm-12">
+                                        <div id="wdr-component2"></div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -61,6 +67,9 @@ include 'header.php';
                                         "QTT": {
                                             type: "number"
                                         },
+                                        "type":{
+                                            type: "string"
+                                        }
 
                                     }
 
@@ -71,7 +80,7 @@ include 'header.php';
                                 };
 
                                 var pivot1 = new WebDataRocks({
-                                    container: "#wdr-component1",
+                                    container: "#wdr-component",
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -101,6 +110,15 @@ include 'header.php';
                                                     "uniqueName": "Produit",
                                                     "caption": "Produit",
                                                 },
+                                                {
+                                                    "uniqueName": "type",
+                                                    "caption": "type",
+                                                    "filter": {
+                                                        "members": [
+                                                            "type.DH TTC"
+                                                        ]
+                                                    }
+                                                }
                                             ],
                                             "rows": [{
                                                 "uniqueName": "SECTEUR",
@@ -115,18 +133,20 @@ include 'header.php';
                                                     "aggregation": "sum",
                                                     "format": "precentForamt"
                                                 },
-                                                {
-                                                    "uniqueName": "QTT",
-                                                    "caption": "VENTE NETTE UNITES/J",
-                                                    "aggregation": "sum",
-                                                    "format": "precentForamt"
-                                                }
+                                               
                                             ],
+                                            "sorting":{
+                                                "column" : {
+                                                    "type": "desc",
+                                                    "tuple": [],
+                                                    "measure": "CE NET"
+                                                }
+                                            },
                                         },
                                         "sorting": "off",
                                         "options": {
                                             "grid": {
-                                                "title": "<?php echo strtoupper($page_title) ?>",
+                                                "title": "TOP +",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false
@@ -138,6 +158,101 @@ include 'header.php';
                                             "decimalPlaces": 2,
                                         }]
                                     },
+                                });
+
+                                var pivot2 = new WebDataRocks({
+                                    container: "#wdr-component2",
+                                    toolbar: true,
+                                    report: {
+                                        dataSource: {
+                                            "data": getJSONData()
+                                        },
+                                        "slice": {
+                                            "reportFilters": [{
+                                                    "uniqueName": "AGENCE",
+                                                    "caption": "AGENCE",
+                                                },
+                                                {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "BLOC",
+                                                },
+                                                {
+                                                    "uniqueName": "SECTEUR",
+                                                    "caption": "SECTEUR",
+                                                },
+                                                {
+                                                    "uniqueName": "BLOC",
+                                                    "caption": "Bloc",
+                                                },
+                                                {
+                                                    "uniqueName": "Gamme",
+                                                    "caption": "Gamme",
+                                                },{
+                                                    "uniqueName": "Produit",
+                                                    "caption": "Produit",
+                                                },
+                                                {
+                                                    "uniqueName": "type",
+                                                    "caption": "type",
+                                                    "filter": {
+                                                        "members": [
+                                                            "type.DH TTC"
+                                                        ]
+                                                    }
+                                                }
+                                            ],
+                                            "rows": [{
+                                                "uniqueName": "SECTEUR",
+                                                "caption": "sect",
+                                            }],
+                                            "columns": [{
+                                                "uniqueName": "Measures"
+                                            }],
+                                            "measures": [{
+                                                    "uniqueName": "CE NET",
+                                                    "caption": "VENTE NETTE DH TTC/J",
+                                                    "aggregation": "sum",
+                                                    "format": "precentForamt"
+                                                },
+                                               
+                                            ],
+                                            "sorting":{
+                                                "column" : {
+                                                    "type": "asc",
+                                                    "tuple": [],
+                                                    "measure": "CE NET"
+                                                }
+                                            },
+                                        },
+                                        "options": {
+                                            "grid": {
+                                                "title": "TOP -",
+                                                "showHeaders": false,
+                                                "showGrandTotals": "rows",
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
+                                            },
+                                            "showAggregationLabels": false
+                                        },
+                                        "formats": [{
+                                            "name": "precentForamt",
+                                            "decimalPlaces": 2,
+                                        }]
+                                    },
+                                });
+
+                                pivot1.on("reportcomplete", function() {
+                                    pivot1.on("reportchange", function() {
+                                        var currentConfigP1 = pivot1.getReport();
+                                        var currentConfigP2 = pivot2.getReport();
+                                        currentConfigP2.slice.measures.forEach(m => {
+                                            if (m.uniqueName == 'CE NET') {
+                                                m.caption = "VENTE NETTE DH TTC/J"
+                                            }
+                                        })
+                                        currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
+                                        pivot2.setReport(currentConfigP2);
+                                    });
                                 });
                             }
 
