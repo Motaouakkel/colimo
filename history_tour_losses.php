@@ -65,6 +65,9 @@ include 'header.php';
                                         "type": {
                                             type: "number"
                                         },
+                                        "canal":{
+                                            type: "string"
+                                        }
                                     }
                                     daysMapper = data[1]
                                     data[0].unshift(struct);
@@ -94,6 +97,8 @@ include 'header.php';
                                                 "uniqueName": "Produit"
                                             }, {
                                                 "uniqueName": "type"
+                                            },{
+                                                "uniqueName": "canal"
                                             }],
                                             "rows": [{
                                                     "uniqueName": "Agence"

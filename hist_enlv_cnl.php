@@ -94,12 +94,16 @@ include 'header.php';
                                             }
                                             ,{
                                                 "uniqueName": "type",
-                                                "caption": "unite",
+                                                "caption": "type",
                                                 "filter": {
                                                         "members": [
                                                             "type.DH TTC"
                                                         ]
                                                     }
+                                            },{
+                                                "uniqueName": "canal",
+                                                "caption": "canal",
+                                                
                                             }],
                                             "rows": [{
                                                     "uniqueName": "Agence"
