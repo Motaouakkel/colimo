@@ -105,6 +105,8 @@ include 'header.php';
                                         '% PROMO': {
                                             type: 'number'
                                         },
+                                        'DEG':{ type: 'number' },
+                                        '% DEG':{ type: 'number' },
                                         'REMISE GLOBALE': {
                                             type: 'number'
                                         },
@@ -170,106 +172,139 @@ include 'header.php';
                                                     "uniqueName": "ENLEVEMENT BRUT",
                                                     "aggregation": "sum",
                                                     "caption": "ENLEVEMENT BRUT",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "INVENDU",
                                                     "aggregation": "sum",
                                                     "caption": "INVENDU",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%INV",
                                                     "caption": "%INV",
                                                     "formula": "(sum('INVENDU')/sum('ENLEVEMENT BRUT'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "ENLEVEMENT NET",
                                                     "aggregation": "sum",
                                                     "caption": "ENLEVEMENT NET",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "PERTE COMMERCIAL",
                                                     "aggregation": "sum",
                                                     "caption": "PERTE COMMERCIAL",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%PC",
                                                     "caption": "%PC",
                                                     "formula": "(sum('PERTE COMMERCIAL')/sum('ENLEVEMENT NET'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "PERTE TECHNIQUE",
                                                     "caption": "PERTE TECHNIQUE",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%PT",
                                                     "caption": "%PT",
                                                     "formula": "(sum('PERTE TECHNIQUE')/sum('ENLEVEMENT NET'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "PERTE CAMION",
                                                     "caption": "PERTE CAMION",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%PCAM",
                                                     "caption": "%PCAM",
                                                     "formula": "(sum('PERTE CAMION')/sum('ENLEVEMENT NET'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "PERTE GLOBALE",
                                                     "caption": "PERTE GLOBALE",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%PG",
                                                     "caption": "%PG",
                                                     "formula": "(sum('PERTE GLOBALE')/sum('ENLEVEMENT NET'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "CA NET avant remise",
                                                     "caption": "CA NET avant remise",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "RFM",
                                                     "caption": "RFM",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%RFM",
                                                     "caption": "%RFM",
                                                     "formula": "(sum('RFM')/sum('CA NET avant remise'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "RSF",
                                                     "caption": "RSF",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%RSF",
                                                     "caption": "%RSF",
                                                     "formula": "(sum('RSF')/sum('CA NET avant remise'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "PROMOTION",
                                                     "caption": "PROMOTION",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%PROMO",
                                                     "caption": "%PROMO",
                                                     "formula": "(sum('PROMOTION')/sum('CA NET avant remise'))*100",
+                                                    "format": "percentage"
+                                                },
+                                                {
+                                                    "uniqueName": "DEG",
+                                                    "caption": "DEG",
+                                                    "aggregation": "sum",
+                                                    "format": "precision"
+                                                },
+                                                {
+                                                    "uniqueName": "%DEG",
+                                                    "caption": "%DEG",
+                                                    "formula": "(sum('DEG')/sum('CA NET avant remise'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "REMISE GLOBALE",
                                                     "caption": "REMISE GLOBALE",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 },
                                                 {
                                                     "uniqueName": "%REMISE GLOBALE",
                                                     "caption": "%REMISE GLOBALE",
                                                     "formula": "(sum('REMISE GLOBALE')/sum('CA NET avant remise'))*100",
+                                                    "format": "percentage"
                                                 },
                                                 {
                                                     "uniqueName": "CA NET",
@@ -293,7 +328,18 @@ include 'header.php';
                                             },
                                             "showAggregationLabels": false
                                         },
-                                        "formats": []
+                                        "formats": [
+                                            {
+                                            "name": "precision",
+                                            "decimalPlaces": 2,
+                                            },
+                                            {
+                                            "name": "percentage",
+                                            "decimalPlaces": 2,
+                                            "currencySymbol": "%",
+                                            "currencySymbolAlign": "left",
+                                            }
+                                        ]
                                     },
 
                                 });
