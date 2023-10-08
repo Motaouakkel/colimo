@@ -99,10 +99,18 @@ include 'header.php';
                                         '% PROMO': {
                                             type: 'number'
                                         },
+                                        'DEG':{ type: 'number' },
+                                        '% DEG':{ type: 'number' },
                                         'REMISE GLOBALE': {
                                             type: 'number'
                                         },
                                         '% REMISE GLOBALE': {
+                                            type: 'number'
+                                        },
+                                        "REMISE + PERTE": {
+                                            type: 'number'
+                                        },
+                                        '% REMISE + PERTE': {
                                             type: 'number'
                                         },
                                         'CE NET': {

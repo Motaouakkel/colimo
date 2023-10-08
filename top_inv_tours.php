@@ -116,7 +116,7 @@ include 'header.php';
                                             "measures": [{
                                                 "uniqueName": "% INVENDU",
                                                 "caption": "% INVENDU",
-                                                "aggregation": "sum",
+                                                "aggregation": "average",
                                                 "format": "precentForamt"
                                             }],
                                             "sorting": {
@@ -140,6 +140,8 @@ include 'header.php';
                                         "formats": [{
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
+                                            "currencySymbol" : "%",
+                                            "currencySymbolAlign" : "left",
                                         }]
                                     },
                                 });
@@ -183,7 +185,7 @@ include 'header.php';
                                             "measures": [{
                                                 "uniqueName": "% INVENDU",
                                                 "caption": "% INVENDU",
-                                                "aggregation": "sum",
+                                                "aggregation": "average",
                                                 "format": "precentForamt"
                                             }],
                                             "sorting": {
@@ -208,6 +210,8 @@ include 'header.php';
                                         "formats": [{
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
+                                            "currencySymbol" : "%",
+                                            "currencySymbolAlign" : "left",
                                         }]
                                     },
                                 });
