@@ -120,7 +120,7 @@
 
               var sel2 = document.getElementById('filter-customer');
               var opt2 = document.createElement('option');
-              opt2.appendChild(document.createTextNode("Tout"));
+              opt2.appendChild(document.createTextNode("Agence"));
 
               // set value property of opt
               opt2.value = "0";
@@ -130,7 +130,7 @@
 
               var sel3 = document.getElementById('f-customer');
               var opt3 = document.createElement('option');
-              opt3.appendChild(document.createTextNode("Tout"));
+              opt3.appendChild(document.createTextNode("Superviseur"));
 
               // set value property of opt
               opt3.value = "0";
@@ -204,7 +204,7 @@
 
               var sel2 = document.getElementById('f-customer');
               var opt2 = document.createElement('option');
-              opt2.appendChild(document.createTextNode("Tout"));
+              opt2.appendChild(document.createTextNode("Superviseur"));
 
               // set value property of opt
               opt2.value = "0";
