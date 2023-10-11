@@ -6,10 +6,11 @@ include 'header.php';
 ?>
 
 <body class="dashboard-page sb-l-o sb-r-c">
-
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.js"></script>
+    <script src = "include.js"></script>
     <!-- Start: Main -->
     <div id="main">
-        <script src = "include.js"></script>
         <!-- Start: Header -->
         <!-- End: Header -->
         <?php include 'sidebar_left.php'; ?>
@@ -29,8 +30,10 @@ include 'header.php';
                                     <div class="col-md-2">
                                         <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
                                     </div>
+                                    
                                 </div>
                             </div>
+
                             <div class="panel-body pn">
                                 <div class="ml15 ib va-m" id="toggle_sidemenu_r">
                                     <a href="#" id="aCliquer">
@@ -40,9 +43,7 @@ include 'header.php';
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component"></div>
                                     </div>
-                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;">
-                                        <h3> <?php echo strtoupper($page_title) ?></h3>
-                                    </div>
+                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;"></div>
                                     <div class="table2 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component2"></div>
                                     </div>
@@ -53,6 +54,10 @@ include 'header.php';
                         <script>
                             var piv = null
                             var pin = null
+                            csvArr = []
+                            mapperRows = []
+
+
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
@@ -77,9 +82,9 @@ include 'header.php';
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
-                                    //beforetoolbarcreated: customizeToolbar,
+                                    beforetoolbarcreated: customizeToolbar,
                                     customizeCell: customizeCellFunction,
-                                    toolbar: false,
+                                    toolbar: true,
                                     height: 1000,
                                     report: {
                                         dataSource: {
@@ -115,8 +120,8 @@ include 'header.php';
                                                 "caption": "RATIO LP %",
                                                 "format": "percent",
                                             }, ],
-                                            "sorting":{
-                                                "column" : {
+                                            "sorting": {
+                                                "column": {
                                                     "type": "desc",
                                                     "tuple": [],
                                                     "measure": "ratio"
@@ -177,7 +182,7 @@ include 'header.php';
                                 var pivot2 = new WebDataRocks({
                                     container: "#wdr-component2",
                                     customizeCell: customizeCellFunction,
-                                    toolbar: false,
+                                    toolbar: true,
 
                                     height: 1000,
                                     report: {
@@ -213,8 +218,8 @@ include 'header.php';
 
 
                                             ],
-                                            "sorting":{
-                                                "column" : {
+                                            "sorting": {
+                                                "column": {
                                                     "type": "asc",
                                                     "tuple": [],
                                                     "measure": "ratio"

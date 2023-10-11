@@ -1,0 +1,3 @@
+Z2B = "text/plain;charset=utf-8"
+J2B = ".xlsx"
+var i2B = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"

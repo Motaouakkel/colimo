@@ -5,6 +5,7 @@ include 'header.php';
 ?>
 
 <body class="dashboard-page sb-l-o sb-r-c">
+    <script src="include.js"></script>
     <div id="main">
         <?php include 'sidebar_left.php'; ?>
         <section id="content_wrapper">
@@ -16,6 +17,9 @@ include 'header.php';
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
                                     <?php include 'search_2_dates.php' ?>
+                                    <div class="col-md-2">
+                                        <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="panel-body pn">
@@ -27,7 +31,9 @@ include 'header.php';
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component"></div>
                                     </div>
-                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;"></div>
+                                    <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;">
+                                        <h3> <?php echo strtoupper($page_title) ?></h3>
+                                    </div>
                                     <div class="table2 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component2"></div>
                                     </div>
@@ -35,7 +41,10 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
+                            var piv = null
+                                var pin = null
                             function loadfile(f) {
+                                
                                 var maper = []
 
                                 function getJSONData() {
@@ -79,7 +88,7 @@ include 'header.php';
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
-                                    toolbar: true,
+                                    toolbar: false,
                                     report: {
                                         dataSource: {
                                             "data": getJSONData()
@@ -145,10 +154,11 @@ include 'header.php';
                                         }]
                                     },
                                 });
+                                piv = pivot1
 
                                 var pivot2 = new WebDataRocks({
                                     container: "#wdr-component2",
-                                    toolbar: true,
+                                    toolbar: false,
                                     report: {
                                         dataSource: {
                                             "data": getJSONData()
@@ -215,6 +225,7 @@ include 'header.php';
                                         }]
                                     },
                                 });
+                                pin = pivot2
                             }
 
                             loaddate();
