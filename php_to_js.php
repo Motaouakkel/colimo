@@ -4,7 +4,11 @@ include 'consts.php';
 ///////////////////////////////////////////////////////////
 ////////////////////      Function     ///////////////////
 //////////////////////////////////////////////////////////
-
+ // var blob = new Blob([data.data], {
+                                    //     type: 'application/octet-stream'
+                                    // });
+                                    // url = window.URL.createObjectURL(blob);
+                                    // downloadURL(url, 'export.xlsx');
 function get_data($endpint)
 {
     session_start();
