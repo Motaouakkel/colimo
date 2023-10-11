@@ -17,7 +17,7 @@ include 'header.php';
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
                                     <?php include 'search_2_dates.php' ?>
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
                                     </div>
                                 </div>
@@ -28,11 +28,15 @@ include 'header.php';
                                     </a>
                                 </div>
                                 <div class="row">
+                                    <div class="report-title col-xl-12 col-md-12 col-sm-12">
+                                        <h3> <?php echo strtoupper($page_title) ?></h3>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component"></div>
                                     </div>
                                     <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;">
-                                    <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
                                     <div class="table2 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component2"></div>

@@ -253,7 +253,7 @@
   </label>
 </div>
 
-<div class="col-md-2">
+<div class="col-md-1">
 
   <a type="submit" href="#" onclick="loadme(getsup(),getag(),'<?php if (isset($api_action)) echo $api_action ?>')" class="button btn-primary submit-btn">Consulter</a>
 

@@ -4,7 +4,7 @@ $api_action = "topTourLosses";
 include 'header.php';
 ?>
 
-<body class="dashboard-page sb-l-o sb-r-c">
+<body class="dashboard-page sb-l-o sb-r-c top-report">
     <script src="include.js"></script>
     <div id="main">
         <?php include 'sidebar_left.php'; ?>
@@ -17,7 +17,7 @@ include 'header.php';
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
                                     <?php include 'search_2_dates.php' ?>
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
                                     </div>
                                 </div>
@@ -28,11 +28,18 @@ include 'header.php';
                                     </a>
                                 </div>
                                 <div class="row">
+                                    <div class="report-title col-xl-12 col-md-12 col-sm-12">
+                                        <h3> <?php echo strtoupper($page_title) ?></h3>
+                                    </div>
+                                </div>
+                                <div id="ls-filters" class="row ls-filters">
+
+                                </div>
+                                <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component"></div>
                                     </div>
                                     <div class="spacer col-xl-2 col-md-2 col-sm-12" style="height: 250%;">
-                                        <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
                                     <div class="table2 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component2"></div>
@@ -151,10 +158,12 @@ include 'header.php';
                                             },
                                         },
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "title": "TOP +",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
+                                                //"showFilter": false,
                                                 "sorting": "on",
                                                 "showHierarchyCaptions": false
                                             },
@@ -230,6 +239,7 @@ include 'header.php';
                                             },
                                         },
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "title": "TOP -",
                                                 "showHeaders": false,
@@ -249,15 +259,34 @@ include 'header.php';
                                 pin = pivot2
                                 previosFilter = []
 
-
+                               
 
                                 pivot1.on("reportcomplete", function() {
                                     console.log("reportcomplete")
                                     previosFilter = pivot1.getFilter("type");
-                                    if (!loaded) {
+
+                                    var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                    console.log(sourceFiltersContainer)
+                                    var targetFiltersContainer = document.getElementById("ls-filters");
+                                    while(targetFiltersContainer.firstChild){
+                                        targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
+                                    }
+                                    var elementParent = sourceFiltersContainer.parentElement;
+                                    console.log("child",sourceFiltersContainer)
+                                    console.log("parent",elementParent)
+                                    sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
+                                    elementParent.removeChild(sourceFiltersContainer);
+                                    targetFiltersContainer.appendChild(sourceFiltersContainer);
+                                    
                                         console.log("loaded ", loaded)
                                         loaded = true;
                                         pivot1.on("reportchange", function() {
+                                            var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                            var Parent =  srcFiltersContainer.parentElement;
+                                            Parent.removeChild(srcFiltersContainer);
+                                            console.log("reportchange")
+                                            var sourceFiltersContainer = document.getElementById("wdr-page-filter");
+
                                             var filterValue = pivot1.getFilter("type");
                                             var currentConfig = pivot1.getReport();
                                             var currentConfigP2 = pivot2.getReport();
@@ -286,7 +315,7 @@ include 'header.php';
 
 
                                         });
-                                    }
+                                    
                                 });
                             }
 

@@ -23653,6 +23653,8 @@ body.boxed-layout #main {
   overflow: hidden;
 }
 
+.title {}
+
 /* hide psuedo background */
 body.boxed-layout #main:before {
   display: none;
@@ -24474,6 +24476,64 @@ ul.sidebar-nav ul#sideEight.sub-nav>li>a:hover {
     padding: 10px;
   }
 }
+
+
+/* .top-report .wdr-filters{
+    display: none !important;
+} */
+.report-title {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.ls-filters .wdr-filters {
+  display: flex !important;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  margin: 10px 0;
+  overflow: auto;
+}
+
+.ls-filters .wdr-filters .wdr-ui-element {
+  background-color: #005AA0;
+  color: #fff;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+
+.ls-filters .wdr-filters .wdr-filtered-icon {
+  display: none;
+  padding: 0;
+}
+
+.ls-filters .wdr-filters .wdr-filter-icon:last-child {
+  display: block;
+  padding: 0;
+}
+
+.ls-filters .wdr-filters .wdr-filter-icon::before {
+  content: "\e915";
+  font-family: webdatarocks-icons;
+  font-weight: normal;
+  font-size: 15px;
+  color: #FFF;
+  top: 6px;
+
+}
+
+.ls-filters .wdr-filters .wdr-ui-element span {
+  display: block;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 300;
+}
+
 
 /* ==============================================
    III. RESPONSIVE STYLES

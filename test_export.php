@@ -27,7 +27,7 @@ include 'header.php';
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
                                     <?php include 'search_2_dates.php' ?>
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
                                     </div>
                                     

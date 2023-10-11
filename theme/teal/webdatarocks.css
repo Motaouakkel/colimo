@@ -187,9 +187,6 @@
   height: 250% !important;
 }
 
-#wdr-component2 #wdr-grid-layout {
-  transform: translateY(50px);
-}
 
 #wdr-pivot-view ol,
 #wdr-pivot-view ul,
