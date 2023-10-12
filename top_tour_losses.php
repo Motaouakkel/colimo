@@ -17,7 +17,8 @@ include 'header.php';
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
                                     <?php include 'search_2_dates.php' ?>
-                                    <div class="col-md-1">
+                                
+                                    <div class="col-md-2 excel-btn">
                                         <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
                                     </div>
                                 </div>
@@ -160,6 +161,7 @@ include 'header.php';
                                         "options": {
                                             "configuratorButton": false,
                                             "grid": {
+                                                
                                                 "title": "TOP +",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
@@ -244,7 +246,7 @@ include 'header.php';
                                                 "title": "TOP -",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
-                                                "showFilter": false,
+                                                "showFilter": true,
                                                 "sorting": "on",
                                                 "showHierarchyCaptions": false
                                             },
@@ -258,62 +260,42 @@ include 'header.php';
                                 });
                                 pin = pivot2
                                 previosFilter = []
-
-                               
-
+                            
+                                srcDemo = null
                                 pivot1.on("reportcomplete", function() {
-                                    console.log("reportcomplete")
                                     previosFilter = pivot1.getFilter("type");
-
                                     var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                    console.log(sourceFiltersContainer)
+                                    srcDemo = sourceFiltersContainer;
                                     var targetFiltersContainer = document.getElementById("ls-filters");
                                     while(targetFiltersContainer.firstChild){
                                         targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
                                     }
-                                    var elementParent = sourceFiltersContainer.parentElement;
-                                    console.log("child",sourceFiltersContainer)
-                                    console.log("parent",elementParent)
-                                    sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
+                                    var elementParent = sourceFiltersContainer.parentElement;                                 
                                     elementParent.removeChild(sourceFiltersContainer);
-                                    targetFiltersContainer.appendChild(sourceFiltersContainer);
-                                    
-                                        console.log("loaded ", loaded)
-                                        loaded = true;
+                                    sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
+                                    var secondElement = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                    secondparent = secondElement.parentElement;
+                                    srcDemo = secondElement; 
+                                    secondparent.removeChild(secondElement);
+                                    targetFiltersContainer.appendChild(sourceFiltersContainer);                                        
                                         pivot1.on("reportchange", function() {
-                                            var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                            var Parent =  srcFiltersContainer.parentElement;
-                                            Parent.removeChild(srcFiltersContainer);
-                                            console.log("reportchange")
-                                            var sourceFiltersContainer = document.getElementById("wdr-page-filter");
-
+                                            while(document.querySelector(".wdr-filters.wdr-ui-hgroup")){
+                                                var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                                var Parent =  srcFiltersContainer.parentElement;
+                                                Parent.removeChild(srcFiltersContainer);
+                                            }
                                             var filterValue = pivot1.getFilter("type");
                                             var currentConfig = pivot1.getReport();
-                                            var currentConfigP2 = pivot2.getReport();
+                                            var currentConfigP2 = pivot2.getReport();                                       
                                             currentConfigP2.slice.measures.forEach(m => {
                                                 if (m.uniqueName == 'Mt Perte') {
                                                     m.caption = "PERTE"
                                                 }
                                             })
                                             currentConfigP2.slice.reportFilters = currentConfig.slice.reportFilters;
+                                            currentConfigP2.options.grid["showFilter"]=  true,
                                             pivot2.setReport(currentConfigP2);
-                                            // if (compare_filters(previosFilter, filterValue)) {
-                                            //     console.log("filter not changed")
-                                            //     return;
-                                            // }
-                                            // var headerValue = "PERTE GLOBALE"
-
-                                            // if (filterValue != null && filterValue.length === 1) {
-                                            //     headerValue = filterValue[0].caption;
-                                            // } else if (filterValue != null && filterValue.length === 2) {
-                                            //     headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
-                                            // }
-
-                                            // currentConfig.slice.measures[0].caption = headerValue + " DH TTC/J";
-                                            // currentConfig.slice.measures[1].caption = "QTT " + headerValue + " UNITES/J";
-                                            // pivot1.setReport(currentConfig);
-
-
+                                            document.getElementById("wdr-grid-view").appendChild(srcDemo);                                           
                                         });
                                     
                                 });

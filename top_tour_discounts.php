@@ -17,7 +17,7 @@ include 'header.php';
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
                                     <?php include 'search_2_dates.php' ?>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
                                     </div>
                                 </div>
@@ -31,6 +31,9 @@ include 'header.php';
                                     <div class="report-title col-xl-12 col-md-12 col-sm-12">
                                         <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
+                                </div>
+                                <div id="ls-filters" class="row ls-filters">
+
                                 </div>
                                 <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
@@ -122,6 +125,7 @@ include 'header.php';
                                             "sorting": {
                                                 "column": {
                                                     "type": "desc",
+                                                    
                                                     "tuple": [],
                                                     "measure": "Mt Remise"
                                                 }
@@ -197,7 +201,7 @@ include 'header.php';
                                             "grid": {
                                                 "title": "Top -",
                                                 "showHeaders": false,
-                                                "showFilter": false,
+                                                "showFilter": true,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false
                                             },
@@ -211,25 +215,37 @@ include 'header.php';
                                 });
                                 pin = pivot1
                                 previosFilter = []
+                                srcDemo = null
                                 pivot1.on("reportcomplete", function() {
                                     previosFilter = pivot1.getFilter("type");
-
+                                    var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                    srcDemo = sourceFiltersContainer;
+                                    var targetFiltersContainer = document.getElementById("ls-filters");
+                                    while(targetFiltersContainer.firstChild){
+                                        targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
+                                    }
+                                    var elementParent = sourceFiltersContainer.parentElement;                                 
+                                    elementParent.removeChild(sourceFiltersContainer);
+                                    sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
+                                    var secondElement = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                    secondparent = secondElement.parentElement;
+                                    srcDemo = secondElement; 
+                                    secondparent.removeChild(secondElement);
+                                    targetFiltersContainer.appendChild(sourceFiltersContainer);    
 
                                     pivot1.on("reportchange", function() {
+                                        while(document.querySelector(".wdr-filters.wdr-ui-hgroup")){
+                                                var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                                var Parent =  srcFiltersContainer.parentElement;
+                                                Parent.removeChild(srcFiltersContainer);
+                                            }
                                         var currentConfig = pivot1.getReport();
                                         var currentConfigP2 = pivot2.getReport();
                                         currentConfigP2.slice.reportFilters = currentConfig.slice.reportFilters;
-                                        var filterValue = pivot1.getFilter("type");
-                                        headerValue = "REMISE"
-                                        if (filterValue.length === 1) {
-                                            headerValue = filterValue[0].caption;
-                                        } else if (filterValue.length === 2) {
-                                            headerValue = filterValue[0].caption + " + " + filterValue[1].caption;
-                                        }
-                                        currentConfig.slice.measures[0].caption = headerValue.toUpperCase();
-                                        currentConfigP2.slice.measures[0].caption = headerValue.toUpperCase();
-                                        pivot2.setReport(currentConfigP2);
-                                        pivot1.setReport(currentConfig);
+                                            currentConfigP2.options.grid["showFilter"]=  true,
+                                            pivot2.setReport(currentConfigP2);
+                                            document.getElementById("wdr-grid-view").appendChild(srcDemo);
+                                        //pivot1.setReport(currentConfig);
                                     });
                                 });
                             }

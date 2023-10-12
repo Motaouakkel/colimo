@@ -17,7 +17,7 @@ include 'header.php';
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
                                     <?php include 'search_2_dates.php' ?>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <a type="submit" class="button btn-primary submit-btn" href="#" onclick="exportAndHandleData(piv,pin,'<?php echo $page_title ?>');">To Excel</a>
                                     </div>
                                 </div>
@@ -31,6 +31,9 @@ include 'header.php';
                                     <div class="report-title col-xl-12 col-md-12 col-sm-12">
                                         <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
+                                </div>
+                                <div id="ls-filters" class="row ls-filters">
+
                                 </div>
                                 <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
@@ -216,7 +219,7 @@ include 'header.php';
                                             "grid": {
                                                 "title": "TOP -",
                                                 "showHeaders": false,
-                                                "showFilter": false,
+                                                "showFilter": true,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false
                                             },
