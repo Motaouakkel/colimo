@@ -273,6 +273,7 @@ function loadfile(f) {
 					
 					//data[i].VNT = data[i].Vente;
 				if ((data[i].distance < 15 ) && (data[i].status_viste == 'VENTE' ||  (data[i].CA > 0 || data[i].CA != null ))) {
+					console.log(data[i].CA);
 					data[i].scanclient = 0;
 					data[i].ca_visite = data[i].ca  ;
                    
