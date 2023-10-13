@@ -132,16 +132,8 @@ function includeHTML() {
                     </ol>
                 </div>
              <div class="topbar-right">
-                      
-			<span class="label label-rounded label-default">A</span><span class="label label-default">MDF CLIENTS + OPERATEURS</span>
-				<span class="label label-rounded label-primary">B</span><span class="label label-primary">MDF OPERATEURS + SILDA</span>
-				<span class="label label-rounded label-success">C</span><span class="label label-success">SILDA SEUL</span>
-				<span class="label label-rounded label-danger">D</span><span class="label label-danger">SILDA + CLIENT</span><br/>
-				<span class="label label-rounded label-system">E</span><span class="label label-system">LOCAL 2P SEUL</span>
-				
-				<span class="label label-rounded label-warning">F</span><span class="label label-warning">LOCAL 1 P SEUL </span>
-				<span class="label label-rounded label-alert">G</span><span class="label label-alert">COMPTOIRE SEUL</span>
-                   
+
+		     
                              
                    
                 </div>
