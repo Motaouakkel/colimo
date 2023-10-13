@@ -1,4 +1,5 @@
 <?php
+require_once 'function.php';
     session_start();
 	if(!isset($_SESSION['auth']) or $_SESSION['auth']!='yes' or empty($_SESSION['auth'])) {
 	  echo "<script language='javascript'>window.location.href='login.php';</script>";
