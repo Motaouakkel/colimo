@@ -185,9 +185,17 @@
             <i class="arrow double"></i>
         </label>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-1">
         <a type="submit" href="#" onclick="loadme(getsup(),getag(),'<?php if (isset($api_action)) echo $api_action ?>')" class="button btn-primary submit-btn">Consulter</a>
     </div>
+    <?php
+
+    if (isset($export_btn) && $export_btn == true) {
+    ?>
+        <div class="col-md-1">
+            <a type="submit" class="button btn-primary submit-btn" href="#" onclick="">To Excel</a>
+        </div>
+    <?php } ?>
 </div>
 
 
