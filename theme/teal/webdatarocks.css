@@ -186,6 +186,13 @@
 #wdr-component2 {
   height: 250% !important;
 }
+.wdr-table-container{
+  margin: 20px 0px 50px 0px;  
+}
+.wdr-component-box {
+  height: 40% !important;
+}
+
 
 
 #wdr-pivot-view ol,
