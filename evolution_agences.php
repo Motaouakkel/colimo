@@ -10,7 +10,9 @@ include 'header.php';
 
     <!-- Start: Main -->
     <div id="main">
-
+    <script src="include.js">
+        
+    </script>
         <!-- Start: Header -->
         <!-- End: Header -->
         <?php include 'sidebar_left.php'; ?>
@@ -44,6 +46,7 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
+                            pivs = null
                             async function loadfile(f) {
                                 let data = $.parseJSON(f);
                                 buildTablesContainers(data);
@@ -137,7 +140,7 @@ include 'header.php';
                                         });
                                     });
                                 });
-
+                                pivs= tables;
 
 
                                 function buildWebDataRocksTable(element, index) {
