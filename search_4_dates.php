@@ -193,7 +193,7 @@
     if (isset($export_btn) && $export_btn == true) {
     ?>
         <div class="col-md-1">
-            <a type="submit" class="button btn-primary submit-btn" href="#" onclick="">To Excel</a>
+            <a type="submit" class="button btn-primary submit-btn" href="#" onclick='mergeMultipleExcel(pivs,"Evolution par canal");'>To Excel</a>
         </div>
     <?php } ?>
 </div>
