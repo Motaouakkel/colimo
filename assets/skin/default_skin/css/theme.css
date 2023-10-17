@@ -27,6 +27,10 @@ Import the fonts*/
   -moz-osx-font-smoothing: grayscale;
 }
 
+.panel .panel-body , .wdr-filter-header{
+  text-transform: uppercase !important;
+}
+
 /*Individual icons*/
 .glyphicon-asterisk:before {
   content: "\2a";
