@@ -55,10 +55,10 @@ include 'header.php';
                                         "Agence": {
                                             type: "string"
                                         },
-                                        "Qt Objectif":{
+                                        "Mt Objectif":{
                                             type : "number"
                                         },
-                                        "Qt Vente": {
+                                        "Mt Brut": {
                                             type: "number"
                                         },
                                        
@@ -91,13 +91,13 @@ include 'header.php';
 
                                             "measures": [
                                                 {
-                                                    "uniqueName": "Qt Objectif",
+                                                    "uniqueName": "Mt Objectif",
                                                     "caption": "OBJECTIF",
                                                     "format": "precision",
                                                     "aggregation": "sum"
                                                 },
                                                 {
-                                                    "uniqueName": "Qt Vente",
+                                                    "uniqueName": "Mt Brut",
                                                     "caption": "REALISATION",
                                                     "format": "precision",
                                                     "aggregation": "sum"
@@ -107,14 +107,14 @@ include 'header.php';
                                                     "uniqueName": "percent",
                                                     "caption": "%",
                                                     //to save againt division by zero
-                                                    "formula": "100*(sum('Qt Vente'))/sum('Qt Objectif'))",
+                                                    "formula": "100*(sum('Mt Brut'))/sum('Mt Objectif'))",
                                                     "format": "precentForamt"
                                                 },
                                                 {
                                                     "uniqueName": "amount_3",
                                                     "caption": "RESTE A FAIRE MOIS",
                                                     "format": "precision",
-                                                    "formula": "sum('Qt Objectif') -sum('Qt Vente')"
+                                                    "formula": "sum('Mt Objectif') -sum('Mt Brut')"
                                                 }
                                             ],
 

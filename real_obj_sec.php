@@ -83,6 +83,7 @@ include 'header.php';
                                         dataSource: {
                                             "data": getJSONData()
                                         },
+                                        
                                         "slice": {
                                             "reportFilters": [
                                                 {
@@ -133,7 +134,6 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "percent",
                                                     "caption": "%",
-                                                    //to save againt division by zero
                                                     "formula": "100*(sum('taxed_amount'))/sum('goal'))",
                                                     "format": "precentForamt"
                                                 },
@@ -144,11 +144,12 @@ include 'header.php';
                                                     "formula": "sum('goal') -sum('taxed_amount')"
                                                 }
                                             ],
-
-                                        },
-                                        "expands": {
+                                            "expands": {
                                             "expandAll": true,
                                         },
+
+                                        },
+                                        
                                         "options": {
                                             "grid": {
                                                 "title": "<?php echo strtoupper($page_title) ?> " ,

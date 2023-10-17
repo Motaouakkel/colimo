@@ -183,8 +183,7 @@ include 'header.php';
                                             "currencySymbolAlign": "right"
                                         },{
                                             "name": "precision",
-                                            "decimalPlaces": 2,
-                                            
+                                            "decimalPlaces": 2,   
                                         }]
                                     },
 
