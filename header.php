@@ -57,6 +57,19 @@ $objet = json_decode($response, true);
             }
         }
     };
+
+    function loadLSFiltersTemplate(filters) {
+        $.ajax({
+            type: "POST",
+            url: "filters.php",
+            data: {
+                data: filters
+            },
+            success: function(response) {
+                $('#filters').html(response);
+            }
+        });
+    }
 </script>
 
 <head>
@@ -75,6 +88,9 @@ $objet = json_decode($response, true);
 
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="assets/skin/default_skin/css/theme.css">
+
+    <!-- Filters CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/skin/default_skin/css/filters.css">
 
     <!-- Admin Panels CSS -->
     <link rel="stylesheet" type="text/css" href="assets/admin-tools/admin-plugins/admin-panels/adminpanels.css">

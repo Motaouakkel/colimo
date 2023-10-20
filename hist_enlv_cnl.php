@@ -32,13 +32,14 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
                         <script>
                             daysMapper = {}
                             function loadfile(f) {
-                                
+
                                 function getJSONData() {
                                     data = $.parseJSON(f);
                                     var struct = {
@@ -65,12 +66,14 @@ include 'header.php';
                                         },
                                         "canal": {
                                             type: "string"
-                                        },  
+                                        },
                                     }
-                                    daysMapper = data[1];
-                                    data[0].unshift(struct);
-                                    return data[0];
-                                    
+                                    daysMapper = data["data"][1];
+                                    data["data"][0].unshift(struct);
+
+                                    loadLSFiltersTemplate(data['filters']);
+                                    return data["data"][0];
+
                                 };
 
 
@@ -85,26 +88,26 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                "uniqueName": "Agence"
-                                            },{
-                                                "uniqueName": "Gamme"
-                                            },
-                                            {
-                                                "uniqueName":"Produit"
-                                            }
-                                            ,{
-                                                "uniqueName": "type",
-                                                "caption": "type",
-                                                "filter": {
+                                                    "uniqueName": "Agence"
+                                                }, {
+                                                    "uniqueName": "Gamme"
+                                                },
+                                                {
+                                                    "uniqueName": "Produit"
+                                                }, {
+                                                    "uniqueName": "type",
+                                                    "caption": "type",
+                                                    "filter": {
                                                         "members": [
                                                             "type.DH TTC"
                                                         ]
                                                     }
-                                            },{
-                                                "uniqueName": "canal",
-                                                "caption": "canal",
-                                                
-                                            }],
+                                                }, {
+                                                    "uniqueName": "canal",
+                                                    "caption": "canal",
+
+                                                }
+                                            ],
                                             "rows": [{
                                                     "uniqueName": "Agence"
                                                 },
@@ -112,7 +115,7 @@ include 'header.php';
                                                     "uniqueName": "Secteur",
 
                                                 }
-                                                
+
 
                                             ],
                                             "columns": [{
@@ -134,7 +137,8 @@ include 'header.php';
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -168,20 +172,24 @@ include 'header.php';
                                     },
 
                                 });
+                                pivot1.on("reportcomplete", function() {
+                                    applayLSFilters(pivot1);
+                                    pivot1.off("reportcomplete");
+                                })
 
                                 function customizeCellFunction(cell, data) {
-                                    if(data.rowIndex == 0 && data.columnIndex != 0 && data.label != ''){
+                                    if (data.rowIndex == 0 && data.columnIndex != 0 && data.label != '') {
                                         var str = daysMapper[parseInt(data.label)];
-                                        
-                                        if (str){
-                                        arr = str.split('/');
-                                        cell.text = arr[0] + '/' + arr[1] ;
+
+                                        if (str) {
+                                            arr = str.split('/');
+                                            cell.text = arr[0] + '/' + arr[1];
                                         }
                                     }
                                     if (data.isGrandTotal && data.columnIndex == 0) {
                                         cell.text = "Total";
                                     }
-                                    
+
                                 }
 
                                 function customizeToolbar(toolbar) {

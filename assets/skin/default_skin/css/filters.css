@@ -1,0 +1,213 @@
+.ls-filters {
+    padding: 15px;
+}
+
+.ls-filters .filters-list {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin-inline: auto;
+    align-content: center;
+    justify-content: center;
+}
+
+.ls-filters .filters-list .filter-child {
+    margin-inline: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #005AA0;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.ls-filters .filter-child .filter-title {
+    display: block;
+}
+
+.ls-filters .filter-child .filter-title::after {
+    content: '\f013';
+    font-family: 'FontAwesome';
+    margin-left: 10px;
+    color: #fff;
+
+}
+
+.ls-filters .filter-child .filter-subtitle {
+    font-size: 9px;
+}
+
+
+/* Filters-pop-up ========================================== */
+.filters-pop-up {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%) scale(0.9);
+    -moz-transform: translate(-50%, -50%) scale(0.9);
+    -ms-transform: translate(-50%, -50%) scale(0.9);
+    -o-transform: translate(-50%, -50%) scale(0.9);
+    transform: translate(-50%, -50%) scale(0.9);
+    overflow-y: auto;
+    box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.4);
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: 10;
+    background-color: #fff;
+    width: 500px;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.filters-pop-up .content .container {
+    padding: 15px;
+    max-width: 100%;
+}
+
+
+
+.filters-pop-up .content {
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    min-height: 100vh;
+}
+
+.filters-pop-up .content .container .pop-up-header {
+    margin-bottom: 10px;
+}
+
+.filters-pop-up .content .container .filter-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.filters-pop-up .content .container .filter-search {
+    width: 100%;
+    position: relative;
+}
+
+.filters-pop-up .content .filter-search::after {
+    height: 30px;
+    width: 30px;
+    content: '\f00d';
+    font-family: 'FontAwesome';
+    color: #fff;
+    background-color: #005AA0;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    z-index: 999;
+}
+
+
+.filters-pop-up .filter-search input {
+    height: 30px;
+}
+
+
+
+
+.filters-pop-up .content .container .pop-up-btn {
+    padding: 0px;
+    display: flex;
+    justify-content: end;
+}
+
+.filters-pop-up .content .container .back,
+.filters-pop-up .content .container .save {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-inline: 15px;
+    background-color: #005AA0;
+    color: #fff;
+}
+
+.filters-pop-up .content .container .back {
+    background-color: #fff;
+    border: 1px solid #005AA0;
+    color: #005AA0;
+
+}
+
+.filters-pop-up .content .container .pop-up-body {
+    overflow-y: hidden;
+}
+
+.filters-pop-up .content .pop-up-body .filter-list {
+    padding: 0;
+    overflow-y: scroll;
+    height: 300px;
+}
+
+.filters-pop-up .content .select-all {
+    background-color: #81beec;
+    color: #fff;
+}
+
+.filters-pop-up .content .form-check {
+    display: flex;
+    justify-content: start;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.filters-pop-up .content .form-check {
+    border-bottom: 0.2px solid #d6d6d6;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.filters-pop-up .content .form-check:last-child {
+    border-bottom: none;
+}
+
+.filters-pop-up .content .form-check input,
+.filters-pop-up .content .form-check label {
+    padding: 0;
+    margin: 0;
+}
+
+.filters-pop-up .content .form-check input {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+}
+
+
+
+
+.filters-pop-up.open {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -moz-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    -o-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+@media (min-width: 768px) {
+    .filters-pop-up .content {
+        min-height: inherit;
+    }
+}
+
+@media (min-width: 768px) {
+    .filters-pop-up {
+        width: calc(100% - 40px);
+        height: auto;
+        max-width: 500px;
+    }
+}
