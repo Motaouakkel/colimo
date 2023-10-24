@@ -10,9 +10,9 @@ include 'header.php';
 
     <!-- Start: Main -->
     <div id="main">
-    <script src="include.js">
-        
-    </script>
+        <script src="include.js">
+
+        </script>
         <!-- Start: Header -->
         <!-- End: Header -->
         <?php include 'sidebar_left.php'; ?>
@@ -43,13 +43,16 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                             </div>
+
                         </div>
                         <script>
                             pivs = null
                             async function loadfile(f) {
                                 let data = $.parseJSON(f);
-                                buildTablesContainers(data);
+                                loadLSFiltersTemplate(data['filters']);
+                                buildTablesContainers(data['data']);
 
                                 function buildTablesContainers(data) {
                                     var index = 1;
@@ -57,7 +60,6 @@ include 'header.php';
                                     $.each(data, function(key, element) {
                                         if (mainContainer && index <= 21) {
                                             var rowOutput = "";
-                                            console.log(index);
                                             if (data[index]['div']) {
                                                 rowOutput += '<div class="row wdr-table-container ' + (data[index]['expanded'] ? 'expanded' : 'not-expanded') + '">';
                                                 if (data[index]['expanded']) {
@@ -75,7 +77,6 @@ include 'header.php';
                                                 }
                                                 rowOutput += '</div>';
 
-                                                console.log(rowOutput);
                                                 mainContainer.append(rowOutput);
                                                 rowOutput = "";
                                             }
@@ -123,28 +124,23 @@ include 'header.php';
 
                                 var tables = [];
                                 var index = 0;
-                                $.each(data, function(key, element) {
+                                $.each(data["data"], function(key, element) {
                                     tables.push(buildWebDataRocksTable(element, index))
                                     index++;
                                 });
 
-                                tables[0].on("reportcomplete", function() {
-                                    tables[0].on("reportchange", function() {
-                                        var currentConfig = tables[0].getReport();
-                                        $.each(tables, function(key, element) {
-                                            if (key != 0) {
-                                                var elementConfig = element.getReport();
-                                                elementConfig.slice.reportFilters = currentConfig.slice.reportFilters;
-                                                element.setReport(elementConfig);
-                                            }
-                                        });
+                                tables.forEach(pivot => {
+                                    pivot.on("reportcomplete", function() {
+                                        var captionsMapper = buildCaptionsMapper(pivot.getMeasures().concat(pivot.getRows()));
+                                        applayLSFilters(pivot, captionsMapper);
+                                        pivot.off("reportcomplete");
                                     });
                                 });
-                                pivs= tables;
+                                pivs = tables;
 
 
                                 function buildWebDataRocksTable(element, index) {
-                                    console.log("wdr-component-" + element.div)
+
                                     return new WebDataRocks({
                                         container: "#wdr-component-" + element.div,
                                         toolbar: false,
@@ -180,7 +176,7 @@ include 'header.php';
                                                     "type": "classic",
                                                     "showGrandTotals": "columns",
                                                     "showHierarchyCaptions": false,
-                                                    "showFilter": (index == 0)
+                                                    "showFilter": false,
                                                 },
                                                 "showAggregationLabels": false
                                             },

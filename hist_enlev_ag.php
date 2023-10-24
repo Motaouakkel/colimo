@@ -32,6 +32,7 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
@@ -60,11 +61,12 @@ include 'header.php';
                                         },
                                         "Canal": {
                                             type: "string"
-                                        },  
+                                        },
                                     }
-                                    data.unshift(struct);
-                                    return data;
-                                    
+                                    data['data'].unshift(struct);
+                                    loadLSFiltersTemplate(data['filters']);
+                                    return data['data'];
+
                                 };
 
 
@@ -80,23 +82,22 @@ include 'header.php';
                                         "slice": {
                                             "reportFilters": [{
                                                 "uniqueName": "Agence"
-                                            },{
+                                            }, {
                                                 "uniqueName": "Gamme"
-                                            },{
+                                            }, {
                                                 "uniqueName": "Produit"
-                                            }
-                                            ,{
+                                            }, {
                                                 "uniqueName": "type",
                                                 "filter": {
-                                                        "members": [
-                                                            "type.DH TTC"
-                                                        ]
-                                                    }
+                                                    "members": [
+                                                        "type.DH TTC"
+                                                    ]
+                                                }
                                             }],
                                             "rows": [{
                                                     "uniqueName": "Agence"
                                                 },
-                                                
+
 
                                             ],
                                             "columns": [{
@@ -118,7 +119,8 @@ include 'header.php';
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -151,6 +153,12 @@ include 'header.php';
                                         ],
                                     },
 
+                                });
+
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
                                 });
 
                                 function customizeCellFunction(cell, data) {

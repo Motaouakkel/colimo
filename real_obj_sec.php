@@ -41,6 +41,7 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
@@ -70,8 +71,9 @@ include 'header.php';
                                                         
                                     }
                                     
-                                    data.unshift(struct);
-                                    return data;
+                                    loadLSFiltersTemplate(data['filters']);
+                                    data['data'].unshift(struct);
+                                    return data['data'];
                                 };
 
 
@@ -151,12 +153,14 @@ include 'header.php';
                                         },
                                         
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "title": "<?php echo strtoupper($page_title) ?> " ,
                                                 "showHeaders": false,
                                                 "type": "classic",
                                                 "showGrandTotals": "columns",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -174,82 +178,13 @@ include 'header.php';
 
                                 });
                                 
-                                // pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                //     if (data.isGrandTotal && data.columnIndex == 0) {
-                                //         cell.text = "Total";
-                                //     }
-                                // });
-                                // var i = false;
-                                // if(i == false){
-                                //     i = true
-                                // previosFilter = []
-                                // pivot1.on("reportcomplete", function() {
-                                //     previosFilter = pivot1.getFilter("canal");
-                                    
-                                    
-                                //     pivot1.on("reportchange", function() {
-                                //         if (compare_filters(previosFilter, filterValue)) {
-                                //             console.log("filter not changed")
-                                //             return;
-                                //         }
-                                //         var filterValue = pivot1.getFilter("canal");
-                                       
-                                //             var currentConfig = pivot1.getReport();
-                                //             console.log(currentConfig)
-                                            
-                                //         headerValue = "EVOLUTION AGENCES CANAL "
-                                //         if (filterValue.length === 1) {
-                                //             headerValue = headerValue +  filterValue[0].caption;
-                                //         } else if (filterValue.length === 2) {
-                                //             headerValue = headerValue + filterValue[0].caption + " + " + filterValue[1].caption;
-                                //         }
-                                //         else if (filterValue.length === 3) {
-                                //             headerValue = headerValue + filterValue[0].caption + " + " + filterValue[1].caption + " + " + filterValue[2].caption;
-                                //         }
-                                //         currentConfig.options.grid.title = headerValue.toUpperCase();
-                                //         pivot1.setReport(currentConfig);                  
-                                //     });
-                                // });
-                                // }
-                            // function compare_filters(f1,f2){
-                            //         filter1 = {}
-                                    
-                            //         if(f1 != null){
-                            //             f1.forEach(e=>{
-                            //                 filter1[e.uniqueName] = 1
-                            //             })
-                            //         }
-                            //         //check if element in f2 is in f1
-                            //         if(f2 != null){
-                            //             f2.forEach(e=>{
-                            //                 if(filter1[e.uniqueName] == 1){
-                            //                     filter1[e.uniqueName] = 2
-                            //                 }
-                            //             })
-                            //         }
-                            //         if(f1 != null && f2 != null){
-                            //             if (f1.length != f2.length)
-                            //             return false
-                            //         }
-                            //         for (const [key, value] of Object.entries(filter1)) {
-                            //             if(value == 1){
-                            //                 return false
-                            //             }
-                            //         }
-                            //         return true
-                            //     }
-                            //     function customizeToolbar(toolbar) {
-                            //         var tabs = toolbar.getTabs(); // get all tabs from the toolbar
-                            //         toolbar.getTabs = function() {
-                            //             delete tabs[1];
-                            //             delete tabs[0]; // delete the first tab
-                            //             return tabs;
-                            //         }
-                            //     }
-
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
                             }
 
-                            //WebDataRocks[ report ] = yourValue;
 
                             loaddate();
                         </script>

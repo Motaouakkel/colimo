@@ -9,7 +9,7 @@ include 'header.php';
 
     <!-- Start: Main -->
     <div id="main">
-        <script src = "include.js"></script>
+        <script src="include.js"></script>
         <!-- Start: Header -->
         <!-- End: Header -->
         <?php include 'sidebar_left.php'; ?>
@@ -36,13 +36,11 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div class="row">
                                     <div class="report-title col-xl-12 col-md-12 col-sm-12">
                                         <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
-                                </div>
-                                <div id="ls-filters" class="row ls-filters">
-
                                 </div>
                                 <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
@@ -60,6 +58,7 @@ include 'header.php';
                         <script>
                             var piv = null
                             var pin = null
+
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
@@ -77,14 +76,15 @@ include 'header.php';
                                             type: "string"
                                         },
                                     }
-                                    data.unshift(struct);
-                                    return data;
+
+                                    loadLSFiltersTemplate(data['filters']);
+                                    data['data'].unshift(struct);
+                                    return data['data'];
                                 };
 
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
-                                    //beforetoolbarcreated: customizeToolbar,
                                     customizeCell: customizeCellFunction,
                                     toolbar: false,
                                     height: 1000,
@@ -122,8 +122,8 @@ include 'header.php';
                                                 "caption": "RATIO LP %",
                                                 "format": "percent",
                                             }, ],
-                                            "sorting":{
-                                                "column" : {
+                                            "sorting": {
+                                                "column": {
                                                     "type": "desc",
                                                     "tuple": [],
                                                     "measure": "ratio"
@@ -134,13 +134,14 @@ include 'header.php';
                                             }
                                         },
                                         "options": {
+                                            "configuratorButton":false,
                                             "grid": {
                                                 "type": "classic",
                                                 "title": "TOP +",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
                                                 "showHierarchyCaptions": false,
-
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -220,8 +221,8 @@ include 'header.php';
 
 
                                             ],
-                                            "sorting":{
-                                                "column" : {
+                                            "sorting": {
+                                                "column": {
                                                     "type": "asc",
                                                     "tuple": [],
                                                     "measure": "ratio"
@@ -232,13 +233,15 @@ include 'header.php';
                                             }
                                         },
                                         "options": {
+                                            "configuratorButton":false,
                                             "grid": {
                                                 "type": "classic",
                                                 "title": "TOP -",
                                                 "showHeaders": false,
                                                 "showFilter": true,
                                                 "showGrandTotals": true,
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -287,6 +290,18 @@ include 'header.php';
                                     }
                                 }
 
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
+
+                                pivot2.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot2.getMeasures().concat(pivot2.getRows()));
+                                    applayLSFilters(pivot2, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
+
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
                                     toolbar.getTabs = function() {
@@ -303,28 +318,8 @@ include 'header.php';
                                     }
                                 });
 
-                                srcDemo = null
                                 pivot1.on("reportcomplete", function() {
-                                    var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                    srcDemo = sourceFiltersContainer;
-                                    var targetFiltersContainer = document.getElementById("ls-filters");
-                                    while(targetFiltersContainer.firstChild){
-                                        targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
-                                    }
-                                    var elementParent = sourceFiltersContainer.parentElement;                                 
-                                    elementParent.removeChild(sourceFiltersContainer);
-                                    sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
-                                    var secondElement = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                    secondparent = secondElement.parentElement;
-                                    srcDemo = secondElement; 
-                                    secondparent.removeChild(secondElement);
-                                    targetFiltersContainer.appendChild(sourceFiltersContainer);      
                                     pivot1.on("reportchange", function() {
-                                        while(document.querySelector(".wdr-filters.wdr-ui-hgroup")){
-                                                var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                                var Parent =  srcFiltersContainer.parentElement;
-                                                Parent.removeChild(srcFiltersContainer);
-                                            }
                                         var currentConfigP1 = pivot1.getReport();
                                         var currentConfigP2 = pivot2.getReport();
                                         currentConfigP2.slice.measures.forEach(m => {
@@ -333,9 +328,8 @@ include 'header.php';
                                             }
                                         })
                                         currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
-                                        currentConfigP2.options.grid["showFilter"]=  true,
+                                        currentConfigP2.options.grid["showFilter"] = true,
                                             pivot2.setReport(currentConfigP2);
-                                            document.getElementById("wdr-grid-view").appendChild(srcDemo);
                                         pivot2.setReport(currentConfigP2);
                                     });
                                 });

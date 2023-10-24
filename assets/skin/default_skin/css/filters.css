@@ -41,7 +41,7 @@
 /* Filters-pop-up ========================================== */
 .filters-pop-up {
     position: absolute;
-    top: 10%;
+    top: 150px;
     left: 50%;
     -webkit-transform: translate(-50%, -50%) scale(0.9);
     -moz-transform: translate(-50%, -50%) scale(0.9);
@@ -195,6 +195,7 @@
     -ms-transform: translate(-50%, -50%) scale(1);
     -o-transform: translate(-50%, -50%) scale(1);
     transform: translate(-50%, -50%) scale(1);
+    z-index: 9999;
 }
 
 

@@ -41,6 +41,7 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
@@ -55,8 +56,8 @@ include 'header.php';
                                         "Agence": {
                                             type: "string"
                                         },
-                                        "Gamme":{
-                                            type : "string"
+                                        "Gamme": {
+                                            type: "string"
                                         },
                                         "Produit": {
                                             type: "string"
@@ -76,12 +77,11 @@ include 'header.php';
                                         "amount2": {
                                             type: "number"
                                         },
-                                        
+
                                     }
-                                    test = data;
-                                    data.unshift(struct);
-                                    
-                                    return data;
+                                    data['data'].unshift(struct);
+                                    loadLSFiltersTemplate(data['filters']);
+                                    return data['data'];
                                 };
 
 
@@ -97,8 +97,8 @@ include 'header.php';
                                             "reportFilters": [{
                                                     "uniqueName": "Agence"
                                                 },
-                                                
-                                                
+
+
                                                 {
                                                     "uniqueName": "Gamme"
                                                 },
@@ -131,8 +131,7 @@ include 'header.php';
                                                 "uniqueName": "Measures"
                                             }],
 
-                                            "measures": [
-                                                {
+                                            "measures": [{
                                                     "uniqueName": "amount1",
                                                     "caption": "PERIODE 1",
                                                     "format": "precision",
@@ -169,7 +168,8 @@ include 'header.php';
                                                 "showHeaders": false,
                                                 "type": "classic",
                                                 "showGrandTotals": "columns",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -178,20 +178,27 @@ include 'header.php';
                                             "decimalPlaces": 2,
                                             "currencySymbol": "%",
                                             "currencySymbolAlign": "right"
-                                        },{
+                                        }, {
                                             "name": "precision",
                                             "decimalPlaces": 2,
-                                            
+
                                         }]
                                     },
 
                                 });
-                                
+
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
+
                                 pivot1.customizeCell(function customizeCellFunction(cell, data) {
                                     if (data.isGrandTotal && data.columnIndex == 0) {
                                         cell.text = "Total";
                                     }
                                 });
+
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
                                     toolbar.getTabs = function() {

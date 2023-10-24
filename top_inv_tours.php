@@ -32,9 +32,7 @@ include 'header.php';
                                         <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
                                 </div>
-                                <div id="ls-filters" class="row ls-filters">
-
-                                </div>
+                                <div id="filters"></div>
                                 <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component"></div>
@@ -87,10 +85,9 @@ include 'header.php';
                                             type: "number"
                                         },
                                     }
-                                    console.log(struct)
-
-                                    data.unshift(struct);
-                                    return data;
+                                    loadLSFiltersTemplate(data['filters']);
+                                    data['data'].unshift(struct);
+                                    return data['data'];
 
                                 };
 
@@ -146,11 +143,13 @@ include 'header.php';
                                         },
 
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "title": "TOP +",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -216,10 +215,11 @@ include 'header.php';
                                         },
 
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "title": "TOP -",
                                                 "showHeaders": false,
-                                                "showFilter": true,
+                                                "showFilter": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false
                                             },
@@ -233,7 +233,19 @@ include 'header.php';
                                         }]
                                     },
                                 });
-                                pin = pivot2
+                                pin = pivot2;
+
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
+
+                                pivot2.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot2.getMeasures().concat(pivot2.getRows()));
+                                    applayLSFilters(pivot2, captionsMapper);
+                                    pivot2.off("reportcomplete");
+                                });
                             }
 
                             loaddate();

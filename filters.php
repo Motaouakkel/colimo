@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_POST["data"])) {
+if (!isset($_POST["filtersData"])) {
     return;
 }
 ?>
@@ -9,11 +9,11 @@ if (!isset($_POST["data"])) {
     <nav>
         <ul class="filters-list">
             <?php
-            foreach ($_POST["data"] as $mainkey => $filter) {
+            foreach ($_POST["filtersData"] as $mainkey => $filter) {
                 $filtersList = [];
                 if (isset($filter['data'])) {
                     $default_id = isset($filter['default_id']) ? $filter['default_id'] : null;
-                    if ($default_id) {
+                    if ($default_id != null) {
                         $filtersList[] = $filter['data'][$default_id];
                     } else {
                         $filtersList = $filter['data'];
@@ -28,7 +28,7 @@ if (!isset($_POST["data"])) {
                 $filtersListJson = json_encode($filtersList);
             ?>
                 <li class="filter-child" data-id="<?php echo $mainkey ?>">
-                    <span class="filter-title"><?php echo $filter['name'] ?></span>
+                    <span class="filter-title"><?php echo (isset($filter['caption']) ? $filter['caption']  : $filter['name'])  ?></span>
                     <span class="filter-subtitle"><?php echo  isset($filter['default_id']) ? "Quelques" : "Tout"  ?> </span>
                 </li>
                 <script>
@@ -81,14 +81,16 @@ if (!isset($_POST["data"])) {
 </div>
 
 <script>
-    var data = <?php echo json_encode($_POST["data"]); ?>;
+    var filtersData = <?php echo json_encode($_POST["filtersData"]); ?>;
     $('.filter-child').click(function() {
+        console.log("data");
+        console.log(filtersData);
         var popup = $('.filters-pop-up');
         var filterList = $('.filter-list');
         var popupTitle = $('.pop-up-header .filter-title');
         popupTitle.html($(this).children(".filter-title").html());
         filterList.empty();
-        var filterData = data[$(this).data("id")];
+        var filterData = filtersData[$(this).data("id")];
         popup.attr("data-active", $(this).data("id"));
         var index = 0;
         if (filterData['data']) {
@@ -180,11 +182,11 @@ if (!isset($_POST["data"])) {
     }
 
     function activeFilterChildrens(filterId) {
-        if (data[filterId]) {
-            var childId = data[filterId]['child_id'];
+        if (filtersData[filterId]) {
+            var childId = filtersData[filterId]['child_id'];
             var parentId = filterId;
             while (childId) {
-                if (data[childId]) {
+                if (filtersData[childId]) {
                     // Get parent config
                     var parentFilters = [];
                     var parentStoredData = localStorage.getItem("filter" + parentId);
@@ -193,10 +195,10 @@ if (!isset($_POST["data"])) {
 
                         // Set the child data
                         var childFilters = [];
-                        if (data[childId]['mapper']) {
-                            Object.keys(data[childId]['mapper']).forEach(maper => {
+                        if (filtersData[childId]['mapper']) {
+                            Object.keys(filtersData[childId]['mapper']).forEach(maper => {
                                 if (parentFilters.includes(maper)) {
-                                    data[childId]['mapper'][maper].forEach(maperItem => {
+                                    filtersData[childId]['mapper'][maper].forEach(maperItem => {
                                         childFilters.push(maperItem);
                                     });
                                 }
@@ -206,9 +208,9 @@ if (!isset($_POST["data"])) {
                         }
                     }
                 }
-                if (data[childId]['child_id']) {
+                if (filtersData[childId]['child_id']) {
                     parentId = childId;
-                    childId = data[childId]['child_id'];
+                    childId = filtersData[childId]['child_id'];
                 } else {
                     break;
                 }
@@ -216,13 +218,13 @@ if (!isset($_POST["data"])) {
         }
     }
 
-    function applayLSFilters(pivot) {
+    function applayLSFilters(pivot, captionsMapper) {
 
         $(document).on('LSFiltersChanged', function(event, filterId) {
             filterss = []
             // Use local storage to  get all filters ( from filter0 to filter(data.length))
             var index = 0;
-            data.forEach(filter => {
+            filtersData.forEach(filter => {
                 currentFilter = {
                     "uniqueName": filter.name
                 }
@@ -244,7 +246,16 @@ if (!isset($_POST["data"])) {
 
             firstrep = pivot.getReport()
 
-            firstrep.slice.reportFilters = filterss
+            firstrep.slice.reportFilters = filterss;
+            firstrep.slice.measures.forEach(element => {
+                if (captionsMapper) {
+                    const captionMapper = captionsMapper.find(item => item.uniqueName === element.uniqueName);
+                    if (captionMapper) {
+                        element['caption'] = captionMapper.caption;
+                    }
+                }
+
+            });
             pivot.setReport(firstrep)
         });
 

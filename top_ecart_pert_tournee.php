@@ -36,13 +36,11 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div class="row">
                                     <div class="report-title col-xl-12 col-md-12 col-sm-12">
                                         <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
-                                </div>
-                                <div id="ls-filters" class="row ls-filters">
-
                                 </div>
                                 <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
@@ -75,8 +73,10 @@ include 'header.php';
                                             type: "number"
                                         },
                                     }
-                                    data.unshift(struct);
-                                    return data;
+                                    loadLSFiltersTemplate(data['filters']);
+                                    daysMapper = data['data'];
+                                    data['data'].unshift(struct);
+                                    return data['data'];
                                 };
 
                                 var pivot1 = new WebDataRocks({
@@ -119,13 +119,15 @@ include 'header.php';
                                             }
                                         },
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "type": "classic",
                                                 "title": "TOP +",
                                                 "showHeaders": false,
                                                 "showTotals": "off",
                                                 "showGrandTotals": "off",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
 
                                             },
                                             "showAggregationLabels": false
@@ -202,6 +204,7 @@ include 'header.php';
                                             }
                                         },
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "type": "classic",
                                                 "title": "TOP -",
@@ -209,7 +212,9 @@ include 'header.php';
                                                 "showFilter": true,
                                                 "showTotals": "off",
                                                 "showGrandTotals": "off",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
+
 
                                             },
                                             "showAggregationLabels": false
@@ -254,30 +259,8 @@ include 'header.php';
                                         return tabs;
                                     }
                                 }
-                                var ll = 0;
                                 pivot1.on("reportcomplete", function() {
-                                    
-                                    var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                    srcDemo = sourceFiltersContainer;
-                                    var targetFiltersContainer = document.getElementById("ls-filters");
-                                    while(targetFiltersContainer.firstChild){
-                                        targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
-                                    }
-                                    var elementParent = sourceFiltersContainer.parentElement;                                 
-                                    elementParent.removeChild(sourceFiltersContainer);
-                                    sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
-                                    var secondElement = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                    secondparent = secondElement.parentElement;
-                                    srcDemo = secondElement; 
-                                    secondparent.removeChild(secondElement);
-                                    targetFiltersContainer.appendChild(sourceFiltersContainer);         
                                     pivot1.on("reportchange", function() {
-                                        
-                                        while(document.querySelector(".wdr-filters.wdr-ui-hgroup")){
-                                                var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                                var Parent =  srcFiltersContainer.parentElement;
-                                                Parent.removeChild(srcFiltersContainer);
-                                            }
                                         var currentConfigP1 = pivot1.getReport();
                                         var currentConfigP2 = pivot2.getReport();
                                         currentConfigP2.slice.measures.forEach(m => {
@@ -285,18 +268,25 @@ include 'header.php';
                                                 m.caption = "ECART PERTE/J"
                                             }
                                         })
-                                        //pivot1.setReport(currentConfigP1);
                                         currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
-                                        currentConfigP2.options.grid["showFilter"]=  true,
-                                        pivot2.setReport(currentConfigP2);
-                                        document.getElementById("wdr-grid-view").appendChild(srcDemo);  
+                                        currentConfigP2.options.grid["showFilter"] = true,
+                                            pivot2.setReport(currentConfigP2);
                                     });
                                 });
 
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
+
+                                pivot2.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot2.getMeasures().concat(pivot2.getRows()));
+                                    applayLSFilters(pivot2, captionsMapper);
+                                    pivot2.off("reportcomplete");
+                                });
+
                             }
-
-                            //WebDataRocks[ report ] = yourValue;
-
                             loaddate();
                         </script>
 

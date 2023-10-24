@@ -32,11 +32,13 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
                         <script>
                             var daysMapper = {}
+
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
@@ -66,9 +68,10 @@ include 'header.php';
                                             type: "number"
                                         },
                                     }
-                                    daysMapper = data[1]
-                                    data[0].unshift(struct);
-                                    return data[0];
+                                    loadLSFiltersTemplate(data['filters']);
+                                    daysMapper = data['data'][1]
+                                    data['data'][0].unshift(struct);
+                                    return data['data'][0];
                                 };
 
 
@@ -119,12 +122,14 @@ include 'header.php';
                                             }
                                         },
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "type": "classic",
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -159,14 +164,20 @@ include 'header.php';
 
                                 });
 
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
+
                                 function customizeCellFunction(cell, data) {
-                                    
-                                    if(data.rowIndex == 0 && data.columnIndex != 0 && data.label != ''){
+
+                                    if (data.rowIndex == 0 && data.columnIndex != 0 && data.label != '') {
                                         var str = daysMapper[parseInt(data.label)];
-                                        
-                                        if (str){
-                                        arr = str.split('/');
-                                        cell.text = arr[0] + '/' + arr[1] ;
+
+                                        if (str) {
+                                            arr = str.split('/');
+                                            cell.text = arr[0] + '/' + arr[1];
                                         }
                                     }
                                     if (data.isGrandTotal && data.columnIndex == 0) {

@@ -41,12 +41,12 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
                         <script>
                             function loadfile(f) {
-                                var test = []
 
                                 function getJSONData() {
 
@@ -78,10 +78,9 @@ include 'header.php';
                                         },
 
                                     }
-                                    test = data;
-                                    data.unshift(struct);
-
-                                    return data;
+                                    loadLSFiltersTemplate(data['filters']);
+                                    data['data'].unshift(struct);
+                                    return data['data'];
                                 };
 
 
@@ -164,7 +163,8 @@ include 'header.php';
                                                 "showHeaders": false,
                                                 "type": "classic",
                                                 "showGrandTotals": "columns",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -181,7 +181,13 @@ include 'header.php';
                                     },
 
                                 });
-                                
+
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
+
                                 pivot1.customizeCell(function customizeCellFunction(cell, data) {
                                     if (data.isGrandTotal && data.columnIndex == 0) {
                                         cell.text = "TOTAL";

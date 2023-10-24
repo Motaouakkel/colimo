@@ -23,6 +23,7 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div class="row">
                                     <div id="wdr-component"></div>
                                 </div>
@@ -105,8 +106,12 @@ include 'header.php';
                                         '% PROMO': {
                                             type: 'number'
                                         },
-                                        'DEG':{ type: 'number' },
-                                        '% DEG':{ type: 'number' },
+                                        'DEG': {
+                                            type: 'number'
+                                        },
+                                        '% DEG': {
+                                            type: 'number'
+                                        },
                                         'REMISE GLOBALE': {
                                             type: 'number'
                                         },
@@ -116,11 +121,11 @@ include 'header.php';
                                         'CA NET': {
                                             type: 'number'
                                         },
-                                        
+
                                     }
-                                    data.unshift(struct);
-                                    console.log(data);
-                                    return data;
+                                    loadLSFiltersTemplate(data['filters']);
+                                    data['data'].unshift(struct);
+                                    return data['data'];
 
                                 };
 
@@ -135,7 +140,7 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [
-                                               
+
                                                 {
                                                     "uniqueName": "AGENCE",
                                                     "caption": "AGENCE",
@@ -143,15 +148,13 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
-                                                }
-                                                ,{
+                                                }, {
                                                     "uniqueName": "BLOC",
                                                     "caption": "BLOC",
                                                 },
-                                                
+
                                             ],
-                                            "rows": [
-                                                {
+                                            "rows": [{
                                                     "uniqueName": "AGENCE"
                                                 },
                                                 {
@@ -167,8 +170,7 @@ include 'header.php';
                                             "expands": {
                                                 "expandAll": true
                                             },
-                                            "measures": [
-                                                {
+                                            "measures": [{
                                                     "uniqueName": "ENLEVEMENT BRUT",
                                                     "aggregation": "sum",
                                                     "caption": "ENLEVEMENT BRUT",
@@ -311,37 +313,42 @@ include 'header.php';
                                                     "caption": "CA NET",
                                                     "aggregation": "sum",
                                                 }
-                                                
-                                                
+
+
                                             ],
                                         },
                                         "options": {
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "title": "<?php echo strtoupper($page_title) ?>",
-                                                "showHeaders": true,
+                                                "showHeaders": false,
                                                 "showGrandTotals": "off",
                                                 "showTotals": "off",
-                                                "showHierarchyCaptions": true,
+                                                "showHierarchyCaptions": false,
                                                 "type": "classic",
-                                                
-                                               
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
-                                        "formats": [
-                                            {
-                                            "name": "precision",
-                                            "decimalPlaces": 2,
+                                        "formats": [{
+                                                "name": "precision",
+                                                "decimalPlaces": 2,
                                             },
                                             {
-                                            "name": "percentage",
-                                            "decimalPlaces": 2,
-                                            "currencySymbol": "%",
-                                            "currencySymbolAlign": "left",
+                                                "name": "percentage",
+                                                "decimalPlaces": 2,
+                                                "currencySymbol": "%",
+                                                "currencySymbolAlign": "left",
                                             }
                                         ]
                                     },
 
+                                });
+
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
                                 });
 
                                 function customizeToolbar(toolbar) {

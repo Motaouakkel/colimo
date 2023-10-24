@@ -13,7 +13,7 @@ if (!isset($_SESSION['auth']) or $_SESSION['auth'] != 'yes' or empty($_SESSION['
 
 $data = array("partner_id" => $_SESSION["partner"]);
 
-$response = fetch_data(BASE_URL . ':'.PORT.'/ms/gpmenuweb', $data, 'test', 'miftah');
+$response = fetch_data(BASE_URL . ':' . PORT . '/ms/gpmenuweb', $data, 'test', 'miftah');
 
 
 $objet = json_decode($response, true);
@@ -59,16 +59,32 @@ $objet = json_decode($response, true);
     };
 
     function loadLSFiltersTemplate(filters) {
-        $.ajax({
-            type: "POST",
-            url: "filters.php",
-            data: {
-                data: filters
-            },
-            success: function(response) {
-                $('#filters').html(response);
+        if ($('#filters').children().length == 0) {
+            $.ajax({
+                type: "POST",
+                url: "filters.php",
+                data: {
+                    filtersData: filters
+                },
+                success: function(response) {
+                    $('#filters').html(response);
+                }
+            });
+        }
+    }
+
+    function buildCaptionsMapper(measures) {
+        var mapper = [];
+        measures.forEach(measure => {
+            if (measure.uniqueName && measure.caption) {
+                mapper.push({
+                    "uniqueName": measure.uniqueName,
+                    "caption": measure.caption
+                });
             }
         });
+        return mapper;
+
     }
 </script>
 

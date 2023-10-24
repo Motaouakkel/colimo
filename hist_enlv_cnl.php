@@ -38,6 +38,7 @@ include 'header.php';
                         </div>
                         <script>
                             daysMapper = {}
+
                             function loadfile(f) {
 
                                 function getJSONData() {
@@ -173,7 +174,8 @@ include 'header.php';
 
                                 });
                                 pivot1.on("reportcomplete", function() {
-                                    applayLSFilters(pivot1);
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
                                     pivot1.off("reportcomplete");
                                 })
 
