@@ -1,5 +1,6 @@
 <?php
 include 'consts.php';
+include 'header.php';
 session_start();
 if (!isset($_SESSION['auth']) or $_SESSION['auth'] != 'yes' or empty($_SESSION['auth'])) {
     echo "<script language='javascript'>window.location.href='login.php';</script>";
@@ -46,10 +47,7 @@ foreach ($objet as $v1) {
         $acces = 1;
     }
 }
-if ($acces == 10) {
 
-    echo "<script language='javascript'>window.location.href='home.php';</script>";
-}
 
 ?>
 
