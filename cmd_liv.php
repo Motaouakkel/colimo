@@ -170,8 +170,7 @@ include 'header.php';
                                             {
                                             "name": "percentage",
                                             "decimalPlaces": 2,
-                                            "currencySymbol": "%",
-                                            "currencySymbolAlign": "left",
+                                           
                                             }
                                         ]
                                     },

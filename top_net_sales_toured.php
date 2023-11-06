@@ -1,5 +1,5 @@
 <?php
-$page_title = "Top nombre factures";
+$page_title = "TOP VENTES NETTES PAR TOURNEE";
 $api_action = "topNetSalesToured";
 include 'header.php';
 ?>
@@ -83,6 +83,10 @@ include 'header.php';
                                         },
                                         "type": {
                                             type: "string"
+                                        },
+                                        "Canal":{
+                                            type: "string"
+                                        
                                         }
 
                                     }

@@ -57,6 +57,9 @@ include 'header.php';
                                         "Mt facture": {
                                             type: "number"
                                         },
+                                        "unite":{
+                                            type:"string"
+                                        }
 
                                     }
                                     loadLSFiltersTemplate(data['filters']);
@@ -77,7 +80,20 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [{
+                                            "reportFilters": [
+                                                {
+                                                    "uniqueName": "unite",
+                                                    "caption": "unite",
+                                                    
+                                                    
+                                                    "filter": {
+                                                        "members": [
+                                                            "unite.DH TTC"
+                                                        ]
+                                                    }
+                                                
+                                                },
+                                                {
                                                     "uniqueName": "Secteur",
                                                     "caption": "Secteur",
                                                 },

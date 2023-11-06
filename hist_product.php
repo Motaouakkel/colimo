@@ -66,9 +66,9 @@ include 'header.php';
                                             type: "number"
                                         },
                                     }
-                                    daysMapper = data[1]
-                                    data[0].unshift(struct);
-                                    return data[0];
+                                    daysMapper = data["data"][1]
+                                    data["data"][0].unshift(struct);
+                                    return data["data"][0];
                                 };
 
 
