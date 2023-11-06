@@ -159,8 +159,7 @@ include 'header.php';
 
                                             }, {
                                                 "name": "percent",
-                                                "decimalPlaces": 2,
-                                                "currencySymbol": "%",
+
 
 
                                             }, {
@@ -257,8 +256,7 @@ include 'header.php';
 
                                             }, {
                                                 "name": "percent",
-                                                "decimalPlaces": 2,
-                                                "currencySymbol": "%",
+
 
 
                                             }, {

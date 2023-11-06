@@ -180,8 +180,7 @@ include 'header.php';
                                         "formats": [{
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
-                                            "currencySymbol": "%",
-                                            "currencySymbolAlign": "right"
+                                            
                                         }, {
                                             "name": "precision",
                                             "decimalPlaces": 2,
