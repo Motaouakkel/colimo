@@ -254,8 +254,7 @@ Secteur
 
                                             },{
                                                 "name": "percent",
-                                                "decimalPlaces": 2,
-                                                "currencySymbol": "%",
+
                                                 
 
                                             }, {

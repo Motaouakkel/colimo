@@ -156,8 +156,7 @@ include 'header.php';
                                         "formats": [{
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
-                                            "currencySymbol": "%",
-                                            "currencySymbolAlign": "left",
+
                                         }]
                                     },
                                 });
@@ -228,8 +227,7 @@ include 'header.php';
                                         "formats": [{
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
-                                            "currencySymbol": "%",
-                                            "currencySymbolAlign": "left",
+
                                         }]
                                     },
                                 });
