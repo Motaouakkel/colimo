@@ -69,6 +69,9 @@ include 'header.php';
                                         },
                                         "canal": {
                                             type: "string"
+                                        },
+                                        "unite":{
+                                            type: "string"
                                         }
                                     }
                                     loadLSFiltersTemplate(data['filters']);

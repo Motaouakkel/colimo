@@ -70,6 +70,9 @@ include 'header.php';
                                         "type": {
                                             type: "string"
                                         },
+                                        "unite":{
+                                            type:"string"
+                                        },
                                         "amount_1": {
                                             type: "number"
                                         },
@@ -102,6 +105,14 @@ include 'header.php';
                                                     "filter": {
                                                         "members": [
                                                             "type.ENLEV NET"
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "uniqueName": "unite",
+                                                    "filter": {
+                                                        "members": [
+                                                            "unite.DH TTC"
                                                         ]
                                                     }
                                                 },

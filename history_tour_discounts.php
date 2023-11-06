@@ -111,11 +111,14 @@ include 'header.php';
                                             ],
                                             "columns": [{
                                                 "uniqueName": "day",
-                                                "formula": "sum(\"amount\")"
+                                                "formula": "sum(\"amount\")",
+                                                
+
                                             }],
                                             "measures": [{
                                                 "uniqueName": "amount",
-                                                "caption": "total"
+                                                "caption": "total",
+                                                "format": "precision"
                                             }, ],
                                             "expands": {
                                                 "expandAll": true,
