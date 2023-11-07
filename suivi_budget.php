@@ -176,7 +176,7 @@ include 'header.php';
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false,
-                                                "showFilter": true,
+                                                "showFilter": false
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -272,7 +272,7 @@ include 'header.php';
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false,
-                                                "showFilter": true,
+                                                "showFilter": false
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -366,7 +366,7 @@ include 'header.php';
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false,
-                                                "showFilter": true,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },

@@ -4,7 +4,6 @@ if (!isset($_POST["filtersData"])) {
     return;
 }
 ?>
-<div id="filters"></div>
 <div class="row ls-filters">
     <nav>
         <ul class="filters-list">
@@ -83,8 +82,6 @@ if (!isset($_POST["filtersData"])) {
 <script>
     var filtersData = <?php echo json_encode($_POST["filtersData"]); ?>;
     $('.filter-child').click(function() {
-        console.log("data");
-        console.log(filtersData);
         var popup = $('.filters-pop-up');
         var filterList = $('.filter-list');
         var popupTitle = $('.pop-up-header .filter-title');
@@ -220,7 +217,7 @@ if (!isset($_POST["filtersData"])) {
 
     function applayLSFilters(pivot, captionsMapper) {
 
-        $(document).on('LSFiltersChanged', function(event, filterId) {
+        $(document).on('LSFiltersChanged', async function(event, filterId) {
             filterss = []
             // Use local storage to  get all filters ( from filter0 to filter(data.length))
             var index = 0;
@@ -256,7 +253,8 @@ if (!isset($_POST["filtersData"])) {
                 }
 
             });
-            pivot.setReport(firstrep)
+            await pivot.runQuery(firstrep.slice);
+            pivot.refresh()
         });
 
     }

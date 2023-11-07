@@ -238,7 +238,6 @@ include 'header.php';
                                                 "type": "classic",
                                                 "title": "TOP -",
                                                 "showHeaders": false,
-                                                "showFilter": true,
                                                 "showGrandTotals": true,
                                                 "showHierarchyCaptions": false,
                                                 "showFilter": false,
@@ -299,7 +298,7 @@ include 'header.php';
                                 pivot2.on("reportcomplete", function() {
                                     var captionsMapper = buildCaptionsMapper(pivot2.getMeasures().concat(pivot2.getRows()));
                                     applayLSFilters(pivot2, captionsMapper);
-                                    pivot1.off("reportcomplete");
+                                    pivot2.off("reportcomplete");
                                 });
 
                                 function customizeToolbar(toolbar) {
@@ -328,7 +327,7 @@ include 'header.php';
                                             }
                                         })
                                         currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
-                                        currentConfigP2.options.grid["showFilter"] = true,
+                                        
                                             pivot2.setReport(currentConfigP2);
                                         pivot2.setReport(currentConfigP2);
                                     });
