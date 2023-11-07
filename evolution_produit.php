@@ -41,6 +41,7 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
@@ -55,8 +56,8 @@ include 'header.php';
                                         "Agence": {
                                             type: "string"
                                         },
-                                        "Gamme":{
-                                            type : "string"
+                                        "Gamme": {
+                                            type: "string"
                                         },
                                         "Produit": {
                                             type: "string"
@@ -77,10 +78,9 @@ include 'header.php';
                                             type: "number"
                                         },
                                     }
-                                    test = data;
-                                    data.unshift(struct);
-                                    
-                                    return data;
+                                    data['data'].unshift(struct);
+                                    loadLSFiltersTemplate(data['filters']);
+                                    return data['data'];
                                 };
 
 
@@ -102,15 +102,14 @@ include 'header.php';
                                             ],
                                             "rows": [{
                                                 "uniqueName": "Gamme",
-                                            },{
+                                            }, {
                                                 "uniqueName": "Produit",
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
 
-                                            "measures": [
-                                                {
+                                            "measures": [{
                                                     "uniqueName": "amount_1",
                                                     "caption": "PERIODE 1",
                                                     "format": "precision"
@@ -130,9 +129,9 @@ include 'header.php';
                                                     "caption": "% evolution",
                                                     //to save againt division by zero
                                                     "formula": "IF(sum('amount_1')=0,0,100*(sum('amount_2') -sum('amount_1'))/sum('amount_1'))",
-                                                    
+
                                                     "format": "precentForamt"
-                                                    
+
                                                 }
                                             ],
 
@@ -146,7 +145,8 @@ include 'header.php';
                                                 "showHeaders": false,
                                                 "type": "classic",
                                                 "showGrandTotals": "columns",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -154,24 +154,15 @@ include 'header.php';
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
 
-                                        },{
+                                        }, {
                                             "name": "precision",
                                             "decimalPlaces": 2,
-                                            
+
                                         }]
                                     },
 
                                 });
-                                pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                    if (data.measure &&
-                                        data.type != "header") {
-                                        if (data.measure.uniqueName == "type_identifier") {
-                                           
-                                            cell.text = "" + test[data.value]["customer_type"];
-                                            
-                                        } 
-                                    }
-                                });
+
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
                                     toolbar.getTabs = function() {
@@ -180,6 +171,12 @@ include 'header.php';
                                         return tabs;
                                     }
                                 }
+
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
+                                });
 
                             }
 

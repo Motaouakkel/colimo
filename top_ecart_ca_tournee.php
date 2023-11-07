@@ -267,23 +267,6 @@ include 'header.php';
                                     }
                                 }
                                 srcDemo = null
-                                pivot1.on("reportcomplete", function() {
-
-                                    // pivot1.on("reportchange", function() {
-                                    //     var filterValue = pivot1.getFilter("type");
-                                    //     var currentConfig = pivot1.getReport();
-                                    //     var currentConfigP2 = pivot2.getReport();
-                                    //     currentConfigP2.slice.measures.forEach(m => {
-                                    //         if (m.uniqueName == 'Mt Perte') {
-                                    //             m.caption = "PERTE"
-                                    //         }
-                                    //     })
-                                    //     currentConfigP2.slice.reportFilters = currentConfig.slice.reportFilters;
-                                    //     currentConfigP2.options.grid["showFilter"] = true,
-                                    //     pivot2.setReport(currentConfigP2);
-                                    // });
-                                });
-
                             }
 
                             loaddate();

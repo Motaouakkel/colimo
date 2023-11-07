@@ -150,7 +150,7 @@ include 'header.php';
                                                 "uniqueName": "%N-N-1",
                                                 "caption": "%",
                                                 "format": "precentForamt",
-                                                "formula": "IF(sum('N_1') = 0,sum('N'),((sum('N') / sum('N_1') ) *100))"
+                                                "formula": "IF(sum('N_1') = 0,100,((sum('N') / sum('N_1') ) *100))"
                                             },
                                             {
                                                 "uniqueName": "N-B",
@@ -162,7 +162,7 @@ include 'header.php';
                                                 "uniqueName": "%N_B",
                                                 "caption": "%",
                                                 "format": "precentForamt",
-                                                "formula": "IF(sum('BUDGET') = 0,sum('N'),((sum('N') / sum('BUDGET') ) *100))"
+                                                "formula": "IF(sum('BUDGET') = 0,100,((sum('N') / sum('BUDGET') ) *100))"
                                             },
                                             
                                         ],
@@ -246,7 +246,7 @@ include 'header.php';
                                                 "uniqueName": "%N-N-1",
                                                 "caption": "%",
                                                 "format": "precentForamt",
-                                                "formula": "IF(sum('N_1') = 0,sum('N'),((sum('N') / sum('N_1') ) *100))"
+                                                "formula": "IF(sum('N_1') = 0,100,((sum('N') / sum('N_1') ) *100))"
                                             },
                                             {
                                                 "uniqueName": "N-B",
@@ -258,7 +258,7 @@ include 'header.php';
                                                 "uniqueName": "%N_B",
                                                 "caption": "%",
                                                 "format": "precentForamt",
-                                                "formula": "IF(sum('BUDGET') = 0,sum('N'),((sum('N') / sum('BUDGET') ) *100))"
+                                                "formula": "IF(sum('BUDGET') = 0,100,((sum('N') / sum('BUDGET') ) *100))"
                                             },
                                             
                                         ],
@@ -340,7 +340,7 @@ include 'header.php';
                                                 "uniqueName": "%N-N-1",
                                                 "caption": "%",
                                                 "format": "precentForamt",
-                                                "formula": "IF(sum('N_1') = 0,sum('N'),((sum('N') / sum('N_1') ) *100))"
+                                                "formula": "IF(sum('N_1') = 0,100,((sum('N') / sum('N_1') ) *100))"
                                             },
                                             {
                                                 "uniqueName": "N-B",
@@ -352,7 +352,7 @@ include 'header.php';
                                                 "uniqueName": "%N_B",
                                                 "caption": "%",
                                                 "format": "precentForamt",
-                                                "formula": "IF(sum('BUDGET') = 0,sum('N'),((sum('N') / sum('BUDGET') ) *100))"
+                                                "formula": "IF(sum('BUDGET') = 0,100,((sum('N') / sum('BUDGET') ) *100))"
                                             },
                                             
                                         ],
