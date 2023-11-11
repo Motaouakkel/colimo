@@ -37,6 +37,7 @@ include 'header.php';
                         </div>
                         <script>
                             var daysMapper = {}
+
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
@@ -65,6 +66,9 @@ include 'header.php';
                                         "type": {
                                             type: "number"
                                         },
+                                        "unite": {
+                                            type: "string"
+                                        }
                                     }
                                     daysMapper = data["data"][1]
                                     data["data"][0].unshift(struct);
@@ -84,8 +88,15 @@ include 'header.php';
                                         "slice": {
                                             "reportFilters": [{
                                                 "uniqueName": "Agence"
-                                            },{
+                                            }, {
                                                 "uniqueName": "type"
+                                            }, {
+                                                "uniqueName": "unite",
+                                                "filter": {
+                                                    "members": [
+                                                        "unite.DH TTC"
+                                                    ]
+                                                }
                                             }],
                                             "rows": [{
                                                     "uniqueName": "Gamme"
@@ -149,13 +160,13 @@ include 'header.php';
                                 });
 
                                 function customizeCellFunction(cell, data) {
-                                    
-                                    if(data.rowIndex == 0 && data.columnIndex != 0 && data.label != ''){
+
+                                    if (data.rowIndex == 0 && data.columnIndex != 0 && data.label != '') {
                                         var str = daysMapper[parseInt(data.label)];
-                                        
-                                        if (str){
-                                        arr = str.split('/');
-                                        cell.text = arr[0] + '/' + arr[1] ;
+
+                                        if (str) {
+                                            arr = str.split('/');
+                                            cell.text = arr[0] + '/' + arr[1];
                                         }
                                     }
                                     if (data.isGrandTotal && data.columnIndex == 0) {

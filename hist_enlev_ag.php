@@ -37,11 +37,15 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
+                            var daysMapper = {}
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
                                     var struct = {
                                         "Agence": {
+                                            type: "string"
+                                        },
+                                        "day":{
                                             type: "string"
                                         },
                                         "Gamme": {
@@ -63,9 +67,10 @@ include 'header.php';
                                             type: "string"
                                         },
                                     }
-                                    data['data'].unshift(struct);
+                                    data['data'][0].unshift(struct);
+                                    daysMapper =  data['data'][1]
                                     loadLSFiltersTemplate(data['filters']);
-                                    return data['data'];
+                                    return  data['data'][0];
 
                                 };
 
@@ -101,7 +106,7 @@ include 'header.php';
 
                                             ],
                                             "columns": [{
-                                                "uniqueName": "Canal",
+                                                "uniqueName": "day",
                                                 "formula": "sum(\"amount\")"
                                             }],
                                             "measures": [{
@@ -163,6 +168,17 @@ include 'header.php';
 
                                 function customizeCellFunction(cell, data) {
                                     let a = 1;
+                                    if (data.isGrandTotal && data.columnIndex == 0) {
+                                        cell.text = "Total";
+                                    }
+                                    if (data.rowIndex == 0 && data.columnIndex != 0 && data.label != '') {
+                                        var str = daysMapper[parseInt(data.label)];
+
+                                        if (str) {
+                                            arr = str.split('/');
+                                            cell.text = arr[0] + '/' + arr[1];
+                                        }
+                                    }
                                     if (data.isGrandTotal && data.columnIndex == 0) {
                                         cell.text = "Total";
                                     }

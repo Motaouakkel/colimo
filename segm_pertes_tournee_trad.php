@@ -197,7 +197,7 @@ Secteur
                                             {
                                                 "uniqueName": "TAUX PERTE GLOBALE%",
                                                 "caption": "TAUX PERTE GLOBALE%",
-                                                "format": "percent",
+                                                "format": "precision",
                                                 "formula": "(sum(\"Pertes\")/sum(\"CA\"))*100"
                                             },
                                             {
@@ -219,7 +219,8 @@ Secteur
                                                 "uniqueName": ">2%",
                                                 "caption": ">2%",
                                             },{
-                                                "uniqueName": "CA"
+                                                "uniqueName": "CA",
+                                                "format": "precision",
                                             }
                                             
                                          ],

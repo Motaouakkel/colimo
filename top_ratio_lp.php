@@ -66,7 +66,19 @@ include 'header.php';
                                         "Agence": {
                                             type: "string"
                                         },
-                                        "ratio": {
+                                        "Gamme": {
+                                            type: "string"
+                                        },
+                                        "Produit": {
+                                            type: "string"
+                                        },
+                                        "canal": {
+                                            type: "string"
+                                        },
+                                        "montant": {
+                                            type: "number"
+                                        },
+                                        "montant_global": {
                                             type: "number"
                                         },
                                         "Secteur": {
@@ -121,6 +133,7 @@ include 'header.php';
                                                 "uniqueName": "ratio",
                                                 "caption": "RATIO LP %",
                                                 "format": "percent",
+                                                "formula": "sum('montant')/sum('montant_global')"
                                             }, ],
                                             "sorting": {
                                                 "column": {
@@ -139,7 +152,7 @@ include 'header.php';
                                                 "type": "classic",
                                                 "title": "TOP +",
                                                 "showHeaders": false,
-                                                "showGrandTotals": true,
+                                                "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false,
                                                 "showFilter": false,
                                             },
@@ -214,13 +227,11 @@ include 'header.php';
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
-                                                    "uniqueName": "ratio",
-                                                    "caption": "RATIO LP %",
-                                                    "format": "percent",
-                                                },
-
-
-                                            ],
+                                                "uniqueName": "ratio",
+                                                "caption": "RATIO LP %",
+                                                "format": "percent",
+                                                "formula": "sum('montant')/sum('montant_global')"
+                                            }, ],
                                             "sorting": {
                                                 "column": {
                                                     "type": "asc",
