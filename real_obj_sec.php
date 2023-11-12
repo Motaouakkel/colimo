@@ -56,6 +56,9 @@ include 'header.php';
                                         "agency": {
                                             type: "string"
                                         },
+                                        "Canal":{
+                                            type: "string"
+                                        },
                                         "bloc":{
                                             type : "string"
                                         },

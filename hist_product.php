@@ -45,6 +45,9 @@ include 'header.php';
                                         "Agence": {
                                             type: "string"
                                         },
+                                        "canal":{
+                                            type: "string"
+                                        },
                                         "Gamme": {
                                             type: "string"
                                         },
@@ -88,9 +91,14 @@ include 'header.php';
                                         "slice": {
                                             "reportFilters": [{
                                                 "uniqueName": "Agence"
+                                            },
+                                            ,{
+                                                "uniqueName": "canal",
+                                                "caption": "CANAL"
                                             }, {
                                                 "uniqueName": "type"
-                                            }, {
+                                            },
+                                             {
                                                 "uniqueName": "unite",
                                                 "filter": {
                                                     "members": [

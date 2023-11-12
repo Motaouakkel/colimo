@@ -61,6 +61,9 @@ include 'header.php';
                                         "Mt Brut": {
                                             type: "number"
                                         },
+                                        "Canal": {
+                                            type: "string"
+                                        },
                                        
                                         
                                     }
@@ -80,7 +83,10 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [
-                                                
+                                                {
+                                                    "uniqueName": "Canal",
+                                                    "caption": "CANAL"
+                                                }                                                
                                             ],
                                             "rows": [{
                                                 "uniqueName": "Agence",

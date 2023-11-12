@@ -77,7 +77,12 @@ include 'header.php';
                                         "amount_3": {
                                             type: "number"
                                         },
+                                        "Canal":{
+                                            type: "string"
+                                        
+                                        }
                                     }
+
                                     data['data'].unshift(struct);
                                     loadLSFiltersTemplate(data['filters']);
                                     return data['data'];

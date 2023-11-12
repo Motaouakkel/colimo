@@ -63,6 +63,10 @@ include 'header.php';
                                         "AGENCE": {
                                             type: "string"
                                         },
+                                        "Canal":{
+                                            type: "string"
+                                        }
+                                        ,
                                         "SECTEUR": {
                                             type: "string"
                                         },

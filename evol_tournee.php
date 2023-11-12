@@ -55,6 +55,9 @@ include 'header.php';
                                         "Agence": {
                                             type: "string"
                                         },
+                                        "Canal":{
+                                            type:"string"                               
+                                        },
                                         "Gamme": {
                                             type: "string"
                                         },

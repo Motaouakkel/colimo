@@ -61,6 +61,9 @@ include 'header.php';
 
 
                                     var struct = {
+                                        "Canal": {
+                                            type: "string"
+                                        },
                                         "Agence": {
                                             type: "string"
                                         },
@@ -95,6 +98,10 @@ include 'header.php';
                                             "reportFilters": [{
                                                     "uniqueName": "Agence",
                                                     "caption": "Agence",
+                                                },
+                                                {
+                                                    "uniqueName": "Canal",
+                                                    "caption": "Canal",
                                                 },
                                                 {
                                                     "uniqueName": "Bloc",

@@ -72,6 +72,9 @@ include 'header.php';
                                         "ecart": {
                                             type: "number"
                                         },
+                                        "Canal": {
+                                            type: "string"
+                                        },
                                     }
 
                                     loadLSFiltersTemplate(data['filters']);
