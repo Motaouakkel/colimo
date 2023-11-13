@@ -44,7 +44,7 @@ try {
                 $output .= '<li><a class="accordion-toggle @@menu@@" href="#">';
                 $output .= '<span class="glyphicons glyphicons-fire"></span>';
                 $output .= '<span class="sidebar-title">' . $key . '</span>';
-                $output .= '<span class="caret"></span></a><ul class="nav sub-nav">';
+                $output .= '<span class="caret"></span></a><ul class="nav sub-nav @@menu@@">';
                 foreach ($menu as $key => $menu_item) {
                     $menu_item_class = "";
                     if (strpos($pageRoute, $menu_item["logic_name"]) !== false) {

@@ -22,6 +22,7 @@
     <!-- Theme Javascript -->
     <script type="text/javascript" src="assets/js/utility/utility.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
     <script type="text/javascript" src="assets/js/demo.js"></script>
 
     <!-- Admin Panels  -->

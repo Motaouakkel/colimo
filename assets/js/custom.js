@@ -1,14 +1,11 @@
-'use strict';
-//  Author: AdminDesigns.com
-// 
-//  This file is reserved for changes made by the use. 
-//  Always seperate your work from the theme. It makes
-//  modifications, and future theme updates much easier 
-// 
+(function ($) {
 
-(function($) {
-
-   // Place custom scripts here
+   $(document).ready(function () {
+      var activeItem = $('.sub-nav .active');
+      if (activeItem.length) {
+         $('.sub-nav.menu-open').scrollTop(activeItem.position().top - 60);
+      }
+   });
 
 })(jQuery);
 
