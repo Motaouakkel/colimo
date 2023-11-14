@@ -234,7 +234,9 @@ if (!isset($_POST["filtersData"])) {
                         currentFilter.filter.members.push(filter.name + "." + fi);
                     })
                     filterss.push(currentFilter)
-
+                }
+                if(filter["static"] != undefined){
+                    currentFilter.filter.members.push(filter.name + "." + filter["static"]);
                 }
                 index++;
 

@@ -36,64 +36,73 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
+                            canals = new Set()
+                            window.prev_filters = []
+
+                            function decompose(data, members) {
+                                ret = {}
+                                data.forEach(el => {
+                                    if (!ret[el.AGENCE]) {
+                                        ret[el.AGENCE] = {}
+                                    }
+                                    if (!ret[el.AGENCE][el.secteur]) {
+                                        ret[el.AGENCE][el.secteur] = {}
+                                        ret[el.AGENCE][el.secteur]["CA"] = 0
+                                    }
+                                    if (members.includes(el.Canal)) {
+                                        ret[el.AGENCE][el.secteur]["CA"] += el["CA NET"]
+                                    }
+
+                                })
+                                ret2 = []
+                                int = 0
+                                Object.keys(ret).forEach(agency => {
+                                    Object.keys(ret[agency]).forEach(sector => {
+                                        obj = {}
+                                        obj["AGENCE"] = agency
+                                        obj["secteur"] = sector
+                                        obj['CA NET'] = ret[agency][sector]["CA"]
+                                        obj['Canal'] = Array.from(canals)[int % 3]
+                                        int += 1
+                                        ret2.push(obj)
+                                    })
+                                })
+                                return ret2
+
+                            }
+                            dataglob = []
+                            data_to_feed = []
+
+                            var struct = {
+                                "AGENCE": {
+                                    type: "string"
+                                },
+                                "secteur": {
+                                    type: "string"
+                                },
+                                "Canal": {
+                                    type: "string"
+                                },
+                                "CA NET": {
+                                    type: "number"
+                                },
+
+
+                            }
+
                             function loadfile(f) {
                                 function getJSONData() {
                                     data = $.parseJSON(f);
-                                    var struct = {
-                                        "Agence": {
-                                            type: "string"
-                                        },
-                                        "CA": {
-                                            type: "number"
-                                        },
-                                        "Secteur": {
-                                            type: "string"
-                                        },
-                                        "<7500": {
-                                            type: "number"
-                                        },
-                                        "7500-10000": {
-                                            type: "number"
-                                        },
-                                        "10000-12500": {
-                                            type: "number"
-                                        },
-                                        "12500-15000": {
-                                            type: "number"
-                                        },
-                                        ">15000": {
-                                            type: "number"
-                                        },
-                                        
-                                    }
-                                    data.unshift(struct);
-                                    return data;
-                                    /*
-                                    7500-10000
-: 
-0
-10000-12500
-: 
-0
-12500-15000
-: 
-0
-<7500
-: 
-1
->15000
-: 
-0
-Agence
-: 
-"OUJDA"
-CA
-: 
-3689.973333333334
-Secteur
-: 
-"1478"
-                                    */ 
+                                    dataglob = data
+
+                                    data_to_feed = data
+                                    data.forEach(e => {
+                                        canals.add(e.Canal)
+                                    })
+                                    data_ret = decompose(data, Array.from(canals))
+                                    window.prev_filters = Array.from(canals)
+                                    data_ret.unshift(struct);
+                                    return data_ret;
                                 };
 
 
@@ -107,52 +116,66 @@ Secteur
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [],
+                                            "reportFilters": [{
+                                                "uniqueName": "Canal"
+                                            }, ],
                                             "rows": [{
-                                                    "uniqueName": "Agence"
+                                                    "uniqueName": "AGENCE"
                                                 },
-                                                
+                                                {
+                                                    "uniqueName": "secteur"
+                                                },
 
                                             ],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
-                                                "uniqueName": "Secteur",
-                                                "caption": "Nombre de secteurs",
-                                                "formula": "IF(distinctcount(\"Secteur\")=0,0,distinctcount(\"Secteur\"))"
-                                            },{
-                                                "uniqueName": "CA",
-                                                "caption": "DH TTC/Secteur",
-                                                "format": "precision",
-                                                "formula": "IF(distinctcount(\"Secteur\")=0,sum(\"CA\"),sum(\"CA\")/distinctcount(\"Secteur\"))"
-                                            },
-                                            {
-                                                "uniqueName": "<7500",
-                                                "caption": "<7500",
+                                                    "uniqueName": "secteur",
+                                                    "caption": "Nombre de secteurs",
+                                                    "formula": "IF(distinctcount(\"secteur\")=0,0,distinctcount(\"secteur\"))",
+                                                },
+                                                {
+                                                    "uniqueName": "CA NET2",
+                                                    "caption": "DH TTC/Secteur",
+                                                    "format": "precision",
+                                                    "formula": "IF(distinctcount(\"secteur\")=0,sum(\"CA NET\"),sum(\"CA NET\")/distinctcount(\"secteur\"))",
+                                                },
+                                                {
+                                                    "uniqueName": "<7500",
+                                                    "caption": "<7500",
 
-                                            },
-                                            {
-                                                "uniqueName": "7500-10000",
-                                                "caption": "7500-10000",
-                                            }
-                                            ,
-                                            {
-                                                "uniqueName": "10000-12500",
-                                                "caption": "10000-12500",
-                                            },
-                                            {
-                                                "uniqueName": "12500-15000",
-                                                "caption": "12500-15000",
-                                            },
-                                            {
-                                                "uniqueName": ">15000",
-                                                "caption": ">15000",
-                                            }
-                                            
-                                         ],
+                                                    "formula": "IF(sum(\"CA NET2\")<=7500 ,1,0)",
+                                                    "individual": true
+                                                },
+                                                {
+                                                    "uniqueName": "7500-10000",
+                                                    "caption": "7500-10000",
+                                                    "formula": "IF(sum(\"CA NET2\")>7500 AND sum(\"CA NET2\")<=10000 ,1,0)",
+                                                    "individual": true
+                                                },
+                                                {
+                                                    "uniqueName": "10000-12500",
+                                                    "caption": "10000-12500",
+                                                    "formula": "IF(sum(\"CA NET2\")>10000 AND sum(\"CA NET2\")<=12500 ,1,0)",
+                                                    "individual": true
+                                                },
+                                                {
+                                                    "uniqueName": "12500-15000",
+                                                    "caption": "12500-15000",
+                                                    "formula": "IF(sum(\"CA NET2\")>12500 AND sum(\"CA NET2\")<=15000 ,1,0)",
+                                                    "individual": true
+                                                },
+                                                {
+                                                    "uniqueName": ">15000",
+                                                    "caption": ">15000",
+                                                    "formula": "IF(sum(\"CA NET2\")>15000  ,1,0)",
+                                                    "individual": true
+                                                }
+
+                                            ],
                                             "expands": {
-                                                "expandAll": true,
+                                                "expandAll": false,
                                             }
                                         },
                                         "options": {
@@ -161,7 +184,9 @@ Secteur
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": true,
-                                                "showHierarchyCaptions": false
+                                                "showTotals": 'columns',
+                                                "showHierarchyCaptions": false,
+                                                "drillThrough": false
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -212,14 +237,44 @@ Secteur
                                     }
                                 }
 
+                                function comparearrs(ar1, ar2) {
+                                    if (ar1.length != ar2.length) {
+                                        return false
+                                    }
+                                    ar1.forEach(e => {
+                                        if (!ar2.includes(e)) {
+                                            return false
+                                        }
+                                    })
+                                    return true
+                                }
+                                pivot1.on("reportchange", function() {
+                                    filters = pivot1.getFilter('Canal')
+
+                                    arr = []
+
+                                    filters.forEach(e => {
+                                        arr.push(e.caption)
+                                    })
+                                    params = arr.length > 0 ? arr : prev_filters
+                                    if (!comparearrs(params, window.prev_filters)) {
+                                        window.prev_filters = []
+                                        //window.prev_filters = params
+                                        params.forEach(e => {
+                                            window.prev_filters.push(e)
+                                        })
+
+                                        datasss = decompose(dataglob, params)
+                                        datasss.unshift(struct)
+                                        pivot1.updateData({
+                                            data: datasss
+                                        })
+                                    }
+                                })
+
                             }
-
-                            //WebDataRocks[ report ] = yourValue;
-
                             loaddate();
                         </script>
-
-
                     </div>
                     <!-- end: .row -->
 

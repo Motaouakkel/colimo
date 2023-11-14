@@ -1,6 +1,6 @@
 <?php
-$page_title = "Historique pertes par secteur";
-$api_action = "historyTourLosses";
+$page_title = "Historique remises par secteur ( % )";
+$api_action = "historyTourDiscountsperc";
 include 'header.php';
 
 ?>
@@ -55,24 +55,21 @@ include 'header.php';
                                         "Secteur": {
                                             type: "string"
                                         },
-                                        "amout": {
+                                        "amount": {
                                             type: "number"
                                         },
                                         "day": {
-                                            type: "string"
+                                            type: "number"
                                         },
                                         "Bloc": {
                                             type: "string"
                                         },
                                         "type": {
-                                            type: "string"
+                                            type: "number"
                                         },
-                                        "canal": {
-                                            type: "string"
+                                        "enlev_net": {
+                                            type: "number"
                                         },
-                                        "unite": {
-                                            type: "string"
-                                        }
                                     }
                                     loadLSFiltersTemplate(data['filters']);
                                     daysMapper = data['data'][1]
@@ -83,8 +80,8 @@ include 'header.php';
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
-                                    customizeCell: customizeCellFunction,
                                     beforetoolbarcreated: customizeToolbar,
+                                    customizeCell: customizeCellFunction,
                                     toolbar: true,
                                     report: {
                                         dataSource: {
@@ -102,36 +99,27 @@ include 'header.php';
                                             }, {
                                                 "uniqueName": "Produit"
                                             }, {
-                                                "uniqueName": "unite",
-                                                "filter": {
-                                                    "members": [
-                                                        "unite.DH TTC"
-                                                    ]
-                                                }
-                                            }, {
                                                 "uniqueName": "type"
-                                            }, {
-                                                "uniqueName": "canal"
                                             }],
                                             "rows": [{
                                                     "uniqueName": "Agence"
                                                 },
                                                 {
                                                     "uniqueName": "Bloc"
-                                                }, {
+                                                },
+                                                {
                                                     "uniqueName": "Secteur"
                                                 },
 
                                             ],
                                             "columns": [{
-                                                "uniqueName": "day",
-                                                "formula": "sum(\"amout\")",
-                                                "format": "precision"
+                                                "uniqueName": "day",                                     
                                             }],
                                             "measures": [{
-                                                "uniqueName": "amout",
+                                                "uniqueName": "amount",
                                                 "caption": "total",
-                                                "format": "precision"
+                                                "format": "precision",
+                                                "formula": "(sum(\"amount\")/sum(\"enlev_net\"))*100",
                                             }, ],
                                             "expands": {
                                                 "expandAll": true,
@@ -175,7 +163,7 @@ include 'header.php';
                                                 "textAlign": "right",
                                                 "isPercent": false
                                             }
-                                        ],
+                                        ]
                                     },
 
                                 });
@@ -186,8 +174,8 @@ include 'header.php';
                                     pivot1.off("reportcomplete");
                                 });
 
-
                                 function customizeCellFunction(cell, data) {
+
                                     if (data.rowIndex == 0 && data.columnIndex != 0 && data.label != '') {
                                         var str = daysMapper[parseInt(data.label)];
 

@@ -161,63 +161,73 @@ include 'header.php';
                                                 "formula": "sum(\"Pertes\")/distinctcount(\"Secteur\")"
                                             },
                                             
-                                            {
-                                                "uniqueName": "<75",
-                                                "caption": "<75",
-                                                "formula": "IF(sum(\"Pertes\")<=75 ,1,0)",
-                                                "individual": true
+                                            // {
+                                            //     "uniqueName": "<75",
+                                            //     "caption": "<75",
+                                            //     "formula": "IF(sum(\"Pertes\")<=1.25 ,1,0)",
+                                            //     "individual": true
 
-                                            },
-                                            {
-                                                "uniqueName": "75-100",
-                                                "caption": "75-100",
-                                                "formula": "IF(sum(\"Pertes\")>75 AND sum(\"Pertes\")<=100 ,1,0)",
-                                                "individual": true
-                                            }
-                                            ,
-                                            {
-                                                "uniqueName": "100-125",
-                                                "caption": "100-125",
-                                                "formula": "IF(sum(\"Pertes\")>100 AND sum(\"Pertes\")<=125 ,1,0)",
-                                                "individual": true
-                                            },
-                                            {
-                                                "uniqueName": "125-150",
-                                                "caption": "125-150",
-                                                "formula": "IF(sum(\"Pertes\")>125 AND sum(\"Pertes\")<=150 ,1,0)",
-                                                "individual": true
-                                            },
-                                            {
-                                                "uniqueName": ">150",
-                                                "caption": ">150",
-                                                "formula": "IF(sum(\"Pertes\")>150  ,1,0)",
-                                                "individual": true
-                                            },
+                                            // },
+                                            // {
+                                            //     "uniqueName": "75-100",
+                                            //     "caption": "75-100",
+                                            //     "formula": "IF(sum(\"Pertes\")>75 AND sum(\"Pertes\")<=100 ,1,0)",
+                                            //     "individual": true
+                                            // }
+                                            // ,
+                                            // {
+                                            //     "uniqueName": "100-125",
+                                            //     "caption": "100-125",
+                                            //     "formula": "IF(sum(\"Pertes\")>1 AND sum(\"Pertes\")<=1,25 ,1,0)",
+                                            //     "individual": true
+                                            // },
+                                            // {
+                                            //     "uniqueName": "125-150",
+                                            //     "caption": "125-150",
+                                            //     "formula": "IF(sum(\"Pertes\")>1,25 AND sum(\"Pertes\")<=1,5 ,1,0)",
+                                            //     "individual": true
+                                            // },
+                                            // {
+                                            //     "uniqueName": ">150",
+                                            //     "caption": ">150",
+                                                
+                                            // },
                                             {
                                                 "uniqueName": "TAUX PERTE GLOBALE%",
                                                 "caption": "TAUX PERTE GLOBALE%",
                                                 "format": "precision",
                                                 "formula": "(sum(\"Pertes\")/sum(\"CA NET\"))*100"
                                             },
-                                            // {
-                                            //     "uniqueName": "<1,25%",
-                                            //     "caption": "<1,25%",
-                                            // },
-                                            // {
-                                            //     "uniqueName": "1,25-1,50%",
-                                            //     "caption": "1,25-1,50%",
-                                            // },
-                                            // {
-                                            //     "uniqueName": "1,50-1,75%",
-                                            //     "caption": "1,50-1,75%",
-                                            // },{
-                                            //     "uniqueName": "1,75-2%",
-                                            //     "caption": "1,75-2%",
-                                            // },
-                                            // {
-                                            //     "uniqueName": ">2%",
-                                            //     "caption": ">2%",
-                                            // },
+                                            {
+                                                "uniqueName": "<1,25%",
+                                                "caption": "<1,25%",
+                                                "formula": "IF(((sum(\"Pertes\")/sum(\"CA NET\")) * 100)<=1.25 ,1,0)",
+                                                "individual": true
+                                            },
+                                            {
+                                                "uniqueName": "1,25-1,50%",
+                                                "caption": "1,25-1,50%",
+                                                "formula": "IF(((sum(\"Pertes\")/sum(\"CA NET\")) * 100)>1.25 AND ((sum(\"Pertes\")/sum(\"CA NET\")) * 100) <=1.5 ,1,0)",
+                                                "individual": true
+                                            },
+                                            {
+                                                "uniqueName": "1,50-1,75%",
+                                                "caption": "1,50-1,75%",
+                                                "formula": "IF(((sum(\"Pertes\")/sum(\"CA NET\")) * 100)>1.5 AND ((sum(\"Pertes\")/sum(\"CA NET\")) * 100) <=1.75 ,1,0)",
+                                                "individual": true
+                                            },{
+
+                                                "uniqueName": "1,75-2%",
+                                                "caption": "1,75-2%",
+                                                "formula": "IF(((sum(\"Pertes\")/sum(\"CA NET\")) * 100)>1.75 AND ((sum(\"Pertes\")/sum(\"CA NET\")) * 100) <=2 ,1,0)",
+                                                "individual": true
+                                            },
+                                            {
+                                                "uniqueName": ">2%",
+                                                "caption": ">2%",
+                                                "formula": "IF(((sum(\"Pertes\")/sum(\"CA NET\")) * 100)>2 ,1,0)",
+                                                "individual": true
+                                            },
                                             {
                                                 "uniqueName": "CA NET",
                                                 "format": "precision",

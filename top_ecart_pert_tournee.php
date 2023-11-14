@@ -72,6 +72,9 @@ include 'header.php';
                                         "Ecart_Pert": {
                                             type: "number"
                                         },
+                                        "Canal": {
+                                            type: "string"
+                                        },
                                     }
                                     loadLSFiltersTemplate(data['filters']);
                                     daysMapper = data['data'];
@@ -209,11 +212,10 @@ include 'header.php';
                                                 "type": "classic",
                                                 "title": "TOP -",
                                                 "showHeaders": false,
-                                                "showFilter": true,
+                                                "showFilter": false,
                                                 "showTotals": "off",
                                                 "showGrandTotals": "off",
                                                 "showHierarchyCaptions": false,
-                                                "showFilter": false,
 
 
                                             },
@@ -269,8 +271,7 @@ include 'header.php';
                                             }
                                         })
                                         currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
-                                        currentConfigP2.options.grid["showFilter"] = true,
-                                            pivot2.setReport(currentConfigP2);
+                                        pivot2.setReport(currentConfigP2);
                                     });
                                 });
 

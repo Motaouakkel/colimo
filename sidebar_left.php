@@ -15,7 +15,19 @@ try {
 
         return $carry;
     }, []);
+
+    foreach ($groupedArray as $key => $value) {
+        // Sort the "Agence" array by "iname"
+        usort($groupedArray[$key], 'compareByIname');
+    }
 } catch (Exception  $e) {
+}
+
+// Custom comparison function to sort by "iname"
+function compareByIname($a, $b)
+{
+    
+    return strcasecmp($a["iname"], $b["iname"]);
 }
 ?>
 

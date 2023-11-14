@@ -1,6 +1,6 @@
 <?php
-$page_title = "Historique pertes par secteur";
-$api_action = "historyTourLosses";
+$page_title = "Historique pertes par secteur ( % )";
+$api_action = "historyTourLossesperc";
 include 'header.php';
 
 ?>
@@ -67,6 +67,9 @@ include 'header.php';
                                         "type": {
                                             type: "string"
                                         },
+                                        "enlev_net": {
+                                            type: "number"
+                                        },
                                         "canal": {
                                             type: "string"
                                         },
@@ -98,16 +101,16 @@ include 'header.php';
                                             }, {
                                                 "uniqueName": "Bloc"
                                             }, {
-                                                "uniqueName": "Gamme"
-                                            }, {
-                                                "uniqueName": "Produit"
-                                            }, {
                                                 "uniqueName": "unite",
                                                 "filter": {
                                                     "members": [
                                                         "unite.DH TTC"
                                                     ]
                                                 }
+                                            }, {
+                                                "uniqueName": "Gamme"
+                                            }, {
+                                                "uniqueName": "Produit"
                                             }, {
                                                 "uniqueName": "type"
                                             }, {
@@ -125,16 +128,19 @@ include 'header.php';
                                             ],
                                             "columns": [{
                                                 "uniqueName": "day",
-                                                "formula": "sum(\"amout\")",
-                                                "format": "precision"
+
+                                                "format": "precision",
+
                                             }],
                                             "measures": [{
-                                                "uniqueName": "amout",
+                                                "uniqueName": "tttttt",
                                                 "caption": "total",
-                                                "format": "precision"
+                                                "formula": "abs(sum(\"amout\")/sum(\"enlev_net\")) * 100",
+                                                "format": "precision",
+
                                             }, ],
                                             "expands": {
-                                                "expandAll": true,
+                                                "expandAll": false,
                                             }
                                         },
                                         "options": {
@@ -184,6 +190,7 @@ include 'header.php';
                                     var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
                                     applayLSFilters(pivot1, captionsMapper);
                                     pivot1.off("reportcomplete");
+
                                 });
 
 
@@ -211,6 +218,7 @@ include 'header.php';
                                 }
 
                             }
+
 
                             //WebDataRocks[ report ] = yourValue;
 
