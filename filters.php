@@ -215,7 +215,7 @@ if (!isset($_POST["filtersData"])) {
         }
     }
 
-    function applayLSFilters(pivot, captionsMapper) {
+    function applayLSFilters(pivot, captionsMapper, bol) {
 
         $(document).on('LSFiltersChanged', async function(event, filterId) {
             filterss = []
@@ -235,7 +235,7 @@ if (!isset($_POST["filtersData"])) {
                     })
                     filterss.push(currentFilter)
                 }
-                if(filter["static"] != undefined){
+                if (filter["static"] != undefined) {
                     currentFilter.filter.members.push(filter.name + "." + filter["static"]);
                 }
                 index++;
@@ -243,7 +243,7 @@ if (!isset($_POST["filtersData"])) {
             });
 
 
-            firstrep = pivot.getReport()
+            firstrep = await pivot.getReport()
 
             firstrep.slice.reportFilters = filterss;
             firstrep.slice.measures.forEach(element => {
@@ -255,8 +255,22 @@ if (!isset($_POST["filtersData"])) {
                 }
 
             });
-            await pivot.runQuery(firstrep.slice);
-            pivot.refresh()
+
+            if (bol) {
+                await pivot.runQuery(firstrep.slice);
+                await pivot.refresh();
+                await pivot.setReport(firstrep);
+                await pivot.refresh();
+            } else {
+                await pivot.runQuery(firstrep.slice);
+                await pivot.updateData({
+                    data: firstrep.dataSource.data
+                })
+                await pivot.runQuery(firstrep.slice);
+                await pivot.updateData({
+                    data: firstrep.dataSource.data
+                })
+            }
         });
 
     }
@@ -268,5 +282,4 @@ if (!isset($_POST["filtersData"])) {
         }
         return;
     }
-    //applayLSFilters(null);
 </script>

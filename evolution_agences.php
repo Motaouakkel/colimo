@@ -129,10 +129,11 @@ include 'header.php';
                                     index++;
                                 });
 
+                                i = 1
                                 tables.forEach(pivot => {
                                     pivot.on("reportcomplete", function() {
                                         var captionsMapper = buildCaptionsMapper(pivot.getMeasures().concat(pivot.getRows()));
-                                        applayLSFilters(pivot, captionsMapper);
+                                        applayLSFilters(pivot, captionsMapper, true);
                                         pivot.off("reportcomplete");
                                     });
                                 });

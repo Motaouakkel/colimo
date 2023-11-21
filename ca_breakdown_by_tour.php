@@ -121,6 +121,17 @@ include 'header.php';
                                         'CA NET': {
                                             type: 'number'
                                         },
+                                        'CANAL': {
+                                            type: 'string'
+                                        },
+                                        'Gamme': {
+                                            type: 'string'
+                                        },
+                                        'Produit': {
+                                            type: 'string'
+                                        },
+
+
 
                                     }
                                     loadLSFiltersTemplate(data['filters']);
@@ -337,7 +348,7 @@ include 'header.php';
                                             {
                                                 "name": "percentage",
                                                 "decimalPlaces": 2,
-                                                
+
                                             }
                                         ]
                                     },
