@@ -1,6 +1,6 @@
 <?php
 $page_title = "Historique pertes par secteur";
-$api_action = "historyTourLosses";
+$api_action = "historyTourLosses2";
 include 'header.php';
 
 ?>

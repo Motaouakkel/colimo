@@ -221,20 +221,36 @@ if (!isset($_POST["filtersData"])) {
             filterss = []
             // Use local storage to  get all filters ( from filter0 to filter(data.length))
             var index = 0;
+
             filtersData.forEach(filter => {
+
+                var totalFilters = 0;
+
+                if (filter['data']) {
+                    totalFilters = filter['data'].length;
+                } else if (filter['mapper']) {
+                    for (const key in filter['mapper']) {
+                        const value = filter['mapper'][key];
+                        totalFilters += value.length;
+                    }
+                }
+
                 currentFilter = {
                     "uniqueName": filter.name
                 }
                 var filterConfig = getFilterConfigById(index);
-                if (filterConfig.length > 0) {
+
+                if (filterConfig.length > 0 && filterConfig.length < totalFilters) {
                     currentFilter["filter"] = {
                         "members": []
                     }
                     filterConfig.forEach(fi => {
                         currentFilter.filter.members.push(filter.name + "." + fi);
                     })
-                    filterss.push(currentFilter)
                 }
+
+                filterss.push(currentFilter)
+
                 if (filter["static"] != undefined) {
                     currentFilter.filter.members.push(filter.name + "." + filter["static"]);
                 }
@@ -256,21 +272,13 @@ if (!isset($_POST["filtersData"])) {
 
             });
 
-            if (bol) {
-                await pivot.runQuery(firstrep.slice);
-                await pivot.refresh();
-                await pivot.setReport(firstrep);
-                await pivot.refresh();
-            } else {
-                await pivot.runQuery(firstrep.slice);
-                await pivot.updateData({
-                    data: firstrep.dataSource.data
-                })
-                await pivot.runQuery(firstrep.slice);
-                await pivot.updateData({
-                    data: firstrep.dataSource.data
-                })
-            }
+            await pivot.runQuery(firstrep.slice);
+            await pivot.updateData({
+                data: firstrep.dataSource.data
+            })
+            await pivot.updateData({
+                data: firstrep.dataSource.data
+            })
         });
 
     }

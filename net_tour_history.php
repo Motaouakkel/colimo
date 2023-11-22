@@ -57,9 +57,19 @@ include 'header.php';
                                         "Mt facture": {
                                             type: "number"
                                         },
-                                        "unite":{
-                                            type:"string"
-                                        }
+                                        "unite": {
+                                            type: "string"
+                                        },
+                                        "Gamme": {
+                                            type: "string"
+                                        },
+                                        "canal": {
+                                            type: "string"
+                                        },
+                                        "Produit": {
+                                            type: "string"
+                                        },
+
 
                                     }
                                     loadLSFiltersTemplate(data['filters']);
@@ -70,7 +80,7 @@ include 'header.php';
 
 
                                 var pivot1 = new WebDataRocks({
-                                    
+
                                     container: "#wdr-component",
                                     customizeCell: customizeCellFunction,
                                     // beforetoolbarcreated: customizeToolbar,
@@ -80,18 +90,15 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [
-                                                {
+                                            "reportFilters": [{
                                                     "uniqueName": "unite",
                                                     "caption": "unite",
-                                                    
-                                                    
                                                     "filter": {
                                                         "members": [
                                                             "unite.DH TTC"
                                                         ]
                                                     }
-                                                
+
                                                 },
                                                 {
                                                     "uniqueName": "Secteur",
@@ -103,7 +110,21 @@ include 'header.php';
                                                 }, {
                                                     "uniqueName": "BLOC",
                                                     "caption": "Bloc",
+                                                }, {
+                                                    "uniqueName": "Gamme",
+                                                    "caption": "Gamme",
                                                 },
+                                                {
+                                                    "uniqueName": "canal",
+                                                    "caption": "canal",
+                                                },
+                                                {
+                                                    "uniqueName": "Produit",
+                                                    "caption": "Produit",
+                                                },
+
+
+
                                             ],
                                             "rows": [{
                                                     "uniqueName": "Agence",
@@ -169,40 +190,6 @@ include 'header.php';
                                         cell.text = "TOTAL";
                                     }
                                 }
-
-                                // function pivotcallback(pivot1) {
-                                //     pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                //         var i = 0
-                                //         cell2 = pivot1.getCell(data.rowIndex, 0)
-                                //         if (data.type == "header" && i == 0) {
-                                //             if (data.columnIndex == 1 && data.label == "-1") {
-                                //                 cell.text = "SECTEUR"
-                                //             } else if (data.columnIndex == 2 && data.label == "0") {
-                                //                 cell.text = "TOURNEE"
-                                //             }
-                                //             i++
-                                //         }
-
-                                //         if (data.columnIndex == 1 && data.rowIndex != 0) {
-                                //             var a = cell2.label
-                                //             var b = a.split("/")[1]
-                                //             cell.text = b
-                                //         }
-
-                                //         if (data.columnIndex == 2 && data.rowIndex != 0) {
-                                //             var a = cell2.label
-                                //             var b = a.split("/")[2]
-                                //             cell.text = b
-                                //         }
-
-                                //         if (data.columnIndex == 0 && data.rowIndex != 0 && !data.isGrandTotalRow) {
-                                //             var a = data.label
-                                //             cell.text = a.split("/")[0]
-                                //         }
-
-                                //     });
-                                // }
-                                // pivotcallback(pivot1)
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar

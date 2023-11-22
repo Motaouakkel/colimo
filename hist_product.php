@@ -116,11 +116,13 @@ include 'header.php';
                                             ],
                                             "columns": [{
                                                 "uniqueName": "day",
-                                                "formula": "sum(\"amout\")"
+                                                "formula": "sum(\"amout\")",
+                                                "format":"precision"
                                             }],
                                             "measures": [{
                                                 "uniqueName": "amout",
-                                                "caption": "total"
+                                                "caption": "total",
+                                                "format":"precision"
                                             }, ],
                                             "expands": {
                                                 "expandAll": true,
