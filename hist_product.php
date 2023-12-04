@@ -97,6 +97,7 @@ include 'header.php';
                                                 "caption": "CANAL"
                                             }, {
                                                 "uniqueName": "type"
+                                                //TODO SET DEFAULT FILTER ENLEV NEYT
                                             },
                                              {
                                                 "uniqueName": "unite",

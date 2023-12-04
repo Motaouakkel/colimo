@@ -59,7 +59,7 @@ include 'header.php';
                                             type: "number"
                                         },
                                         "day": {
-                                            type: "string"
+                                            type: "number"
                                         },
                                         "Bloc": {
                                             type: "string"

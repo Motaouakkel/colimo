@@ -114,7 +114,9 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
-                                                },
+                                                }, {
+                                                "uniqueName": "Canal"
+                                            },
 
                                                 {
                                                     "uniqueName": "Gamme",
@@ -185,7 +187,9 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "SECTEUR",
                                                     "caption": "SECTEUR",
-                                                },
+                                                }, {
+                                                "uniqueName": "Canal"
+                                            },
 
                                                 {
                                                     "uniqueName": "Gamme",

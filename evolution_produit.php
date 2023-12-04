@@ -80,7 +80,11 @@ include 'header.php';
                                         "Canal":{
                                             type: "string"
                                         
-                                        }
+                                        },
+                                        "unite":{
+                                            type: "string"
+                                        
+                                        },
                                     }
 
                                     data['data'].unshift(struct);
@@ -103,6 +107,21 @@ include 'header.php';
                                                 },
                                                 {
                                                     "uniqueName": "type"
+                                                },
+                                                {
+                                                    "uniqueName": "Canal"
+                                                },
+                                                {
+                                                    "uniqueName": "secteur"
+                                                },
+                                                {
+                                                    "uniqueName": "Gamme"
+                                                },
+                                                {
+                                                    "uniqueName": "Produit"
+                                                },
+                                                {
+                                                    "uniqueName": "unite"
                                                 },
                                             ],
                                             "rows": [{

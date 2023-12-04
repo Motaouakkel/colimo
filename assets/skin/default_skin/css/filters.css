@@ -94,19 +94,6 @@
     position: relative;
 }
 
-.filters-pop-up .content .filter-search::after {
-    height: 30px;
-    width: 30px;
-    content: '\f00d';
-    font-family: 'FontAwesome';
-    color: #fff;
-    background-color: #005AA0;
-    padding: 5px;
-    border-radius: 5px;
-    position: absolute;
-    right: 0;
-    z-index: 999;
-}
 
 
 .filters-pop-up .filter-search input {
@@ -131,6 +118,12 @@
     margin-inline: 15px;
     background-color: #005AA0;
     color: #fff;
+}
+
+.filters-pop-up .content .container .save.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5;
 }
 
 .filters-pop-up .content .container .back {

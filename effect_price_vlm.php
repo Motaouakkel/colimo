@@ -94,7 +94,20 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [],
+                                            "reportFilters": [
+                                                {
+                                                    "uniqueName": "canal",
+                                                    "caption": "canal",
+                                                }, {
+                                                    "uniqueName": "gamme",
+                                                    "caption": "gamme",
+                                                },
+                                                {
+                                                    "uniqueName": "produit",
+                                                    "caption": "produit",
+                                                },
+                                        
+                                            ],
                                             "rows": [{
                                                 "uniqueName": "produit",
                                             }],

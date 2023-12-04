@@ -42,83 +42,59 @@ include 'header.php';
                                         "AGENCE": {
                                             type: 'string'
                                         },
-                                        'ENLEVEMENT BRUT': {
+                                        "CANAL": {
+                                            type: 'string'
+                                        },
+                                        'CA_AVRM': {
                                             type: 'number'
                                         },
-                                        "INVENDU": {
+                                        'CENET': {
                                             type: 'number'
                                         },
-                                        '% INV': {
+                                        'COUT VAR': {
                                             type: 'number'
                                         },
-                                        'ENLEVEMENT NET': {
+                                        'DEG': {
                                             type: 'number'
                                         },
-                                        'PERTE COMMERCIAL': {
+                                        'ENL_BRU': {
                                             type: 'number'
                                         },
-                                        '% PC': {
+                                        'ENL_NET': {
                                             type: 'number'
                                         },
-                                        'PERTE TECHNIQUE': {
+                                        'INV': {
                                             type: 'number'
                                         },
-                                        '% PT': {
+                                        'PC': {
                                             type: 'number'
                                         },
-                                        'PERTE CAMION': {
+                                        'PCA': {
                                             type: 'number'
                                         },
-                                        '% PCAM': {
+                                        'PG': {
                                             type: 'number'
                                         },
-                                        'PERTE GLOBALE': {
+                                        'PROM': {
                                             type: 'number'
                                         },
-                                        '% PG': {
+                                        'PT': {
                                             type: 'number'
                                         },
-                                        'CA NET avant remise': {
+                                        'RFM': {
                                             type: 'number'
                                         },
-                                        "RFM": {
+                                        'RMGB': {
                                             type: 'number'
                                         },
-                                        '% RFM': {
+                                        'RMPER': {
                                             type: 'number'
                                         },
-                                        "RSF": {
+                                        'RSF': {
                                             type: 'number'
                                         },
-                                        '% RSF': {
-                                            type: 'number'
-                                        },
-                                        "PROMOTION": {
-                                            type: 'number'
-                                        },
-                                        '% PROMO': {
-                                            type: 'number'
-                                        },
-                                        'DEG':{ type: 'number' },
-                                        '% DEG':{ type: 'number' },
-                                        'REMISE GLOBALE': {
-                                            type: 'number'
-                                        },
-                                        '% REMISE GLOBALE': {
-                                            type: 'number'
-                                        },
-                                        "REMISE + PERTE": {
-                                            type: 'number'
-                                        },
-                                        '% REMISE + PERTE': {
-                                            type: 'number'
-                                        },
-                                        'CE NET': {
-                                            type: 'number'
-                                        }
                                     }
                                     data.unshift(struct);
-                                    console.log(data);
                                     return data;
 
                                 };
@@ -133,12 +109,143 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [],
-                                            "rows": [],
+                                            "reportFilters": [{
+                                                'uniqueName': 'CANAL'
+                                            }, ],
+                                            "rows": [{
+                                                'uniqueName': 'AGENCE'
+                                            }, ],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
-                                            "measures": [],
+                                            "measures": [{
+                                                    'uniqueName': 'ENL_BRU',
+                                                    'caption': 'ENLEVEMENT BRUT'
+                                                },
+                                                {
+                                                    'uniqueName': 'INV',
+                                                    'caption': 'INVENDU'
+                                                },
+                                                {
+                                                    'uniqueName': '%INV',
+                                                    'caption': '%INVENDU',
+                                                    'formula': '((sum(\"INV\")/sum(\"ENL_BRU\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'ENL_NET',
+                                                    'caption': 'ENLEVEMENT NET',
+                                                },
+                                                {
+                                                    'uniqueName': 'PC',
+                                                    'caption': 'PERTE COMMERCIAL',
+                                                },
+                                                {
+                                                    'uniqueName': '%PC',
+                                                    'caption': '% PERTE COMMERCIAL',
+                                                    'formula': '((sum(\"PC\")/sum(\"ENL_NET\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'PT',
+                                                    'caption': 'PERTE COMMERCIAL',
+                                                },
+                                                {
+                                                    'uniqueName': '%PT',
+                                                    'caption': '%PERTE COMMERCIAL',
+                                                    'formula': '((sum(\"PT\")/sum(\"ENL_NET\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'PCA',
+                                                    'caption': 'PERTE CAMION',
+                                                },
+                                                {
+                                                    'uniqueName': '%PCA',
+                                                    'caption': '%PERTE CAMION',
+                                                    'formula': '((sum(\"PCA\")/sum(\"ENL_NET\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'PG',
+                                                    'caption': 'PERTE GLOBALE',
+                                                },
+                                                {
+                                                    'uniqueName': '%PG',
+                                                    'caption': '%PERTE GLOBALE',
+                                                    'formula': '((sum(\"PG\")/sum(\"ENL_NET\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'CA_AVRM',
+                                                    'caption': 'CA NET AVANT REMISES'
+                                                },
+                                                {
+                                                    'uniqueName': 'RFM',
+                                                    'caption': "RFM"
+                                                },
+                                                {
+                                                    'uniqueName': '%RFM',
+                                                    'caption': '%RFM',
+                                                    'formula': '((sum(\"RFM\")/sum(\"CA_AVRM\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'RSF',
+                                                    'caption': "RSF"
+                                                },
+                                                {
+                                                    'uniqueName': '%RSF',
+                                                    'caption': '%RSF',
+                                                    'formula': '((sum(\"RSF\")/sum(\"CA_AVRM\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'PROM',
+                                                    'caption': 'PROMOTION'
+                                                },
+                                                {
+                                                    'uniqueName': '%PROM',
+                                                    'caption': '%PROMOTION',
+                                                    'formula': '((sum(\"PROM\")/sum(\"CA_AVRM\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'RMGB',
+                                                    'caption': 'REMISE GLOBALE',
+                                                },
+                                                {
+                                                    'uniqueName': '%RMGB',
+                                                    'caption': '%REMISE GLOBALE',
+                                                    'formula': '((sum(\"RMGB\")/sum(\"CA_AVRM\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'RMPER',
+                                                    'caption': 'REMISE + PERTE',
+                                                    
+                                                },
+                                                {
+                                                    'uniqueName': '%RMPER',
+                                                    'caption': '%REMISE + PERTE',
+                                                    'formula': '(((sum(\"RMGB\")+ sum(\"PG\"))/sum(\"ENL_NET\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'COUT VAR',
+                                                    'caption': 'TOTAL COUT VAR'
+                                                },
+                                                {
+                                                    'uniqueName': '%COUT VAR',
+                                                    'caption': '%TOTAL COUT VAR',
+                                                    'formula': '((sum(\"COUT VAR\")/sum(\"CA_AVRM\")) * 100)',
+                                                    'format': 'precentForamt'
+                                                },
+                                                {
+                                                    'uniqueName': 'CE NET'
+                                                },
+
+                                            ],
                                         },
                                         "options": {
                                             "grid": {
@@ -146,13 +253,16 @@ include 'header.php';
                                                 "showHeaders": true,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": true,
-                                                "type": "flat",
+                                                "type": "classic",
                                                 "showFilter": true,
-                                                "showReportFiltersArea": false
+                                                "showReportFiltersArea": true
                                             },
                                             "showAggregationLabels": false
                                         },
-                                        "formats": []
+                                        "formats": [{
+                                            "name": "precentForamt",
+                                            "decimalPlaces": 2,
+                                        }]
                                     },
 
                                 });

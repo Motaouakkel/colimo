@@ -84,9 +84,9 @@ include 'header.php';
                                         "type": {
                                             type: "string"
                                         },
-                                        "Canal":{
+                                        "Canal": {
                                             type: "string"
-                                        
+
                                         }
 
                                     }
@@ -128,6 +128,10 @@ include 'header.php';
                                                 }, {
                                                     "uniqueName": "Produit",
                                                     "caption": "Produit",
+                                                },
+                                                {
+                                                    "uniqueName": "Canal",
+                                                    "caption": "CANAL",
                                                 },
                                                 {
                                                     "uniqueName": "type",
@@ -213,6 +217,10 @@ include 'header.php';
                                                     "caption": "Produit",
                                                 },
                                                 {
+                                                    "uniqueName": "Canal",
+                                                    "caption": "CANAL",
+                                                },
+                                                {
                                                     "uniqueName": "type",
                                                     "caption": "type",
                                                     "filter": {
@@ -266,18 +274,6 @@ include 'header.php';
                                 pivot1.on("reportcomplete", function() {
                                     var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
                                     applayLSFilters(pivot1, captionsMapper);
-                                    pivot1.on("reportchange", function() {
-                                        var currentConfigP1 = pivot1.getReport();
-                                        var currentConfigP2 = pivot2.getReport();
-                                        currentConfigP2.slice.measures.forEach(m => {
-                                            if (m.uniqueName == 'CE NET') {
-                                                m.caption = "VENTE NETTE DH TTC/J"
-                                            }
-                                        })
-                                        currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
-                                        currentConfigP2.options.grid["showFilter"] = true,
-                                            pivot2.setReport(currentConfigP2);
-                                    });
                                     pivot1.off("reportcomplete");
                                 });
                                 pivot2.on("reportcomplete", function() {

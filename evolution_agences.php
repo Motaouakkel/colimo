@@ -159,6 +159,9 @@ include 'header.php';
                                                     {
                                                         "uniqueName": "produit"
                                                     },
+                                                    {
+                                                        "uniqueName": "canal"
+                                                    },
                                                 ],
                                                 "rows": element.config.slice.rows,
                                                 "columns": [{

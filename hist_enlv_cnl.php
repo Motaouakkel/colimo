@@ -92,6 +92,8 @@ include 'header.php';
                                                     "uniqueName": "Agence"
                                                 }, {
                                                     "uniqueName": "Gamme"
+                                                },{
+                                                    "uniqueName": "canal"
                                                 },
                                                 {
                                                     "uniqueName": "Produit"

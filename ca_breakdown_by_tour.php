@@ -163,6 +163,18 @@ include 'header.php';
                                                     "uniqueName": "BLOC",
                                                     "caption": "BLOC",
                                                 },
+                                                {
+                                                    "uniqueName": "CANAL",
+                                                    "caption": "CANAL",
+                                                },
+                                                {
+                                                    "uniqueName": "Gamme",
+                                                    "caption": "Gamme",
+                                                },
+                                                {
+                                                    "uniqueName": "Produit",
+                                                    "caption": "Produit",
+                                                },
 
                                             ],
                                             "rows": [{

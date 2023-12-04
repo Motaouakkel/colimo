@@ -129,6 +129,11 @@ if (!isset($_POST["filtersData"])) {
         $('.form-check').each(function() {
             $(this).click(function() {
                 $('#select-all').prop("checked", isAllSet());
+                if (isNoOneSelected()) {
+                    $('.filters-pop-up .save').addClass('disabled');
+                } else {
+                    $('.filters-pop-up .save').removeClass('disabled');
+                }
             });
         });
         $('.filters-pop-up').addClass('open');
@@ -144,9 +149,11 @@ if (!isset($_POST["filtersData"])) {
         });
     });
 
-    $('.filters-pop-up .save').click(function() {
+    $('.filters-pop-up .save').click(async function() {
         var popup = $('.filters-pop-up');
         var filters = [];
+
+        // Get checked filters
         $('.filter-list .form-check-input').each(function() {
             if ($(this).is(":checked")) {
                 filters.push($(this).next("label").text());
@@ -154,7 +161,11 @@ if (!isset($_POST["filtersData"])) {
         });
         var activeId = popup.attr("data-active");
         var jsonString = JSON.stringify(filters);
+
+        // Save checked filters in localStorage 
         localStorage.setItem('filter' + activeId, jsonString);
+
+        // Change Filters label [ Tout  , Quelques , Aucun]
         var selectedElement = $('li.filter-child[data-id="' + activeId + '"]');
         var filterSubtitle = selectedElement.find('.filter-subtitle');
         if ($('.filter-list .form-check-input:checked').length == 0) {
@@ -162,9 +173,33 @@ if (!isset($_POST["filtersData"])) {
         } else {
             filterSubtitle.html((isAllSet() ? "Tout" : "Quelques"));
         }
-        activeFilterChildrens(activeId);
+
+        // Set the filter children [ Agence => bloc ...]
+        await activeFilterChildrens(activeId);
+
+        // Trigger a custom ( LSFiltersChanged )
         $(document).trigger('LSFiltersChanged', activeId);
+
+        // Close the filters box
         $('.filters-pop-up').removeClass('open');
+    });
+
+
+    $('.filter-search input').on('input', function() {
+        // Get the entered value
+        var filterValue = $(this).val().toLowerCase();
+
+        // Loop through each form-check div
+        $('.form-check').each(function() {
+            // Check if the label's text contains the filter value
+            if (!$(this).hasClass('select-all')) {
+                if ($(this).find('.form-check-label').text().toLowerCase().includes(filterValue)) {
+                    $(this).fadeIn(); // Show the form-check div if it matches
+                } else {
+                    $(this).fadeOut(); // Hide the form-check div if it doesn't match
+                }
+            }
+        });
     });
 
     function buildFilterItem(index, label) {
@@ -178,7 +213,11 @@ if (!isset($_POST["filtersData"])) {
         return $('.filter-list .form-check-input').length === $('.filter-list .form-check-input:checked').length
     }
 
-    function activeFilterChildrens(filterId) {
+    function isNoOneSelected() {
+        return $('.filter-list .form-check-input:checked').length == 0;
+    }
+
+    async function activeFilterChildrens(filterId) {
         if (filtersData[filterId]) {
             var childId = filtersData[filterId]['child_id'];
             var parentId = filterId;
@@ -215,72 +254,55 @@ if (!isset($_POST["filtersData"])) {
         }
     }
 
-    function applayLSFilters(pivot, captionsMapper, bol) {
-
+    async function applayLSFilters(pivot, captionsMapper, bol) {
         $(document).on('LSFiltersChanged', async function(event, filterId) {
-            filterss = []
-            // Use local storage to  get all filters ( from filter0 to filter(data.length))
-            var index = 0;
+            const filterss = [];
 
-            filtersData.forEach(filter => {
+            for (let index = 0; index < filtersData.length; index++) {
+                const filter = filtersData[index];
+                const totalFilters = filter['data'] ? filter['data'].length : Object.values(filter['mapper']).flat().length;
 
-                var totalFilters = 0;
-
-                if (filter['data']) {
-                    totalFilters = filter['data'].length;
-                } else if (filter['mapper']) {
-                    for (const key in filter['mapper']) {
-                        const value = filter['mapper'][key];
-                        totalFilters += value.length;
-                    }
-                }
-
-                currentFilter = {
+                const currentFilter = {
                     "uniqueName": filter.name
-                }
-                var filterConfig = getFilterConfigById(index);
+                };
+
+                const filterConfig = getFilterConfigById(index);
 
                 if (filterConfig.length > 0 && filterConfig.length < totalFilters) {
-                    currentFilter["filter"] = {
-                        "members": []
-                    }
-                    filterConfig.forEach(fi => {
-                        currentFilter.filter.members.push(filter.name + "." + fi);
-                    })
+                    currentFilter.filter = {
+                        "members": filterConfig.map(fi => `${filter.name}.${fi}`)
+                    };
                 }
 
-                filterss.push(currentFilter)
-
-                if (filter["static"] != undefined) {
-                    currentFilter.filter.members.push(filter.name + "." + filter["static"]);
+                if (filter["static"] !== undefined && currentFilter.filter) {
+                    currentFilter.filter.members.push(`${filter.name}.${filter["static"]}`);
                 }
-                index++;
 
-            });
+                filterss.push(currentFilter);
+            }
 
+            const firstrep = pivot.getReport();
+            // firstrep.slice.reportFilters = filterss;
 
-            firstrep = await pivot.getReport()
-
-            firstrep.slice.reportFilters = filterss;
-            firstrep.slice.measures.forEach(element => {
+            for (const element of firstrep.slice.measures) {
                 if (captionsMapper) {
                     const captionMapper = captionsMapper.find(item => item.uniqueName === element.uniqueName);
                     if (captionMapper) {
                         element['caption'] = captionMapper.caption;
                     }
                 }
+            }
+            pivot.setReport(firstrep)
+            filterss.forEach(e => {
+                if (e.filter) {
+                    pivot.setFilter(e.uniqueName, e.filter.members)
+                } else {
+                    pivot.setFilter(e.uniqueName, [])
+                }
 
-            });
+            })
 
-            await pivot.runQuery(firstrep.slice);
-            await pivot.updateData({
-                data: firstrep.dataSource.data
-            })
-            await pivot.updateData({
-                data: firstrep.dataSource.data
-            })
         });
-
     }
 
     function getFilterConfigById(filterId) {

@@ -118,6 +118,19 @@ include 'header.php';
                                                         "type": "top"
                                                     }
                                                 },
+                                                {
+                                                    "uniqueName": "canal",
+
+                                                },
+                                                {
+                                                    "uniqueName": "Produit",
+
+                                                }, {
+                                                    "uniqueName": "Gamme",
+
+                                                },
+
+
 
                                             ],
                                             "rows": [{
@@ -147,7 +160,7 @@ include 'header.php';
                                             }
                                         },
                                         "options": {
-                                            "configuratorButton":false,
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "type": "classic",
                                                 "title": "TOP +",
@@ -176,7 +189,7 @@ include 'header.php';
                                             }, {
                                                 "name": "percent",
                                                 "decimalPlaces": 2,
-                                                
+
 
 
                                             }, {
@@ -214,6 +227,16 @@ include 'header.php';
                                                 },
                                                 {
                                                     "uniqueName": "Secteur"
+                                                }, {
+                                                    "uniqueName": "canal",
+
+                                                },
+                                                {
+                                                    "uniqueName": "Produit",
+
+                                                }, {
+                                                    "uniqueName": "Gamme",
+
                                                 },
 
                                             ],
@@ -244,7 +267,7 @@ include 'header.php';
                                             }
                                         },
                                         "options": {
-                                            "configuratorButton":false,
+                                            "configuratorButton": false,
                                             "grid": {
                                                 "type": "classic",
                                                 "title": "TOP -",
@@ -273,7 +296,7 @@ include 'header.php';
                                             }, {
                                                 "name": "percent",
                                                 "decimalPlaces": 2,
-                                                
+
 
 
                                             }, {
@@ -328,26 +351,9 @@ include 'header.php';
                                     }
                                 });
 
-                                pivot1.on("reportcomplete", function() {
-                                    pivot1.on("reportchange", function() {
-                                        var currentConfigP1 = pivot1.getReport();
-                                        var currentConfigP2 = pivot2.getReport();
-                                        currentConfigP2.slice.measures.forEach(m => {
-                                            if (m.uniqueName == 'ratio') {
-                                                m.caption = "RATIO LP %"
-                                            }
-                                        })
-                                        currentConfigP2.slice.reportFilters = currentConfigP1.slice.reportFilters;
-                                        
-                                            pivot2.setReport(currentConfigP2);
-                                        pivot2.setReport(currentConfigP2);
-                                    });
-                                });
                             }
 
 
-
-                            //WebDataRocks[ report ] = yourValue;
 
                             loaddate();
                         </script>

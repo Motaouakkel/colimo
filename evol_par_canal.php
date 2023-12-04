@@ -115,6 +115,10 @@ include 'header.php';
                                                     }
                                                 },
                                                 {
+                                                    "uniqueName": "canal",
+                                                    "caption": "CANAL",
+                                                },
+                                                {
                                                     "uniqueName": "type2",
                                                     "caption": "Type",
                                                     "filter": {
@@ -176,7 +180,7 @@ include 'header.php';
                                         "formats": [{
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
-                                            
+
                                         }, {
                                             "name": "precision",
                                             "decimalPlaces": 2,

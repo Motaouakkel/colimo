@@ -32,9 +32,7 @@ include 'header.php';
                                         <h3> <?php echo strtoupper($page_title) ?></h3>
                                     </div>
                                 </div>
-                                <div id="ls-filters" class="row ls-filters">
-
-                                </div>
+                                <div id="filters"></div>
                                 <div class="row">
                                     <div class="table1 col-xl-5 col-md-5 col-sm-12">
                                         <div id="wdr-component"></div>
@@ -51,6 +49,7 @@ include 'header.php';
                         <script>
                             var piv = null
                             var pin = null
+
                             function loadfile(f) {
                                 var maper = []
 
@@ -80,11 +79,9 @@ include 'header.php';
                                             type: "number"
                                         },
                                     }
-                                    console.log(struct)
-
-                                    data.unshift(struct);
-                                    return data;
-
+                                    loadLSFiltersTemplate(data['filters']);
+                                    data['data'].unshift(struct);
+                                    return data['data'];
                                 };
 
                                 var pivot1 = new WebDataRocks({
@@ -132,7 +129,7 @@ include 'header.php';
                                             "sorting": {
                                                 "column": {
                                                     "type": "desc",
-                                                    
+
                                                     "tuple": [],
                                                     "measure": "Mt Remise"
                                                 }
@@ -144,7 +141,8 @@ include 'header.php';
                                                 "title": "Top +",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "rows",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -164,10 +162,13 @@ include 'header.php';
                                             "data": getJSONData()
                                         },
                                         "slice": {
-                                            "reportFilters": [
-                                                {
+                                            "reportFilters": [{
                                                     "uniqueName": "Agence",
                                                     "caption": "Agence",
+                                                },
+                                                {
+                                                    "uniqueName": "Canal",
+                                                    "caption": "Canal",
                                                 },
                                                 {
                                                     "uniqueName": "Bloc",
@@ -208,7 +209,7 @@ include 'header.php';
                                             "grid": {
                                                 "title": "Top -",
                                                 "showHeaders": false,
-                                                "showFilter": true,
+                                                "showFilter": false,
                                                 "showGrandTotals": "rows",
                                                 "showHierarchyCaptions": false
                                             },
@@ -221,69 +222,56 @@ include 'header.php';
                                     },
                                 });
                                 pin = pivot1
-                                previosFilter = []
-                                srcDemo = null
+
                                 pivot1.on("reportcomplete", function() {
-                                    previosFilter = pivot1.getFilter("type");
-                                    var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                    srcDemo = sourceFiltersContainer;
-                                    var targetFiltersContainer = document.getElementById("ls-filters");
-                                    while(targetFiltersContainer.firstChild){
-                                        targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
-                                    }
-                                    var elementParent = sourceFiltersContainer.parentElement;                                 
-                                    elementParent.removeChild(sourceFiltersContainer);
-                                    sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
-                                    var secondElement = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                    secondparent = secondElement.parentElement;
-                                    srcDemo = secondElement; 
-                                    secondparent.removeChild(secondElement);
-                                    targetFiltersContainer.appendChild(sourceFiltersContainer);    
-
-                                    pivot1.on("reportchange", function() {
-                                        while(document.querySelector(".wdr-filters.wdr-ui-hgroup")){
-                                                var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                                var Parent =  srcFiltersContainer.parentElement;
-                                                Parent.removeChild(srcFiltersContainer);
-                                            }
-                                        var currentConfig = pivot1.getReport();
-                                        var currentConfigP2 = pivot2.getReport();
-                                        currentConfigP2.slice.reportFilters = currentConfig.slice.reportFilters;
-                                            currentConfigP2.options.grid["showFilter"]=  true,
-                                            pivot2.setReport(currentConfigP2);
-                                            document.getElementById("wdr-grid-view").appendChild(srcDemo);
-                                        //pivot1.setReport(currentConfig);
-                                    });
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
                                 });
+
+                                pivot2.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot2.getMeasures().concat(pivot2.getRows()));
+                                    applayLSFilters(pivot2, captionsMapper);
+                                    pivot2.off("reportcomplete");
+                                });
+
+                                //previosFilter = []
+                                //srcDemo = null
+                                // pivot1.on("reportcomplete", function() {
+                                //     previosFilter = pivot1.getFilter("type");
+                                //     var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                //     srcDemo = sourceFiltersContainer;
+                                //     var targetFiltersContainer = document.getElementById("ls-filters");
+                                //     while (targetFiltersContainer.firstChild) {
+                                //         targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
+                                //     }
+                                //     var elementParent = sourceFiltersContainer.parentElement;
+                                //     elementParent.removeChild(sourceFiltersContainer);
+                                //     sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
+                                //     var secondElement = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                //     secondparent = secondElement.parentElement;
+                                //     srcDemo = secondElement;
+                                //     secondparent.removeChild(secondElement);
+                                //     targetFiltersContainer.appendChild(sourceFiltersContainer);
+
+                                //     pivot1.on("reportchange", function() {
+                                //         while (document.querySelector(".wdr-filters.wdr-ui-hgroup")) {
+                                //             var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
+                                //             var Parent = srcFiltersContainer.parentElement;
+                                //             Parent.removeChild(srcFiltersContainer);
+                                //         }
+                                //         var currentConfig = pivot1.getReport();
+                                //         var currentConfigP2 = pivot2.getReport();
+                                //         currentConfigP2.slice.reportFilters = currentConfig.slice.reportFilters;
+                                //         currentConfigP2.options.grid["showFilter"] = true,
+                                //             pivot2.setReport(currentConfigP2);
+                                //         document.getElementById("wdr-grid-view").appendChild(srcDemo);
+                                //         //pivot1.setReport(currentConfig);
+                                //     });
+                                // });
                             }
 
-                            function compare_filters(f1, f2) {
-                                filter1 = {}
 
-                                if (f1 != null) {
-                                    f1.forEach(e => {
-                                        filter1[e.uniqueName] = 1
-                                    })
-                                }
-                                //check if element in f2 is in f1
-                                if (f2 != null) {
-                                    f2.forEach(e => {
-                                        if (filter1[e.uniqueName] == 1) {
-                                            filter1[e.uniqueName] = 2
-                                        }
-                                    })
-                                }
-                                if (f1 != null && f2 != null) {
-                                    if (f1.length != f2.length)
-                                        return false
-                                }
-                                for (const [key, value] of Object.entries(filter1)) {
-                                    if (value == 1) {
-                                        return false
-                                    }
-                                }
-                                return true
-                            }
                             loaddate();
                         </script>
 

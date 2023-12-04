@@ -119,6 +119,9 @@ include 'header.php';
                                                     "uniqueName": "Produit"
                                                 },
                                                 {
+                                                    "uniqueName": "type"
+                                                },
+                                                {
                                                     "uniqueName": "type2",
                                                     "caption": "Type",
                                                     "filter": {

@@ -115,6 +115,9 @@ $objet = json_decode($response, true);
     <link rel="stylesheet" type="text/css" href="assets/admin-tools/admin-forms/css/admin-forms.css">
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.ico">
+    <!-- <link href="assets/webdatarocks_1_4_12/webdatarocks.min.css" rel="stylesheet" />
+    <script src="assets/webdatarocks_1_4_12/webdatarocks.toolbar.min.js"></script>
+    <script src="assets/webdatarocks_1_4_12/webdatarocks.js"></script> -->
     <link href="webdatarocks.min.css" rel="stylesheet" />
     <script src="webdatarocks.toolbar.min.js"></script>
     <script src="webdatarocks.js"></script>

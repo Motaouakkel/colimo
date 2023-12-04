@@ -91,7 +91,9 @@ include 'header.php';
                                                 "uniqueName": "Gamme"
                                             }, {
                                                 "uniqueName": "Produit"
-                                            }, {
+                                            }, , {
+                                                "uniqueName": "Canal"
+                                            },{
                                                 "uniqueName": "type",
                                                 "filter": {
                                                     "members": [

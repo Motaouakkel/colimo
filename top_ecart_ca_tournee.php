@@ -96,6 +96,8 @@ include 'header.php';
                                                 "uniqueName": "agence"
                                             }, {
                                                 "uniqueName": "secteur"
+                                            },{
+                                                "uniqueName": "Canal"
                                             }],
                                             "rows": [{
                                                     "uniqueName": "secteur"
@@ -178,6 +180,8 @@ include 'header.php';
                                                 "uniqueName": "agence"
                                             }, {
                                                 "uniqueName": "secteur"
+                                            }, {
+                                                "uniqueName": "Canal"
                                             }],
                                             "rows": [{
                                                     "uniqueName": "secteur"

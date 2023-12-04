@@ -96,6 +96,10 @@ include 'header.php';
                                                 "caption": "AGENCE"
                                             },
                                             {
+                                                "uniqueName": "Canal",
+                                                "caption": "tttx    "
+                                            },
+                                            {
                                                 "uniqueName": "sector",
                                                 "caption": "SECTEUR"
 
