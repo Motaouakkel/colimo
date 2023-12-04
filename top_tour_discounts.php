@@ -235,40 +235,6 @@ include 'header.php';
                                     pivot2.off("reportcomplete");
                                 });
 
-                                //previosFilter = []
-                                //srcDemo = null
-                                // pivot1.on("reportcomplete", function() {
-                                //     previosFilter = pivot1.getFilter("type");
-                                //     var sourceFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                //     srcDemo = sourceFiltersContainer;
-                                //     var targetFiltersContainer = document.getElementById("ls-filters");
-                                //     while (targetFiltersContainer.firstChild) {
-                                //         targetFiltersContainer.removeChild(targetFiltersContainer.firstChild)
-                                //     }
-                                //     var elementParent = sourceFiltersContainer.parentElement;
-                                //     elementParent.removeChild(sourceFiltersContainer);
-                                //     sourceFiltersContainer.classList.remove("wdr-ui-hgroup")
-                                //     var secondElement = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                //     secondparent = secondElement.parentElement;
-                                //     srcDemo = secondElement;
-                                //     secondparent.removeChild(secondElement);
-                                //     targetFiltersContainer.appendChild(sourceFiltersContainer);
-
-                                //     pivot1.on("reportchange", function() {
-                                //         while (document.querySelector(".wdr-filters.wdr-ui-hgroup")) {
-                                //             var srcFiltersContainer = document.querySelector(".wdr-filters.wdr-ui-hgroup");
-                                //             var Parent = srcFiltersContainer.parentElement;
-                                //             Parent.removeChild(srcFiltersContainer);
-                                //         }
-                                //         var currentConfig = pivot1.getReport();
-                                //         var currentConfigP2 = pivot2.getReport();
-                                //         currentConfigP2.slice.reportFilters = currentConfig.slice.reportFilters;
-                                //         currentConfigP2.options.grid["showFilter"] = true,
-                                //             pivot2.setReport(currentConfigP2);
-                                //         document.getElementById("wdr-grid-view").appendChild(srcDemo);
-                                //         //pivot1.setReport(currentConfig);
-                                //     });
-                                // });
                             }
 
 

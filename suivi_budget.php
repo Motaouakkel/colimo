@@ -113,6 +113,10 @@ include 'header.php';
                                                 {
                                                     "uniqueName": "Produit",
                                                     "caption": "Produit",
+                                                },
+                                                {
+                                                    "uniqueName": "Gamme",
+                                                    "caption": "Gamme",
                                                 }
                                             ],
                                             "rows": [{

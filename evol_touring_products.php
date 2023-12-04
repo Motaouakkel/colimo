@@ -41,6 +41,7 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                <div id="filters"></div>
                                 <div id="wdr-component"></div>
                             </div>
                         </div>
@@ -52,64 +53,48 @@ include 'header.php';
 
                                     data = $.parseJSON(f);
 
-                                    var i = 1;
-                                    data.forEach(e => {
-                                        if (!mapper[e.product_name]) {
-                                            mapper[e.product_name] = {
-                                                "gamme": e.gamme,
-                                                "famille": e.famille
-
-                                            }
-                                        }
-                                        e.gamme_seq = i;
-                                        e.famille_seq = i;
-                                        i++
-                                    })
-
-                                    ret = []
                                     var struct = {
-                                        "tournee": {
+                                        "Famille": {
                                             type: "string"
                                         },
-
-                                        "gamme_seq": {
-                                            type: "number"
-                                        },
-                                        "famille_seq": {
-                                            type: "number"
-                                        },
-                                        "product_name": {
+                                        "Produit": {
                                             type: "string"
                                         },
-                                        "ca1": {
-                                            type: "number"
-                                        },
-                                        "ca2": {
-                                            type: "number"
-                                        },
-                                        "sold_qtt1": {
-                                            type: "number"
-                                        },
-                                        "sold_qtt2": {
-                                            type: "number"
-                                        },
-                                        "lost1": {
-                                            type: "number"
-                                        },
-                                        "lost2": {
-                                            type: "number"
-                                        },
-                                        "famille": {
+                                        "Gamme": {
                                             type: "string"
                                         },
-                                        "gamme": {
+                                        "agence": {
+                                            type: "string"
+                                        },
+                                        "bloc": {
+                                            type: "string"
+                                        },
+                                        "ca_1": {
+                                            type: "number"
+                                        },
+                                        "ca_2": {
+                                            type: "number"
+                                        },
+                                        "perte_1": {
+                                            type: "number"
+                                        },
+                                        "perte_2": {
+                                            type: "number"
+                                        },
+                                        "quantite_1": {
+                                            type: "number"
+                                        },
+                                        "quantite_2": {
+                                            type: "number"
+                                        },
+                                        "secteur": {
                                             type: "string"
                                         },
 
                                     }
-                                    data.unshift(struct);
-
-                                    return data;
+                                    loadLSFiltersTemplate(data['filters']);
+                                    data['data'].unshift(struct);
+                                    return data['data'];
 
                                 };
 
@@ -124,104 +109,94 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                "uniqueName": "tournee"
+                                                "uniqueName": "agence",
+                                                "caption": "Agence",
+                                            }, {
+                                                "uniqueName": "bloc",
+                                                "caption": "bloc",
+                                            }, {
+                                                "uniqueName": "secteur",
+                                                "caption": "secteur",
                                             }],
                                             "rows": [{
-                                                    "uniqueName": "product_name"
+                                                    "uniqueName": "Famille"
                                                 },
-
+                                                {
+                                                    "uniqueName": "Gamme"
+                                                },
+                                                {
+                                                    "uniqueName": "Produit"
+                                                },
                                             ],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
 
                                             "measures": [{
-                                                    "uniqueName": "famille_seq",
-                                                    "caption": "FAMILLE",
-                                                },
-                                                {
-                                                    "uniqueName": "gamme_seq",
-                                                    "caption": "GAMME",
-                                                },
-                                                {
-                                                    "uniqueName": "sold_qtt1",
+                                                    "uniqueName": "quantite_1",
                                                     "caption": "QTTE P1",
-                                                    "format": "precision"
-
                                                 },
                                                 {
-                                                    "uniqueName": "sold_qtt2",
+                                                    "uniqueName": "quantite_2",
                                                     "caption": "QTTE P2",
-                                                    "format": "precision"
-
                                                 },
                                                 {
-                                                    "uniqueName": "Evol_sold_qtt",
+                                                    "uniqueName": "evol_qtte",
                                                     "caption": "EVOL",
-                                                    "formula": "\"sold_qtt2\" - \"sold_qtt1\"",
-                                                    "format": "precision"
+                                                    "format": "precision",
+                                                    "formula": "(sum(\"quantite_2\") - sum(\"quantite_1\"))",
                                                 },
                                                 {
-                                                    "uniqueName": "Evol_sold_qtt%",
+                                                    "uniqueName": "evol_qtte%",
                                                     "caption": "%",
-                                                    "formula": "if( (sum(\"sold_qtt1\") != 0) ,  (\"Evol_sold_qtt\" * 100)/abs(sum(\"sold_qtt1\") ,sum(\"sold_qtt1\") )",
-                                                    "aggregation": "none",
-                                                    "format": "precentForamt",
+                                                    "format": "precision",
+                                                    "formula": "(((sum(\"quantite_2\") - sum(\"quantite_1\")) * 100)/ sum(\"quantite_1\"))",
                                                 },
                                                 {
-                                                    "uniqueName": "ca1",
+                                                    "uniqueName": "ca_1",
                                                     "caption": "CA P1",
                                                     "format": "precision"
-
                                                 },
-
                                                 {
-                                                    "uniqueName": "ca2",
+                                                    "uniqueName": "ca_2",
                                                     "caption": "CA P2",
                                                     "format": "precision"
-
                                                 },
                                                 {
-                                                    "uniqueName": "Evol",
+                                                    "uniqueName": "evol_ca",
                                                     "caption": "EVOL",
-                                                    "formula": "\"ca2\" - \"ca1\"",
-                                                    "format": "precision"
-
+                                                    "format": "precision",
+                                                    "formula": "sum(\"ca_2\") - sum(\"ca_1\")",
                                                 },
                                                 {
-                                                    "uniqueName": "Evol%",
+                                                    "uniqueName": "evol_ca%",
                                                     "caption": "%",
-                                                    "formula": "if( (sum(\"ca1\") != 0) ,  (\"Evol\" * 100)/abs(sum(\"ca1\") ,sum(\"ca1\") )",
-                                                    "aggregation": "none",
-                                                    "format": "precentForamt",
-
+                                                    "format": "precision",
+                                                    "formula": "(((sum(\"ca_2\") - sum(\"ca_1\")) * 100)/ sum(\"ca_1\"))",
                                                 },
                                                 {
-                                                    "uniqueName": "lost1",
-                                                    "caption": "PERTE GLOBALE P1",
+                                                    "uniqueName": "perte_1",
+                                                    "caption": "Perte Globale P1",
                                                     "format": "precision"
-
                                                 },
                                                 {
-                                                    "uniqueName": "lost2",
-                                                    "caption": "PERTE GLOBALE P2",
+                                                    "uniqueName": "perte_2",
+                                                    "caption": "Perte Globale P2",
                                                     "format": "precision"
-                                                    
                                                 },
                                                 {
-                                                    "uniqueName": "EvolLost",
+                                                    "uniqueName": "evol_perte",
                                                     "caption": "EVOL",
-                                                    "formula": "\"lost2\" - \"lost1\"",
-                                                    "format": "precision"
-                                                    
+                                                    "format": "precision",
+                                                    "formula": "((sum(\"perte_2\") - sum(\"perte_1\"))",
                                                 },
                                                 {
-                                                    "uniqueName": "EvolLost%",
+                                                    "uniqueName": "evol_ca%",
                                                     "caption": "%",
-                                                    "formula": "if( (sum(\"lost1\") != 0) ,  (\"EvolLost\" * 100)/abs(sum(\"lost1\") ,sum(\"lost1\") )",
-                                                    "aggregation": "none",
-                                                    "format": "precentForamt",
+                                                    "format": "precision",
+                                                    "formula": "(((sum(\"perte_2\") - sum(\"perte_1\")) * 100)/ sum(\"perte_1\"))",
                                                 },
+
                                             ],
 
                                         },
@@ -230,43 +205,51 @@ include 'header.php';
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
                                                 "showGrandTotals": "columns",
-                                                "showHierarchyCaptions": false
+                                                "showHierarchyCaptions": false,
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
                                         "formats": [{
-                                            "name": "precentForamt",
-                                            "decimalPlaces": 2,
-                                            
-                                        },
-                                        {
-                                            "name": "precision",
-                                            "decimalPlaces": 2,
-                                            
-                                            
-                                        }]
+                                                "name": "precentForamt",
+                                                "decimalPlaces": 2,
+
+                                            },
+                                            {
+                                                "name": "precision",
+                                                "decimalPlaces": 2,
+
+
+                                            }
+                                        ]
                                     },
 
                                 });
 
-                                pivot1.customizeCell(function customizeCellFunction(cell, data) {
-                                    if (data.measure &&
-                                        data.type != "header") {
-                                        if (data.measure.uniqueName == "gamme_seq") {
-                                            if (data.rows.length == 0) {
-                                                cell.text = ""
-                                            } else {
-                                                cell.text = "" + mapper[data.rows[0].caption].gamme;
-                                            }
-                                        } else if (data.measure.uniqueName == "famille_seq") {
-                                            if (data.rows.length == 0) {
-                                                cell.text = ""
-                                            } else {
-                                                cell.text = "" + mapper[data.rows[0].caption].famille;
-                                            }
-                                        }
-                                    }
+                                pivot1.on("reportcomplete", function() {
+                                    var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
+                                    applayLSFilters(pivot1, captionsMapper);
+                                    pivot1.off("reportcomplete");
                                 });
+
+                                // pivot1.customizeCell(function customizeCellFunction(cell, data) {
+                                //     if (data.measure &&
+                                //         data.type != "header") {
+                                //         if (data.measure.uniqueName == "gamme_seq") {
+                                //             if (data.rows.length == 0) {
+                                //                 cell.text = ""
+                                //             } else {
+                                //                 cell.text = "" + mapper[data.rows[0].caption].gamme;
+                                //             }
+                                //         } else if (data.measure.uniqueName == "famille_seq") {
+                                //             if (data.rows.length == 0) {
+                                //                 cell.text = ""
+                                //             } else {
+                                //                 cell.text = "" + mapper[data.rows[0].caption].famille;
+                                //             }
+                                //         }
+                                //     }
+                                // });
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
