@@ -55,31 +55,28 @@ include 'header.php';
                                         "agency": {
                                             type: "string"
                                         },
-                                        "vitrines": {
+                                        "vitrine": {
                                             type: "number"
                                         },
-                                        "ca_vitrines": {
+                                        "ca_vitrine": {
                                             type: "number"
                                         },
-                                        "ca/jour": {
+                                        "100": {
                                             type: "number"
                                         },
-                                        "<100": {
+                                        "100_200": {
                                             type: "number"
                                         },
-                                        "100-200": {
+                                        "200_300": {
                                             type: "number"
                                         },
-                                        "200-300": {
+                                        "300_400": {
                                             type: "number"
                                         },
-                                        "300-400": {
+                                        "400_500": {
                                             type: "number"
                                         },
-                                        "400-500": {
-                                            type: "number"
-                                        },
-                                        ">500": {
+                                        "500": {
                                             type: "number"
                                         },
 
@@ -101,49 +98,52 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                "uniqueName": "agency"
+                                                "uniqueName": "agency",
+                                                "caption": "Agence"
                                             }],
                                             "rows": [{
-                                                "uniqueName": "agency"
+                                                "uniqueName": "agency",
+                                                "caption": "Agence"
                                             }],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
-                                                    "uniqueName": "vitrines",
+                                                    "uniqueName": "vitrine",
                                                     "caption": "Nbre vitrines",
                                                 }, {
-                                                    "uniqueName": "ca_vitrines",
+                                                    "uniqueName": "ca_vitrine",
                                                     "caption": "Ca vitrines",
-                                                    "formula": "\"ca/jour\" * \"vitrines\""
                                                 },
                                                 {
-                                                    "uniqueName": "ca/jour",
-                                                    "caption": "Ca /vitrine/jour",
+                                                    "uniqueName": "jour",
+                                                    "caption": "Ca /vitrine",
+                                                    "formula": "sum(\"ca_vitrine\") / sum(\"vitrine\")",
+                                                    "format": "precision"
                                                 },
                                                 {
-                                                    "uniqueName": "<100",
+                                                    "uniqueName": "100",
                                                     "caption": "<100",
                                                 },
                                                 {
-                                                    "uniqueName": "100-200",
+                                                    "uniqueName": "100_200",
                                                     "caption": "100-200",
                                                 },
                                                 {
-                                                    "uniqueName": "200-300",
+                                                    "uniqueName": "200_300",
                                                     "caption": "200-300",
                                                 },
                                                 {
-                                                    "uniqueName": "300-400",
+                                                    "uniqueName": "300_400",
                                                     "caption": "300-400",
                                                 },
                                                 {
-                                                    "uniqueName": "400-500",
+                                                    "uniqueName": "400_500",
                                                     "caption": "400-500",
                                                 },
                                                 {
-                                                    "uniqueName": ">500",
-                                                    "caption": ">300",
+                                                    "uniqueName": "500",
+                                                    "caption": ">500",
                                                 },
 
                                             ]
@@ -187,6 +187,7 @@ include 'header.php';
                                     },
 
                                 });
+
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
                                     toolbar.getTabs = function() {
