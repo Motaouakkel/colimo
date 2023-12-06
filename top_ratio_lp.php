@@ -146,7 +146,7 @@ include 'header.php';
                                                 "uniqueName": "ratio",
                                                 "caption": "RATIO LP %",
                                                 "format": "percent",
-                                                "formula": "sum('montant')/sum('montant_global')"
+                                                "formula": "((sum('montant')/sum('montant_global')) * 100)"
                                             }, ],
                                             "sorting": {
                                                 "column": {
@@ -253,7 +253,7 @@ include 'header.php';
                                                 "uniqueName": "ratio",
                                                 "caption": "RATIO LP %",
                                                 "format": "percent",
-                                                "formula": "sum('montant')/sum('montant_global')"
+                                                "formula": "((sum('montant')/sum('montant_global')) * 100)"
                                             }, ],
                                             "sorting": {
                                                 "column": {

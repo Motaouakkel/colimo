@@ -164,7 +164,7 @@ include 'header.php';
                                                     "uniqueName": "% evolution",
                                                     "caption": "% evolution",
                                                     //to save againt division by zero
-                                                    "formula": "IF(sum('amount_1')=0,0,100*(sum('amount_2') -sum('amount_1'))/sum('amount_1'))",
+                                                    "formula": "IF(sum('amount_1')=0,0,(100*(sum('amount_2') -sum('amount_1')))/sum('amount_1'))",
 
                                                     "format": "precentForamt"
 

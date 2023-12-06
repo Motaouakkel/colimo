@@ -277,7 +277,9 @@ if (!isset($_POST["filtersData"])) {
                 if (filter["static"] !== undefined && currentFilter.filter) {
                     currentFilter.filter.members.push(`${filter.name}.${filter["static"]}`);
                 }
-
+                if (currentFilter.filter && currentFilter.filter["members"]) {
+                    currentFilter.filter.members.push(`${filter.name}.lxjiwil`)
+                }
                 filterss.push(currentFilter);
             }
 
