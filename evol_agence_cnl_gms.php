@@ -186,7 +186,7 @@ include 'header.php';
                                             
                                         }, {
                                             "name": "precision",
-                                            "decimalPlaces": 2,
+                                            "decimalPlaces": 0,
                                         }]
                                     },
 
