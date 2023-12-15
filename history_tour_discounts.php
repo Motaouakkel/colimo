@@ -67,6 +67,9 @@ include 'header.php';
                                         "type": {
                                             type: "number"
                                         },
+                                        "Canal": {
+                                            type: "string"
+                                        },
                                     }
                                     loadLSFiltersTemplate(data['filters']);
                                     daysMapper = data['data'][1]
@@ -86,18 +89,22 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                "uniqueName": "Agence"
-                                            }, {
-                                                "uniqueName": "Secteur"
-                                            }, {
-                                                "uniqueName": "Bloc"
-                                            }, {
-                                                "uniqueName": "Gamme"
-                                            }, {
-                                                "uniqueName": "Produit"
-                                            }, {
-                                                "uniqueName": "type"
-                                            }],
+                                                    "uniqueName": "Agence"
+                                                }, {
+                                                    "uniqueName": "Secteur"
+                                                }, {
+                                                    "uniqueName": "Bloc"
+                                                }, {
+                                                    "uniqueName": "Gamme"
+                                                }, {
+                                                    "uniqueName": "Produit"
+                                                }, {
+                                                    "uniqueName": "type"
+                                                },
+                                                {
+                                                    "uniqueName": "Canal"
+                                                },
+                                            ],
                                             "rows": [{
                                                     "uniqueName": "Agence"
                                                 },
@@ -112,7 +119,7 @@ include 'header.php';
                                             "columns": [{
                                                 "uniqueName": "day",
                                                 "formula": "sum(\"amount\")",
-                                                
+
 
                                             }],
                                             "measures": [{

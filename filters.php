@@ -80,6 +80,7 @@ if (!isset($_POST["filtersData"])) {
 </div>
 
 <script>
+    injectHorizontalScrollButtons();
     var filtersData = <?php echo json_encode($_POST["filtersData"]); ?>;
     $('.filter-child').click(function() {
         var popup = $('.filters-pop-up');
@@ -313,5 +314,46 @@ if (!isset($_POST["filtersData"])) {
             return JSON.parse(storedData);
         }
         return;
+    }
+
+    function injectHorizontalScrollButtons() {
+        var scrollInterval;
+        var scrollIncrement = 0;
+        var scrollContainerHtml = `
+                    <div class="row h-scroll-container">
+                        <div class="scroll-btn scoll-left"></div>
+                        <div class="scroll-btn scoll-right"></div>
+                    </div>
+                `;
+        $('.navbar.navbar-fixed-top.bg-light').after(scrollContainerHtml);
+
+
+        $('.scoll-right').on('mousedown', function() {
+            var scrollElements = $('#wdr-data-sheet .wdr-ui-element.wdr-scroll-pane');
+            scrollInterval = setInterval(function() {
+                if (scrollElements.length > 0) {
+                    scrollIncrement += 5;
+                    scrollElements.scrollLeft(scrollIncrement);
+                }
+            }, 5);
+        });
+
+        $('.scoll-left').on('mousedown', function() {
+            var scrollElements = $('#wdr-data-sheet .wdr-ui-element.wdr-scroll-pane');
+            scrollInterval = setInterval(function() {
+                if (scrollElements.length > 0) {
+                    scrollIncrement -= 5;
+                    scrollElements.scrollLeft(scrollIncrement);
+                }
+            }, 5);
+        });
+
+        $('.scoll-left').on('mouseup', function() {
+            clearInterval(scrollInterval);
+        });
+
+        $('.scoll-right').on('mouseup', function() {
+            clearInterval(scrollInterval);
+        });
     }
 </script>
