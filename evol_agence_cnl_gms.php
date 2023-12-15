@@ -47,7 +47,7 @@ include 'header.php';
                         </div>
                         <script>
                             function loadfile(f) {
-                                var test = ""
+                                var test = "traditionnel"
 
                                 function getJSONData() {
 

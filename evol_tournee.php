@@ -171,7 +171,7 @@ include 'header.php';
                                                 }
                                             ],
                                             "expands": {
-                                                "expandAll": true,
+                                                "expandAll":false,
                                             },
                                         },
 
@@ -191,7 +191,7 @@ include 'header.php';
                                             "decimalPlaces": 2,
                                         }, {
                                             "name": "precision",
-                                            "decimalPlaces": 2,
+                                            "decimalPlaces": 0,
 
                                         }]
                                     },

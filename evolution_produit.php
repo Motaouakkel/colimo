@@ -106,8 +106,13 @@ include 'header.php';
                                                     "uniqueName": "Agence"
                                                 },
                                                 {
-                                                    "uniqueName": "type"
+                                                    "uniqueName": "type",
+                                                    "filter": {
+                                                        "members": ["type.ENLEV NET"]
+                                                    }
+
                                                 },
+                                                
                                                 {
                                                     "uniqueName": "Canal"
                                                 },
@@ -121,7 +126,11 @@ include 'header.php';
                                                     "uniqueName": "Produit"
                                                 },
                                                 {
-                                                    "uniqueName": "unite"
+                                                    "uniqueName": "unite",
+                                                    "filter": {
+                                                        "members": ["unite.DH TTC"]
+                                                    }
+
                                                 },
                                             ],
                                             "rows": [{
@@ -180,7 +189,7 @@ include 'header.php';
 
                                         }, {
                                             "name": "precision",
-                                            "decimalPlaces": 2,
+                                            "decimalPlaces": 0,
 
                                         }]
                                     },

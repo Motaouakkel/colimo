@@ -120,11 +120,13 @@ include 'header.php';
                                             }],
                                             "measures": [{
                                                     'uniqueName': 'ENL_BRU',
-                                                    'caption': 'ENLEVEMENT BRUT'
+                                                    'caption': 'ENLEVEMENT BRUT',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': 'INV',
-                                                    'caption': 'INVENDU'
+                                                    'caption': 'INVENDU',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%INV',
@@ -135,10 +137,12 @@ include 'header.php';
                                                 {
                                                     'uniqueName': 'ENL_NET',
                                                     'caption': 'ENLEVEMENT NET',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': 'PC',
                                                     'caption': 'PERTE COMMERCIAL',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%PC',
@@ -149,6 +153,7 @@ include 'header.php';
                                                 {
                                                     'uniqueName': 'PT',
                                                     'caption': 'PERTE COMMERCIAL',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%PT',
@@ -159,6 +164,7 @@ include 'header.php';
                                                 {
                                                     'uniqueName': 'PCA',
                                                     'caption': 'PERTE CAMION',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%PCA',
@@ -169,6 +175,7 @@ include 'header.php';
                                                 {
                                                     'uniqueName': 'PG',
                                                     'caption': 'PERTE GLOBALE',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%PG',
@@ -178,11 +185,13 @@ include 'header.php';
                                                 },
                                                 {
                                                     'uniqueName': 'CA_AVRM',
-                                                    'caption': 'CA NET AVANT REMISES'
+                                                    'caption': 'CA NET AVANT REMISES',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': 'RFM',
-                                                    'caption': "RFM"
+                                                    'caption': "RFM",
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%RFM',
@@ -192,7 +201,8 @@ include 'header.php';
                                                 },
                                                 {
                                                     'uniqueName': 'RSF',
-                                                    'caption': "RSF"
+                                                    'caption': "RSF",
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%RSF',
@@ -202,7 +212,8 @@ include 'header.php';
                                                 },
                                                 {
                                                     'uniqueName': 'PROM',
-                                                    'caption': 'PROMOTION'
+                                                    'caption': 'PROMOTION',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%PROM',
@@ -213,6 +224,7 @@ include 'header.php';
                                                 {
                                                     'uniqueName': 'RMGB',
                                                     'caption': 'REMISE GLOBALE',
+                                                    'format': 'precision'
                                                 },
                                                 {
                                                     'uniqueName': '%RMGB',
@@ -223,6 +235,7 @@ include 'header.php';
                                                 {
                                                     'uniqueName': 'RMPER',
                                                     'caption': 'REMISE + PERTE',
+                                                    'format': 'precision'
                                                     
                                                 },
                                                 {
@@ -233,7 +246,9 @@ include 'header.php';
                                                 },
                                                 {
                                                     'uniqueName': 'COUT VAR',
-                                                    'caption': 'TOTAL COUT VAR'
+                                                    'caption': 'TOTAL COUT VAR',
+                                                    'format': 'precision'
+                                                    
                                                 },
                                                 {
                                                     'uniqueName': '%COUT VAR',
@@ -242,7 +257,9 @@ include 'header.php';
                                                     'format': 'precentForamt'
                                                 },
                                                 {
-                                                    'uniqueName': 'CE NET'
+                                                    'uniqueName': 'CENET',
+                                                    'caption': 'CA NET',
+                                                    'format': 'precision'
                                                 },
 
                                             ],
@@ -262,6 +279,9 @@ include 'header.php';
                                         "formats": [{
                                             "name": "precentForamt",
                                             "decimalPlaces": 2,
+                                        },{
+                                            "name": "precision",
+                                            "decimalPlaces": 0,
                                         }]
                                     },
 
