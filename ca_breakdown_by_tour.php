@@ -191,7 +191,7 @@ include 'header.php';
                                                 "uniqueName": "Measures"
                                             }],
                                             "expands": {
-                                                "expandAll": true
+                                                "expandAll": false
                                             },
                                             "measures": [{
                                                     "uniqueName": "ENLEVEMENT BRUT",
@@ -335,6 +335,7 @@ include 'header.php';
                                                     "uniqueName": "CA NET",
                                                     "caption": "CA NET",
                                                     "aggregation": "sum",
+                                                    "format": "precision"
                                                 }
 
 
@@ -345,8 +346,8 @@ include 'header.php';
                                             "grid": {
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
-                                                "showGrandTotals": "off",
-                                                "showTotals": "off",
+                                                "showGrandTotals": "rows",
+                                                "showTotals": "rows",
                                                 "showHierarchyCaptions": false,
                                                 "type": "classic",
                                                 "showFilter": false,
@@ -355,7 +356,7 @@ include 'header.php';
                                         },
                                         "formats": [{
                                                 "name": "precision",
-                                                "decimalPlaces": 2,
+                                                "decimalPlaces": 0,
                                             },
                                             {
                                                 "name": "percentage",

@@ -1,5 +1,5 @@
 <?php
-$page_title = "EVOLUTION par canal";
+$page_title = "EVOLUTION DES AGENCES";
 $api_action = "bulkEvolAgence";
 $export_btn = true;
 include 'header.php';
@@ -185,7 +185,7 @@ include 'header.php';
                                                 "showAggregationLabels": false
                                             },
                                             "formats": [{
-                                                "name": "precentForamt",
+                                                "name": "precent",
                                                 "decimalPlaces": 2,
 
                                             }, {
