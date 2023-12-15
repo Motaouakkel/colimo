@@ -27,7 +27,8 @@ Import the fonts*/
   -moz-osx-font-smoothing: grayscale;
 }
 
-.panel .panel-body , .wdr-filter-header{
+.panel .panel-body,
+.wdr-filter-header {
   text-transform: uppercase !important;
 }
 
@@ -23474,6 +23475,7 @@ body {
   /* Fix for webkit rendering */
   -webkit-text-size-adjust: 100%;
   font-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 #main {
@@ -25696,7 +25698,7 @@ body.tray-rescale .tray .affix-pane.affix {
   position: fixed;
   top: 0;
   left: 0;
-  width: 230px;
+  width: 228px;
   min-height: 100%;
   padding-bottom: 40px;
   background-color: #30363e;
@@ -31166,3 +31168,58 @@ Copyright (c) 2014 Daniel Eden
   -webkit-animation-name: slideOutUp;
   animation-name: slideOutUp;
 }
+
+/* Horizontal Scroll Buttons */
+.h-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  position: fixed;
+  bottom: 10px;
+  right: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 99999999;
+}
+
+.scroll-btn {
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #005AA0;
+  width: 60px;
+  height: 35px;
+  padding: 10px 25px;
+  border-radius: 20px 10px;
+  margin: 0 8px;
+}
+
+.scroll-btn::after {
+  font-family: 'FontAwesome';
+  text-align: center;
+  color: #fff;
+}
+
+.scroll-btn.scoll-left::after {
+  content: '\f053';
+}
+
+.scroll-btn.scoll-right::after {
+  content: '\f054';
+}
+
+.h-scroll-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+}
+
+.scroll-btn {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+/* end horizontal Scroll Buttons */
