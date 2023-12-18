@@ -59,18 +59,17 @@ $objet = json_decode($response, true);
     };
 
     function loadLSFiltersTemplate(filters) {
-        if ($('#filters').children().length == 0) {
-            $.ajax({
-                type: "POST",
-                url: "filters.php",
-                data: {
-                    filtersData: filters
-                },
-                success: function(response) {
-                    $('#filters').html(response);
-                }
-            });
-        }
+        $('#filters').html(' ');
+        $.ajax({
+            type: "POST",
+            url: "filters.php",
+            data: {
+                filtersData: filters
+            },
+            success: function(response) {
+                $('#filters').html(response);
+            }
+        });
     }
 
     function buildCaptionsMapper(measures) {
