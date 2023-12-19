@@ -106,9 +106,10 @@ include 'header.php';
 
                                                 {
                                                     "uniqueName": "canal",
+                                                    "caption":"Canal",
                                                     "filter": {
                                                         "members": [
-                                                            "canal." + test
+                                                            "canal.traditionnel"
                                                         ]
                                                     }
                                                 },
@@ -119,7 +120,13 @@ include 'header.php';
                                                     "uniqueName": "Produit"
                                                 },
                                                 {
-                                                    "uniqueName": "type"
+                                                    "uniqueName": "type",
+                                                    "caption": "UNITE",
+                                                    "filter": {
+                                                        "members": [
+                                                            "type.DH TTC"
+                                                        ]
+                                                    }
                                                 },
                                                 {
                                                     "uniqueName": "type2",
@@ -176,7 +183,7 @@ include 'header.php';
                                                 "type": "classic",
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false,
-                                                "showFilter": false,
+                                                
                                             },
                                             "showAggregationLabels": false
                                         },
