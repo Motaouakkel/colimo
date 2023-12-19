@@ -88,6 +88,10 @@ include 'header.php';
                                         "INVENDU": {
                                             type: "number"
                                         },
+                                        "ENLEVEMENT BRUT":{
+                                            type: "number"
+                                        }
+
                                     }
                                     loadLSFiltersTemplate(data['filters']);
                                     data['data'].unshift(struct);
@@ -134,9 +138,9 @@ include 'header.php';
                                                 "uniqueName": "Measures"
                                             }],
                                             "measures": [{
-                                                "uniqueName": "% INVENDU",
+                                                "uniqueName": "NVENDU",
                                                 "caption": "% INVENDU",
-                                                "aggregation": "average",
+                                                "formula": "((sum(\"INVENDU\")/sum(\"ENLEVEMENT BRUT\"))*100)",
                                                 "format": "precentForamt"
                                             }],
                                             "sorting": {
