@@ -42,7 +42,7 @@ include 'header.php';
                                     </a>
                                 </div>
                                 
-                                    <button onclick="test2(thepivot)">hohi</button>
+                                    <!-- <button onclick="test2(thepivot)">hohi</button> -->
                                     <!-- hige the wdr-component -->
                                 
                                 <div id="filters"></div>
