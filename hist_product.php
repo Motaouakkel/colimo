@@ -103,7 +103,7 @@ include 'header.php';
                                 if (arg2 != '') {
                                     setTimeout(function() {
                                         arg.expandData(arg2);
-                                    }, 5);
+                                    }, 15);
                                 }
 
                             }

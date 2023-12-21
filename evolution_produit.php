@@ -43,7 +43,7 @@ include 'header.php';
                                     </a>
                                 </div>
 
-                                <button onclick="test2(thepivot)">graph <==> tableau</button>
+                                <!-- <button onclick="test2(thepivot)">graph <==> tableau</button> -->
                                 <!-- hige the wdr-component -->
 
                                 <div id="filters"></div>
@@ -100,7 +100,7 @@ include 'header.php';
                                         arg.expandData(arg2);
 
                                         //redraw the chart with the new data
-                                        thechart.clearChart();
+                                        // thechart.clearChart();
                                         if (row) {
                                             // createGoogleChart({
                                             //     rows: [{
@@ -114,7 +114,7 @@ include 'header.php';
                                             // console.log("biatchh")
                                             // createGoogleChart()
                                         }
-                                    }, 25);
+                                    }, 15);
 
 
 
@@ -335,86 +335,86 @@ include 'header.php';
 
 
                             }
-                            google.charts.load('current', {
-                                'packages': ['bar']
-                            });
-                            google.charts.setOnLoadCallback(onGoogleChartsLoaded);
+                            // google.charts.load('current', {
+                            //     'packages': ['bar']
+                            // });
+                            // google.charts.setOnLoadCallback(onGoogleChartsLoaded);
 
-                            function onGoogleChartsLoaded() {
-                                googleChartsLoaded = true;
-                                if (pivotTableReportComplete) {
-                                    createGoogleChart();
-                                }
-                            }
+                            // function onGoogleChartsLoaded() {
+                            //     googleChartsLoaded = true;
+                            //     if (pivotTableReportComplete) {
+                            //         createGoogleChart();
+                            //     }
+                            // }
 
-                            function createGoogleChart(slice) {
-                                console.log("createGoogleChart")
-                                if (googleChartsLoaded) {
-                                    console.log(slice)
-                                    thepivot.googlecharts.getData({
-                                            type: "bar",
-                                            slice: {
-                                                "rows": slice ? slice.rows : [{
-                                                    uniqueName: "Categorie"
-                                                }],
-                                                columns: [{
-                                                    uniqueName: "[Measures]"
-                                                }],
+                            // function createGoogleChart(slice) {
+                            //     console.log("createGoogleChart")
+                            //     if (googleChartsLoaded) {
+                            //         console.log(slice)
+                            //         thepivot.googlecharts.getData({
+                            //                 type: "bar",
+                            //                 slice: {
+                            //                     "rows": slice ? slice.rows : [{
+                            //                         uniqueName: "Categorie"
+                            //                     }],
+                            //                     columns: [{
+                            //                         uniqueName: "[Measures]"
+                            //                     }],
 
-                                                measures: [{
-                                                        uniqueName: "amount_1",
-                                                    },
-                                                    {
-                                                        uniqueName: "amount_2",
-                                                    }
-                                                ],
+                            //                     measures: [{
+                            //                             uniqueName: "amount_1",
+                            //                         },
+                            //                         {
+                            //                             uniqueName: "amount_2",
+                            //                         }
+                            //                     ],
 
-                                            }
-                                        },
-                                        drawChart,
-                                        drawChart,
-                                    );
-                                }
-                            }
+                            //                 }
+                            //             },
+                            //             drawChart,
+                            //             drawChart,
+                            //         );
+                            //     }
+                            // }
 
-                            function drawChart(_data) {
+                            // function drawChart(_data) {
                                
-                                set = []
-                                new_Data = []
-                                _data.data.forEach(element => {
-                                    if(set.includes(element[0])){
-                                        // /_data.data.remove(element)
+                            //     set = []
+                            //     new_Data = []
+                            //     _data.data.forEach(element => {
+                            //         if(set.includes(element[0])){
+                            //             // /_data.data.remove(element)
                                        
-                                    }
-                                    else{
-                                        set.push(element[0])
-                                        new_Data.push(element)
-                                    }
-                                });
+                            //         }
+                            //         else{
+                            //             set.push(element[0])
+                            //             new_Data.push(element)
+                            //         }
+                            //     });
                                 
 
                                
-                                var data = google.visualization.arrayToDataTable(new_Data);
+                            //     var data = google.visualization.arrayToDataTable(new_Data);
                                 
-                                let entries = Object.entries(data["Wf"]);
-                                let half = Math.ceil(entries.length / 2);
+                            //     let entries = Object.entries(data["Wf"]);
+                            //     let half = Math.ceil(entries.length / 2);
 
-                                // data["Wf"]= Object.fromEntries(entries.slice(0, half));
-                                var options = {
-                                    title: "",
+                            //     // data["Wf"]= Object.fromEntries(entries.slice(0, half));
+                            //     var options = {
+                            //         title: "",
                                     
-                                    'height':400,
-                                    legend: {
-                                        position: 'right'
-                                    },
+                            //         'height':400,
+                            //         legend: {
+                            //             position: 'right'
+                            //         },
                                     
 
-                                };
+                            //     };
                                 
-                                var chart = new google.charts.Bar(document.getElementById('google-chart'));
-                                chart.draw(data, google.charts.Bar.convertOptions(options));
-                                thechart = chart
-                            }
+                            //     var chart = new google.charts.Bar(document.getElementById('google-chart'));
+                            //     chart.draw(data, google.charts.Bar.convertOptions(options));
+                            //     thechart = chart
+                            // }
                             //WebDataRocks[ report ] = yourValue;
 
                             loaddate();
