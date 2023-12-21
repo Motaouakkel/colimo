@@ -6,18 +6,26 @@ if (!isset($_POST["filtersData"])) {
 ?>
 <div class="row ls-filters">
     <nav>
+        <style>
+            .multi-line-list {
+                float: none;
+            }
+
+            
+        </style>
         <ul class="filters-list">
             <?php
+        
             foreach ($_POST["filtersData"] as $mainkey => $filter) {
                 $filtersList = [];
-                if (isset($filter['data'])) {
+                 if (isset($filter['data'])) {
                     $default_id = isset($filter['default_id']) ? $filter['default_id'] : null;
                     if ($default_id != null) {
                         $filtersList[] = $filter['data'][$default_id];
                     } else {
                         $filtersList = $filter['data'];
                     }
-                } else {
+                } else if(isset($filter['mapper'])){
                     foreach ($filter['mapper'] as $key => $subArray) {
                         foreach ($subArray as $key => $value) {
                             $filtersList[] = $value;
@@ -258,9 +266,12 @@ if (!isset($_POST["filtersData"])) {
     async function applayLSFilters(pivot, captionsMapper, bol) {
         $(document).on('LSFiltersChanged', async function(event, filterId) {
             const filterss = [];
-
+            
+            console.log(filtersData)
             for (let index = 0; index < filtersData.length; index++) {
+                console.log(index)
                 const filter = filtersData[index];
+                
                 const totalFilters = filter['data'] ? filter['data'].length : Object.values(filter['mapper']).flat().length;
 
                 const currentFilter = {
