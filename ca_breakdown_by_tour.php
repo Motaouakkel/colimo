@@ -24,6 +24,9 @@ include 'header.php';
                                     </a>
                                 </div>
                                 <div id="filters"></div>
+                                <button class="button-18" role="button" onclick="test1(tot)">agence</button>
+                                <button class="button-18" role="button" onclick="test2(tot)">bloc</button>
+                                <button class="button-18" role="button" onclick="test3(tot)">secteur</button>
                                 <div class="row">
                                     <div id="wdr-component"></div>
                                 </div>
@@ -31,6 +34,23 @@ include 'header.php';
                             </div>
                         </div>
                         <script>
+                            function test1(tb){
+                                tb.collapseAllData()
+                            }
+                            function test2(tb){
+                                
+                                tb.collapseAllData();
+                                setTimeout(function() {
+                                    tb.expandData("AGENCE");
+                                    }, 50);
+
+                                
+                            }
+                            function test3(tb){
+                                
+                                tb.expandData("BLOC");
+                            }
+                            tot = null;
                             function loadfile(f) {
                                 var maper = []
 
@@ -367,7 +387,7 @@ include 'header.php';
                                     },
 
                                 });
-
+                                tot = pivot1
                                 pivot1.on("reportcomplete", function() {
                                     var captionsMapper = buildCaptionsMapper(pivot1.getMeasures().concat(pivot1.getRows()));
                                     applayLSFilters(pivot1, captionsMapper);

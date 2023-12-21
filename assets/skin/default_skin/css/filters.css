@@ -12,8 +12,8 @@
 }
 
 .ls-filters .filters-list .filter-child {
-    margin-inline: 15px;
-    padding: 5px 10px;
+    margin-inline: 10px;
+    padding: 5px 5px;
     border-radius: 5px;
     background-color: #005AA0;
     color: #fff;

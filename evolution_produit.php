@@ -41,13 +41,57 @@ include 'header.php';
                                     <a href="#" id="aCliquer">
                                     </a>
                                 </div>
+                                
+                                    <button onclick="test2(thepivot)">hohi</button>
+                                    <!-- hige the wdr-component -->
+                                
                                 <div id="filters"></div>
+                                <style>
+                                    /* CSS */
+                                    
+                                </style>
+                                <div>
+                                    <button class="button-18" role="button" onclick="setCategorie(thepivot,'')">Categorie</button>
+                                    <button class="button-18" role="button" onclick="setCategorie(thepivot,'Categorie')">Famille</button>
+                                    <button class="button-18" role="button" onclick="setCategorie(thepivot,'Famille')">Gamme</button>
+                                    <button class="button-18" role="button" onclick="setCategorie(thepivot,'Gamme')">Produit</button>
+                                    <button class="button-18" role="button" onclick="setCategorie(thepivot,'Produit')">Article</button>
+                                </div>
+                                
                                 <div id="wdr-component"></div>
+                               
                             </div>
                         </div>
                         <script>
+                            function test2(tab){
+                                //hide the div wdr-component
+                                var x = document.getElementById("wdr-component");
+                                if (x.style.display === "none") {
+                                    x.style.display = "block";
+                                } else {
+                                    x.style.display = "none";
+                                }
+                            }
+                            var thepivot = null;
+                            function setCategorie(arg, arg2) {
+                                    
+                                    arg.collapseAllData();
+                                    if(arg2 != ''){
+                                        setTimeout(function() {
+                                            arg.expandData(arg2);
+                                        }, 25);
+                                    }
+
+                                }
                             function loadfile(f) {
                                 var test = []
+                                
+
+                                
+
+                                function setFamille(arg) {
+                                    tb.collapseAllData();
+                                }
 
                                 function getJSONData() {
 
@@ -56,12 +100,7 @@ include 'header.php';
                                         "Agence": {
                                             type: "string"
                                         },
-                                        "Gamme": {
-                                            type: "string"
-                                        },
-                                        "Produit": {
-                                            type: "string"
-                                        },
+
                                         "secteur": {
                                             type: "string"
                                         },
@@ -77,14 +116,31 @@ include 'header.php';
                                         "amount_3": {
                                             type: "number"
                                         },
-                                        "Canal":{
+                                        "Canal": {
                                             type: "string"
-                                        
+
                                         },
-                                        "unite":{
+                                        "unite": {
                                             type: "string"
-                                        
+
                                         },
+                                        "Categorie": {
+                                            type: "string"
+
+                                        },
+                                        "Famille": {
+                                            type: "string"
+                                        },
+                                        "Gamme": {
+                                            type: "string"
+                                        },
+                                        "Produit": {
+                                            type: "string"
+                                        },
+                                        "Article": {
+                                            type: "string"
+
+                                        }
                                     }
 
                                     data['data'].unshift(struct);
@@ -112,12 +168,21 @@ include 'header.php';
                                                     }
 
                                                 },
-                                                
+
                                                 {
                                                     "uniqueName": "Canal"
                                                 },
                                                 {
                                                     "uniqueName": "secteur"
+                                                },
+                                                {
+                                                    "uniqueName": "Categorie"
+                                                },
+                                                {
+                                                    "uniqueName": "Famille"
+                                                },
+                                                {
+                                                    "uniqueName": "Article"
                                                 },
                                                 {
                                                     "uniqueName": "Gamme"
@@ -134,10 +199,19 @@ include 'header.php';
                                                 },
                                             ],
                                             "rows": [{
-                                                "uniqueName": "Gamme",
-                                            }, {
-                                                "uniqueName": "Produit",
-                                            }],
+                                                    "uniqueName": "Categorie"
+                                                },
+                                                {
+                                                    "uniqueName": "Famille"
+                                                },
+                                                {
+                                                    "uniqueName": "Gamme",
+                                                }, {
+                                                    "uniqueName": "Produit",
+                                                }, {
+                                                    "uniqueName": "Article"
+                                                },
+                                            ],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
@@ -170,16 +244,17 @@ include 'header.php';
 
                                         },
                                         "expands": {
-                                            "expandAll": true,
+                                            "expandAll": false,
                                         },
                                         "options": {
                                             "grid": {
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
-                                                "type": "classic",
+                                                "type": "compact",
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false,
                                                 "showFilter": false,
+                                                "showDrillThroughConfigurator": true
                                             },
                                             "showAggregationLabels": false
                                         },
@@ -195,6 +270,7 @@ include 'header.php';
                                     },
 
                                 });
+                                thepivot = pivot1
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
