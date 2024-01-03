@@ -59,7 +59,9 @@ function compareByIname($a, $b)
                 $output .= '<span class="caret"></span></a><ul class="nav sub-nav @@menu@@">';
                 foreach ($menu as $key => $menu_item) {
                     $menu_item_class = "";
-                    if (strpos($pageRoute, $menu_item["logic_name"]) !== false) {
+                    $logic_name = $menu_item["logic_name"];
+                    
+                    if ('/' . $logic_name === $pageRoute) {
                         $menu_item_class = "active";
                         $menu_class = "menu-open";
                     }
