@@ -1,29 +1,29 @@
-<?php	
+<?php
 include 'consts.php';
-session_start();    
+session_start();
 
 
 extract($_REQUEST);
 
+$partner_id = $_SESSION['partner'];
+$job_id = 21;
 
+$url =  BASE_URL . ':' . PORT . '/md/getuser2';
+$params = array('location_id' => $location_id, 'job_id' => $job_id, 'partner_id' => $partner_id);
 
-$part = $_SESSION['partner'];
-$type = $location_id;
-$job = 21;
-
-$url =  BASE_URL . ':'.PORT.'/md/getuser';
-$params = array('location_id' => $type,'job_id' => $job);
 $header = array('Content-Type' => 'application/json');
 $header = addBasicAuth($header, 'test', 'miftah');
 $response = request("GET", $url, $header, $params);
 
-function addBasicAuth($header, $username, $password) {
-    $header['Authorization'] = 'Basic '.base64_encode("$username:$password");
+function addBasicAuth($header, $username, $password)
+{
+    $header['Authorization'] = 'Basic ' . base64_encode("$username:$password");
     return $header;
 }
 
 // method should be "GET", "PUT", etc..
-function request($method, $url, $header, $params) {
+function request($method, $url, $header, $params)
+{
     $opts = array(
         'http' => array(
             'method' => $method,
@@ -46,7 +46,7 @@ function request($method, $url, $header, $params) {
         foreach ($params as $key => $value) {
             $params_array[] = "$key=$value";
         }
-        $url .= '?'.implode('&', $params_array);
+        $url .= '?' . implode('&', $params_array);
     }
 
     $context = stream_context_create($opts);
@@ -54,27 +54,12 @@ function request($method, $url, $header, $params) {
     return $data;
 }
 
-
-
-
-
 $obj = json_decode($response, true);
-
 
 $a = array();
 foreach ($obj as $v1) {
-		
-		$new_data = array($v1["partner_id"],$v1["last_name"]);
-		
-		array_push($a,$new_data);
-	
- 	 
+    $new_data = array($v1["partner_id"], $v1["last_name"]);
+    array_push($a, $new_data);
 }
 
-
-
 echo json_encode($a);
-
-?>
-
-	
