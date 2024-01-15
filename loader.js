@@ -76,6 +76,21 @@ function getSupervisorId() {
     return supervisorId;
 }
 
+/* Gets the selected sector ID from the "f-sector" dropdown. */
+function getSectorId() {
+    // Get the "f-sector" dropdown element
+    var dropdownElement = document.getElementById("f-sector");
+
+    // Get the selected option from the dropdown
+    var selectedOption = dropdownElement.options[dropdownElement.selectedIndex];
+
+    // Get the value (sector ID) of the selected option
+    var sectorId = selectedOption.value;
+
+    // Return the selected sector ID
+    return sectorId;
+}
+
 /* Gets the selected agency ID from the "filter-customer" dropdown. */
 function getAgencyId() {
     // Get the "filter-customer" dropdown element
@@ -134,6 +149,49 @@ function loadSupervisors(agency) {
     xhttp.send("location_id=" + agency);
 }
 
+/* Loads the list of sectors based on the selected locationId. */
+function loadSectors(locationId) {
+    // Create a new XMLHttpRequest
+    var xhttp = new XMLHttpRequest();
+
+    // Define the callback function for when the request is complete
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            // Get the "f-sector" dropdown element
+            var sectorDropdown = document.getElementById("f-sector");
+
+            // Clear all existing options in the sector dropdown
+            removeAllOptions(sectorDropdown);
+
+            // Parse the JSON response
+            var sectorsData = JSON.parse(this.response);
+
+            // Add a default option for "Sector" with value "0"
+            if (sectorsData.length > 1 || sectorsData.length == 0) {
+                addOption(sectorDropdown, "Secteur", "0");
+            }
+
+            // Populate the sector dropdown with options
+            for (var i = 0; i < sectorsData.length; i++) {
+                var optionText = sectorsData[i][1];
+                var optionValue = sectorsData[i][0];
+
+                // Add an option to the dropdown
+                addOption(sectorDropdown, optionText, optionValue);
+            }
+        }
+    };
+
+    // Open the HTTP request
+    xhttp.open("POST", "sectors.php", true);
+
+    // Set the request headers
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    // Send the request with the selected location ID
+    xhttp.send("location_id=" + locationId);
+}
+
 
 /* Loads yesterday's date into the specified input fields. */
 function loaddate() {
@@ -158,10 +216,19 @@ function loaddate() {
 }
 
 /* Loads data based on the specified action, supervisor ID, agency ID, and date range.*/
-function loadme(action) {
-    // Get supervisor and agency IDs
-    var sup_id = getSupervisorId();
+function loadme(action, bySector = false) {
+
+    // Get supervisor and agency IDs or Sector Id
     var ag_id = getAgencyId();
+    if (bySector) {
+        var sector_id = getSectorId();
+        if (sector_id == 0) {
+            alert("Veuillez sélectionner un secteur.");
+            return false;
+        }
+    } else {
+        var sup_id = getSupervisorId();
+    }
 
     // Initialize an array to store date parameters
     var dateParams = [];
@@ -204,7 +271,12 @@ function loadme(action) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     // Send the request with the specified parameters
-    xhttp.send(`action=${action}&user_id=${sup_id}&agency_id=${ag_id}`);
+
+    if (bySector) {
+        xhttp.send(`action=${action}&sector_id=${sector_id}&agency_id=${ag_id}`);
+    } else {
+        xhttp.send(`action=${action}&user_id=${sup_id}&agency_id=${ag_id}`);
+    }
 
     // Exit the function
     return;

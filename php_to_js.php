@@ -4,11 +4,6 @@ include 'consts.php';
 ///////////////////////////////////////////////////////////
 ////////////////////      Function     ///////////////////
 //////////////////////////////////////////////////////////
- // var blob = new Blob([data.data], {
-                                    //     type: 'application/octet-stream'
-                                    // });
-                                    // url = window.URL.createObjectURL(blob);
-                                    // downloadURL(url, 'export.xlsx');
 function get_data($endpint)
 {
     session_start();
@@ -21,7 +16,6 @@ function get_data($endpint)
     }
 
     $ag_id = $agency_id;
-    $sup_id = $user_id;
     $part = $_SESSION['partner'];
 
     if ($part == "") {
@@ -49,8 +43,12 @@ function get_data($endpint)
         $params['agency_id'] = $ag_id;
     }
 
-    if ($sup_id != 0) {
-        $params['supervisor_id'] = $sup_id;
+    if (isset($user_id)) {
+        $params['supervisor_id'] = $user_id;
+    }
+
+    if (isset($sector_id)) {
+        $params['sector_id'] = $sector_id;
     }
 
     $header = array('Content-Type' => 'application/json');
