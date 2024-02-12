@@ -1,27 +1,38 @@
 <?php
-$page_title = "Segmentation nombre de lignes Factures";
-$api_action = "segmnbrlinesfactures";
+$page_title = "EVOLUTION NBRE CLIENTS";
+$api_action = "evolclient";
 include 'header.php';
+
 ?>
 
 <body class="dashboard-page sb-l-o sb-r-c">
+
     <!-- Start: Main -->
     <div id="main">
+
+        <!-- Start: Header -->
+        <!-- End: Header -->
         <?php include 'sidebar_left.php'; ?>
         <!-- Start: Content-Wrapper -->
         <section id="content_wrapper">
+
             <?php include 'bread_crumbs.php'; ?>
+
             <!-- Begin: Content -->
             <section id="content" class="animated fadeIn">
+
                 <!-- Admin-panels -->
                 <div class="admin-panels fade-onload sb-l-o-full">
+
                     <!-- full width widgets -->
                     <div class="row">
 
                         <div class="panel">
                             <div class="panel-menu p12 admin-form theme-primary">
                                 <div class="row">
-                                    <?php include 'search_2_dates.php' ?>
+
+                                    <?php include 'search_4_dates.php' ?>
+
                                 </div>
                             </div>
                             <div class="panel-body pn">
@@ -36,53 +47,50 @@ include 'header.php';
                         </div>
                         <script>
                             function loadfile(f) {
+
                                 function getJSONData() {
+
                                     data = $.parseJSON(f);
                                     var struct = {
                                         "Agence": {
                                             type: "string"
                                         },
-                                        "Secteur": {
+                                        "Secteur":{
+                                            type:"string"                               
+                                        },
+                                        "famille": {
                                             type: "string"
                                         },
-                                        "responsable": {
+                                        "gamme": {
                                             type: "string"
                                         },
-                                        "lines": {
-                                            type: "number"
-                                        },
-                                        "factures": {
+                                        "produit": {
                                             type: "string"
                                         },
-                                        "5": {
-                                            type: "number"
+                                        "superviseur": {
+                                            type: "string"
                                         },
-                                        "5_10": {
-                                            type: "number"
+                                       
+                                        
+                                        "count1": {
+                                            type: "string"
                                         },
-                                        "10_15": {
-                                            type: "number"
-                                        },
-                                        "15_20": {
-                                            type: "number"
-                                        },
-                                        "20": {
-                                            type: "number"
+                                        "count2": {
+                                            type: "String"
                                         },
 
                                     }
                                     loadLSFiltersTemplate(data['filters']);
                                     data['data'].unshift(struct);
                                     return data['data'];
-
                                 };
 
 
                                 var pivot1 = new WebDataRocks({
                                     container: "#wdr-component",
                                     beforetoolbarcreated: customizeToolbar,
-                                    customizeCell: customizeCellFunction,
                                     toolbar: true,
+
                                     report: {
                                         dataSource: {
                                             "data": getJSONData()
@@ -95,97 +103,82 @@ include 'header.php';
                                                     "uniqueName": "Secteur"
                                                 },
                                                 {
-                                                    "uniqueName": "responsable"
-                                                },
-                                            ],
-                                            "rows": [{
-                                                    "uniqueName": "Agence"
+                                                    "uniqueName": "gamme"
                                                 },
                                                 {
-                                                    "uniqueName": "Secteur"
+                                                    "uniqueName": "produit"
                                                 },
+                                                {
+                                                    "uniqueName": "superviseur"
+                                                },
+                                                {
+                                                    "uniqueName": "famille"
+                                                },
+                                                
                                             ],
+                                            "rows": [{
+                                                "uniqueName": "Agence",
+                                            },
+                                            {
+                                                "uniqueName": "Secteur",
+                                            }
+                                        ],
                                             "columns": [{
                                                 "uniqueName": "Measures"
                                             }],
+
                                             "measures": [{
-                                                    "uniqueName": "factures",
-                                                    "caption": "Nombre factures",
-                                                    "aggregation": "distinctcount",
+                                                    "uniqueName": "count1",
+                                                    "caption": "PERIODE 1",
+                                                    "format": "precision",
+                                                    "aggregation": "distinctcount"
+                                                },
+                                                {
+                                                    "uniqueName": "count2",
+                                                    "caption": "PERIODE 2",
+                                                    "format": "precision",
+                                                    "aggregation": "distinctcount"
+                                                },
+                                                {
+                                                    "uniqueName": "amount_3",
+                                                    "caption": "EVOLUTION",
+                                                    "format": "precision",
+                                                    "formula": "distinctcount(\"count2\")- distinctcount(\"count1\")"
+                                                },
+                                                {
+                                                    "uniqueName": "% evolution",
+                                                    "caption": "% evolution",
+                                                    //to save againt division by zero
+                                                    "formula": "IF(distinctcount('count1')=0,0,(100*(distinctcount('count2') -distinctcount('count1')))/distinctcount('count1'))",
 
-                                                },
-                                                {
-                                                    "uniqueName": "lines",
-                                                    "caption": "Nombre total lignes Produits",
-                                                    "aggregation": "sum",
-                                                },
-                                                {
-                                                    "uniqueName": "lines_factures",
-                                                    "caption": "Nbr lignes/factures",
-                                                    "formula": " sum(\"lines\") / sum(\"factures\")",
-                                                    "format": "3dhvwiax"
-                                                },
-                                                {
-                                                    "uniqueName": "5",
-                                                    "caption": "<=5",
-                                                    "aggregation": "sum",
-                                                },
-                                                {
-                                                    "uniqueName": "5_10",
-                                                    "caption": "5-10",
-                                                    "aggregation": "sum",
-                                                },
-                                                {
-                                                    "uniqueName": "10_15",
-                                                    "caption": "10-15",
-                                                    "aggregation": "sum",
-                                                },
-                                                {
-                                                    "uniqueName": "15_20",
-                                                    "caption": "15-20",
-                                                    "aggregation": "sum",
-                                                },
-                                                {
-                                                    "uniqueName": "20",
-                                                    "caption": ">20",
-                                                    "aggregation": "sum",
-                                                },
+                                                    "format": "precentForamt"
 
-                                            ]
+                                                }
+                                            ],
+                                            "expands": {
+                                                "expandAll":false,
+                                            },
                                         },
+
                                         "options": {
                                             "grid": {
                                                 "title": "<?php echo strtoupper($page_title) ?>",
                                                 "showHeaders": false,
+                                                "type": "classic",
                                                 "showGrandTotals": "columns",
                                                 "showHierarchyCaptions": false,
-                                                "showFilter": false
+                                                "showFilter": false,
                                             },
                                             "showAggregationLabels": false
                                         },
                                         "formats": [{
-                                                "name": "3dhvqfuq",
-                                                "thousandsSeparator": " ",
-                                                "decimalSeparator": ".",
-                                                "decimalPlaces": 2,
-                                                "currencySymbol": "",
-                                                "currencySymbolAlign": "left",
-                                                "nullValue": "",
-                                                "textAlign": "right",
-                                                "isPercent": false
-                                            },
-                                            {
-                                                "name": "3dhvwiax",
-                                                "thousandsSeparator": " ",
-                                                "decimalSeparator": ".",
-                                                "decimalPlaces": 2,
-                                                "currencySymbol": "",
-                                                "currencySymbolAlign": "left",
-                                                "nullValue": "",
-                                                "textAlign": "right",
-                                                "isPercent": false
-                                            }
-                                        ]
+                                            "name": "precentForamt",
+                                            "decimalPlaces": 2,
+                                        }, {
+                                            "name": "precision",
+                                            "decimalPlaces": 0,
+
+                                        }]
                                     },
 
                                 });
@@ -196,11 +189,11 @@ include 'header.php';
                                     pivot1.off("reportcomplete");
                                 });
 
-                                function customizeCellFunction(cell, data) {
+                                pivot1.customizeCell(function customizeCellFunction(cell, data) {
                                     if (data.isGrandTotal && data.columnIndex == 0) {
                                         cell.text = "TOTAL";
                                     }
-                                }
+                                });
 
                                 function customizeToolbar(toolbar) {
                                     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
@@ -210,20 +203,33 @@ include 'header.php';
                                         return tabs;
                                     }
                                 }
+
                             }
+
+                            //WebDataRocks[ report ] = yourValue;
+
                             loaddate();
                         </script>
 
 
                     </div>
+                    <!-- end: .row -->
+
+                    <!-- partial width widgets -->
+
             </section>
             <!-- End: Content -->
 
         </section>
         <!-- End: Content-Wrapper -->
+
         <?php include 'sidebar_right.php'; ?>
     </div>
     <!-- End: Main -->
+
+
+
+
 </body>
 <!-- Start: header -->
 <?php include 'footer.php'; ?>

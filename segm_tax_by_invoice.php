@@ -153,13 +153,13 @@ include 'header.php';
                                                 }, {
                                                     "uniqueName": "total des factures",
                                                     "caption": "NOMBRE FACTURES",
-                                                    "formula": "count(\"CA\")",
+                                                    "formula": "distinctcount(\"Client\")",
                                                 },
                                                 {
                                                     "uniqueName": "TTCRatio",
                                                     "caption": "DH TTC/FACTURE",
                                                     "format": "precision",
-                                                    "formula": "sum(\"CA\")/count(\"CA\")",
+                                                    "formula": "sum(\"CA\")/distinctcount(\"Client\")",
                                                 },
                                                 {
                                                     "uniqueName": "<100",
