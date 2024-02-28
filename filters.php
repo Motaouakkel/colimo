@@ -267,9 +267,7 @@ if (!isset($_POST["filtersData"])) {
         $(document).on('LSFiltersChanged', async function(event, filterId) {
             const filterss = [];
             
-            console.log(filtersData)
             for (let index = 0; index < filtersData.length; index++) {
-                console.log(index)
                 const filter = filtersData[index];
                 
                 const totalFilters = filter['data'] ? filter['data'].length : Object.values(filter['mapper']).flat().length;

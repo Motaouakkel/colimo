@@ -146,7 +146,7 @@ include 'header.php';
                                             type: "string"
                                         },
                                         "type": {
-                                            type: "number"
+                                            type: "string"
                                         },
                                         "unite": {
                                             type: "string"
@@ -170,11 +170,18 @@ include 'header.php';
                                         },
                                         "slice": {
                                             "reportFilters": [{
-                                                    "uniqueName": "Agence"
-                                                }, , {
+                                                    "uniqueName": "Agence",
+                                                    "caption": "AGENCE",
+                                                },
+                                                {
+                                                    "uniqueName": "Secteur",
+                                                    "caption": "Secteur",
+                                                },
+                                                {
                                                     "uniqueName": "canal",
                                                     "caption": "CANAL"
-                                                }, {
+                                                },
+                                                {
                                                     "uniqueName": "type",
                                                     "filter": {
                                                         "members": [
@@ -183,13 +190,33 @@ include 'header.php';
                                                     }
                                                 },
                                                 {
+                                                    "uniqueName": "Categorie",
+                                                    "caption": "Categorie"
+                                                },
+                                                {
+                                                    "uniqueName": "Famille",
+                                                    "caption": "Famille"
+                                                },
+                                                {
+                                                    "uniqueName": "Gamme",
+                                                    "caption": "Gamme"
+                                                },
+                                                {
                                                     "uniqueName": "unite",
                                                     "filter": {
                                                         "members": [
                                                             "unite.DH TTC"
                                                         ]
                                                     }
-                                                }
+                                                },
+                                                {
+                                                    "uniqueName": "Produit",
+                                                    "caption": "Produit"
+                                                },
+                                                {
+                                                    "uniqueName": "Article",
+                                                    "caption": "Article"
+                                                },
                                             ],
                                             "rows": [
 
